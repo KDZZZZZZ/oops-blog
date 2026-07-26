@@ -63,7 +63,9 @@ test("home preview omits redundant page shortcuts while preserving email contact
 
   await page.goto("/about/");
   await expect(page.locator("#opensource")).toHaveCount(0);
-  await expect(page.locator('a[href^="mailto:"]')).toHaveCount(1);
+  // The nav home popover now carries its own mailto on every page, so scope
+  // the contact check to the page body.
+  await expect(page.locator('main#content a[href^="mailto:"]')).toHaveCount(1);
   await expect(page.locator("main#content")).not.toContainText("开源与参考边界");
   await expect(page.locator("main#content")).toContainText("联系");
 });

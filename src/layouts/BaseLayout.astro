@@ -6,6 +6,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import type { CategoryGroup, NavKey, NavLink, SearchIndexItem, SocialLink } from "../components/types";
 import { themeInitScript } from "../scripts/theme-init";
+import { getPageContext } from "../lib/page-context";
 import avatarAsset from "../assets/avatar.png";
 
 interface HomePreview {
@@ -78,11 +79,13 @@ const navLinks = Astro.props.navLinks ?? [
   { label: "更多", key: "more", disabled: true, description: "更多内容尚未开放" },
 ];
 
-// Default home preview so nav popup works on every page even if page doesn't supply counts
-const defaultHomePreview: HomePreview = {
-  siteName,
-};
-const homeNavPreview = Astro.props.homeNavPreview ?? defaultHomePreview;
+// Nav popovers need the shared context on every page, not only on pages that
+// pass preview data explicitly — otherwise the home card degrades to a bare
+// site name and the posts preview disappears entirely.
+const needsNavContext = withHeader && (!Astro.props.homeNavPreview || !Astro.props.postsNavPreview);
+const navCtx = needsNavContext ? await getPageContext() : undefined;
+const homeNavPreview = Astro.props.homeNavPreview ?? navCtx?.homePreview ?? { siteName };
+const postsNavPreview = Astro.props.postsNavPreview ?? navCtx?.postsPreview;
 
 const footerGroups = Astro.props.footerGroups ?? [
   { label: "阅读", links: navLinks.filter((item) => item.href && item.key !== "more") },
@@ -122,7 +125,7 @@ const fullTitle = title.includes(siteName) ? title : `${title} · ${siteName}`;
           homeVariant={homeVariant}
           siteName={siteName}
           homePreview={homeNavPreview}
-          postsPreview={Astro.props.postsNavPreview}
+          postsPreview={postsNavPreview}
         />
       )
     }
