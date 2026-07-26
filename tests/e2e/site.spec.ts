@@ -137,7 +137,7 @@ test("browser feedback keeps the archive chrome aligned and consistent", async (
   expect(ink?.fromBaseline).toBe(0);
   expect(ink?.leftDelta).toBeLessThanOrEqual(1);
 
-  await expect(page.locator(".manuscript-toolbar-intro")).toContainText("顺时间读，按门类找，或看全貌。");
+  await expect(page.locator(".manuscript-toolbar-intro")).toContainText("奇文共欣赏，疑义相与析。");
   await expect(page.locator(".manuscript-tabs")).toContainText("编年");
   await expect(page.locator(".manuscript-tabs")).toContainText("门类");
   await expect(page.locator(".manuscript-tabs")).toContainText("全览");

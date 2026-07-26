@@ -738,6 +738,8 @@ a.entry-row:hover { transform: translateX(4px); }
   font-size: 13px;
 }
 
+.search-hint:empty { padding: 14px 4px; }
+
 .search-result {
   display: block;
   padding: 16px 4px;

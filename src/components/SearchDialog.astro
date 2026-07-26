@@ -12,7 +12,7 @@ interface Props {
 const {
   items = [],
   placeholder = "搜索文稿、随笔与项目",
-  hint = "输入关键词，例如 LLVM、Agent 或 推理。",
+  hint = "",
   title = "站内搜索",
 } = Astro.props;
 const serializedItems = JSON.stringify(items).replaceAll("<", "\\u003c");

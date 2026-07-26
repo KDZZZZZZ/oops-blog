@@ -136,7 +136,7 @@ export function initSearch(): void {
     if (!searchResults) return;
     const term = query.trim();
     if (!term) {
-      renderHint(searchResults, "输入关键词，例如 LLVM、Agent 或推理。");
+      renderHint(searchResults, "");
       return;
     }
 

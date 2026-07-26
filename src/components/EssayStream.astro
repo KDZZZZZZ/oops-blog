@@ -5,9 +5,10 @@ import ShareCard from "./ShareCard.astro";
 interface Props {
   essays: EssayItem[];
   closing?: string;
+  closingSource?: string;
 }
 
-const { essays, closing } = Astro.props;
+const { essays, closing, closingSource } = Astro.props;
 ---
 
 <section class="essay-stream shell">
@@ -36,7 +37,10 @@ const { essays, closing } = Astro.props;
   {closing && (
     <div class="essay-closing">
       <span>—</span>
-      <p>{closing}</p>
+      <p>
+        {closing}
+        {closingSource && <cite>{closingSource}</cite>}
+      </p>
     </div>
   )}
 </section>
