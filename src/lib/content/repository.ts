@@ -55,6 +55,7 @@ function mapEssay(entry: CollectionEntry<"essays">): Essay {
     publishedAt: entry.data.publishedAt,
     draft: entry.data.draft,
     url: `/essays/#${entry.data.slug}`,
+    shares: entry.data.shares,
   };
 }
 

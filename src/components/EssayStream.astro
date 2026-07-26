@@ -1,5 +1,6 @@
 ---
 import type { EssayItem } from "./types";
+import ShareCard from "./ShareCard.astro";
 
 interface Props {
   essays: EssayItem[];
@@ -20,6 +21,13 @@ const { essays, closing } = Astro.props;
         <div class="essay-content">
           <h2>{essay.title}</h2>
           <p>{essay.body}</p>
+          {essay.shares && essay.shares.length > 0 && (
+            <div class="essay-shares">
+              {essay.shares.map((share) => (
+                <ShareCard share={share} />
+              ))}
+            </div>
+          )}
           {essay.sourceNote && <footer class="essay-source">{essay.sourceNote}</footer>}
         </div>
       </article>

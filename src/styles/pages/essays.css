@@ -80,6 +80,221 @@
   font: 11px/1.6 var(--font-mono);
 }
 
+/* ── Share attachments（innei.in 思考页 / Shiro 风格分享卡片）──────────────── */
+.essay-shares {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.share-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 104px;
+  padding: 16px 24px;
+  border: 1px solid color-mix(in srgb, var(--share-color, var(--border)) 19%, transparent);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface);
+  color: var(--fg);
+  font-family: var(--font-body);
+  text-decoration: none;
+  backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* 主题色底染（Shiro：主题色 6% 铺底） */
+.share-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--share-color, transparent);
+  opacity: .06;
+  pointer-events: none;
+}
+
+/* 鼠标跟随光斑（Shiro：radial-gradient 追踪指针，主题色 31%） */
+.share-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    var(--share-radius, 360px) circle at var(--share-mx, 50%) var(--share-my, 50%),
+    color-mix(in srgb, var(--share-color, var(--accent)) 31%, transparent) 0%,
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity .5s;
+  pointer-events: none;
+}
+
+.share-card:hover::after { opacity: 1; }
+
+.share-card-contents {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.share-card-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 4px 8px;
+  color: var(--heading);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.share-card-name {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.share-card-note {
+  align-self: center;
+  font-size: 13px;
+  font-weight: 400;
+  opacity: .7;
+}
+
+.share-card-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  align-self: center;
+  flex-shrink: 0;
+  color: #fb923c;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+[data-theme="dark"] .share-card-rating { color: #eab308; }
+
+.share-card-rating svg {
+  width: 14px;
+  height: 14px;
+}
+
+.share-card-desc {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  min-width: 0;
+}
+
+.share-card-line {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.share-card-line strong { font-weight: 600; }
+
+.share-card-desc--clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.share-card-cover {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--subtle);
+}
+
+/* 影视 / 书籍：竖版海报放左侧（Shiro：flex-row-reverse + 50×75 self-start） */
+.share-card--media { flex-direction: row-reverse; }
+
+.share-card--media .share-card-cover {
+  align-self: flex-start;
+  width: 50px;
+  height: 75px;
+}
+
+.share-card-cover--empty {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--share-color, var(--quiet));
+  background: color-mix(in srgb, var(--share-color, var(--border)) 14%, transparent);
+}
+
+.share-card-cover--empty svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* 文字分享：innei 思考页的聊天气泡（rounded-xl + 左上角小圆角） */
+.share-quote {
+  display: inline-block;
+  max-width: 100%;
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border-top-left-radius: 4px;
+  background: color-mix(in srgb, var(--fg) 6%, transparent);
+}
+
+[data-theme="dark"] .share-quote {
+  background: color-mix(in srgb, var(--fg) 11%, transparent);
+}
+
+.share-quote blockquote {
+  margin: 0;
+  color: var(--fg);
+  font: 400 15px/1.85 var(--font-display);
+}
+
+.share-quote-source {
+  position: relative;
+  margin-top: 10px;
+  padding-top: 10px;
+  color: var(--muted);
+  font: 12px/1.5 var(--font-mono);
+}
+
+/* innei RefPreview 的短分隔线 */
+.share-quote-source::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 1px;
+  background: currentColor;
+  opacity: .5;
+}
+
+.share-quote-source a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 3px;
+}
+
+.share-quote-source a:hover { color: var(--accent); }
+
 /* ── Closing line ───────────────────────────────────────────────────────── */
 .essay-closing {
   display: flex;
@@ -106,4 +321,5 @@
   .essay-note { padding: 22px 20px; }
   .essay-content h2 { font-size: 20px; }
   .essay-content p { font-size: 15px; }
+  .share-card { gap: 14px; padding: 14px 16px; }
 }

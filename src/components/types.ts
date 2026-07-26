@@ -1,3 +1,5 @@
+import type { EssayShare } from "@/lib/content/types";
+
 export type NavKey = "home" | "posts" | "essays" | "projects" | "about" | "more";
 
 export interface NavLink {
@@ -46,6 +48,7 @@ export interface EssayItem {
   topic?: string;
   sourceNote?: string;
   href?: string;
+  shares?: EssayShare[];
 }
 
 export interface TraceNode {

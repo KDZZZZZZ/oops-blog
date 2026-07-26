@@ -20,6 +20,49 @@ const posts = defineCollection({
   }),
 });
 
+const shareMediaFields = {
+  title: z.string().min(1),
+  originalTitle: z.string().optional(),
+  rating: z.number().min(0).max(10).optional(),
+  description: z.string().optional(),
+  cover: z.string().optional(),
+  url: z.string().optional(),
+  color: z.string().optional(),
+};
+
+const essayShare = z.discriminatedUnion("type", [
+  z.object({
+    type: z.literal("music"),
+    title: z.string().min(1),
+    artist: z.string().min(1),
+    album: z.string().optional(),
+    cover: z.string().optional(),
+    url: z.string().optional(),
+    color: z.string().optional(),
+  }),
+  z.object({ type: z.literal("movie"), ...shareMediaFields }),
+  z.object({ type: z.literal("tv"), ...shareMediaFields }),
+  z.object({
+    type: z.literal("book"),
+    author: z.string().optional(),
+    ...shareMediaFields,
+  }),
+  z.object({
+    type: z.literal("text"),
+    text: z.string().min(1),
+    source: z.string().optional(),
+    url: z.string().optional(),
+  }),
+  z.object({
+    type: z.literal("link"),
+    title: z.string().min(1),
+    description: z.string().optional(),
+    cover: z.string().optional(),
+    url: z.string().min(1),
+    color: z.string().optional(),
+  }),
+]);
+
 const essays = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/essays" }),
   schema: z.object({
@@ -30,6 +73,7 @@ const essays = defineCollection({
     order: z.number().int().positive(),
     publishedAt: z.coerce.date().optional(),
     draft: z.boolean().default(false),
+    shares: z.array(essayShare).default([]),
   }),
 });
 

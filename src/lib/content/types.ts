@@ -17,6 +17,39 @@ export interface Post {
   url: string;
 }
 
+export interface EssayShareMediaBase {
+  title: string;
+  originalTitle?: string;
+  rating?: number;
+  description?: string;
+  cover?: string;
+  url?: string;
+  color?: string;
+}
+
+export type EssayShare =
+  | {
+      type: "music";
+      title: string;
+      artist: string;
+      album?: string;
+      cover?: string;
+      url?: string;
+      color?: string;
+    }
+  | ({ type: "movie" } & EssayShareMediaBase)
+  | ({ type: "tv" } & EssayShareMediaBase)
+  | ({ type: "book"; author?: string } & EssayShareMediaBase)
+  | { type: "text"; text: string; source?: string; url?: string }
+  | {
+      type: "link";
+      title: string;
+      description?: string;
+      cover?: string;
+      url: string;
+      color?: string;
+    };
+
 export interface Essay {
   kind: "essay";
   id: string;
@@ -29,6 +62,7 @@ export interface Essay {
   publishedAt?: Date;
   draft: boolean;
   url: string;
+  shares: EssayShare[];
 }
 
 export interface Project {

@@ -1,0 +1,202 @@
+---
+import type { EssayShare } from "@/lib/content/types";
+
+interface Props {
+  share: EssayShare;
+}
+
+const { share } = Astro.props;
+
+const NETEASE_RED = "#e72d2c";
+
+/** 由标题哈希出柔和主题色（饱和 30–35、亮度 60–70），同一标题每次构建颜色一致。 */
+function pastelAccent(seed: string): string {
+  let hash = 0;
+  for (let index = 0; index < seed.length; index += 1) {
+    hash = (hash * 31 + seed.charCodeAt(index)) | 0;
+  }
+  const positive = Math.abs(hash);
+  const hue = positive % 360;
+  const saturation = 30 + (positive % 6);
+  const lightness = 60 + (positive % 11);
+  return `hsl(${hue} ${saturation}% ${lightness}%)`;
+}
+
+interface CardLine {
+  label?: string;
+  text: string;
+}
+
+interface CardView {
+  variant: "music" | "media" | "link";
+  color: string;
+  href?: string;
+  cover?: string;
+  title: string;
+  titleNote?: string;
+  rating?: number;
+  lines?: CardLine[];
+  desc?: string;
+  icon: "music" | "film" | "tv" | "book" | "link";
+}
+
+let card: CardView | null = null;
+
+switch (share.type) {
+  case "music":
+    card = {
+      variant: "music",
+      color: share.color ?? NETEASE_RED,
+      href: share.url,
+      cover: share.cover,
+      title: share.title,
+      lines: [
+        { label: "歌手", text: share.artist },
+        ...(share.album ? [{ label: "专辑", text: share.album }] : []),
+      ],
+      icon: "music",
+    };
+    break;
+  case "movie":
+  case "tv":
+    card = {
+      variant: "media",
+      color: share.color ?? pastelAccent(share.title),
+      href: share.url,
+      cover: share.cover,
+      title: share.title,
+      titleNote: share.originalTitle,
+      rating: share.rating,
+      desc: share.description,
+      icon: share.type === "movie" ? "film" : "tv",
+    };
+    break;
+  case "book":
+    card = {
+      variant: "media",
+      color: share.color ?? pastelAccent(share.title),
+      href: share.url,
+      cover: share.cover,
+      title: share.title,
+      titleNote: share.originalTitle ?? share.author,
+      rating: share.rating,
+      desc: share.description,
+      icon: "book",
+    };
+    break;
+  case "link":
+    card = {
+      variant: "link",
+      color: share.color ?? pastelAccent(share.title),
+      href: share.url,
+      cover: share.cover,
+      title: share.title,
+      desc: share.description,
+      icon: "link",
+    };
+    break;
+  case "text":
+    break;
+}
+
+const iconPaths: Record<CardView["icon"], string> = {
+  music: "M9.8 17.5V6.2l9.8-2v11.3M9.8 17.5a2.8 2.8 0 1 1-5.6 0 2.8 2.8 0 0 1 5.6 0Zm9.8-2a2.8 2.8 0 1 1-5.6 0 2.8 2.8 0 0 1 5.6 0Z",
+  film: "M5.5 4.5h13a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2Zm2 0v15m9-15v15m-13-10.5h4m9 0h4m-17 6h4m9 0h4",
+  tv: "M5.5 6.5h13a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2Zm3-4 3.5 3.5L15.5 2.5",
+  book: "M6.5 3.5h13v15h-13a2 2 0 0 0-2 2v-15a2 2 0 0 1 2-2Zm13 15a2 2 0 0 0-2 2h-11",
+  link: "M10.2 13.8a4 4 0 0 0 5.6 0l3.1-3.1a4 4 0 1 0-5.6-5.6l-1.3 1.3m1.8 3.8a4 4 0 0 0-5.6 0l-3.1 3.1a4 4 0 1 0 5.6 5.6l1.3-1.3",
+};
+---
+
+{
+  share.type === "text" ? (
+    <figure class="share-quote">
+      <blockquote>{share.text}</blockquote>
+      {(share.source || share.url) && (
+        <figcaption class="share-quote-source">
+          {share.url ? (
+            <a href={share.url} target="_blank" rel="noreferrer">
+              {share.source ?? share.url}
+            </a>
+          ) : (
+            share.source
+          )}
+        </figcaption>
+      )}
+    </figure>
+  ) : (
+    card && (
+      <a
+        class:list={["share-card", `share-card--${card.variant}`]}
+        href={card.href}
+        target="_blank"
+        rel="noreferrer"
+        style={`--share-color:${card.color}`}
+      >
+        <span class="share-card-contents">
+          <span class="share-card-title">
+            <span class="share-card-name">{card.title}</span>
+            {card.titleNote && <span class="share-card-note">({card.titleNote})</span>}
+            {typeof card.rating === "number" && (
+              <span class="share-card-rating">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    opacity=".35"
+                    d="m12 2.6 2.9 5.9 6.5 1-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5-4.7-4.6 6.5-1z"
+                  />
+                  <path fill="currentColor" d="M12 2.6v14.9l-5.8 3 1.1-6.5-4.7-4.6 6.5-1z" />
+                </svg>
+                {card.rating.toFixed(1)}
+              </span>
+            )}
+          </span>
+          {card.lines && (
+            <span class="share-card-desc">
+              {card.lines.map((line) => (
+                <span class="share-card-line">
+                  {line.label && <strong>{line.label}：</strong>}
+                  {line.text}
+                </span>
+              ))}
+            </span>
+          )}
+          {card.desc && <span class="share-card-desc share-card-desc--clamp">{card.desc}</span>}
+        </span>
+        {card.cover ? (
+          <img
+            class="share-card-cover"
+            src={card.cover}
+            alt=""
+            loading="lazy"
+            referrerpolicy="no-referrer"
+          />
+        ) : (
+          <span class="share-card-cover share-card-cover--empty" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path
+                d={iconPaths[card.icon]}
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        )}
+      </a>
+    )
+  )
+}
+
+<script>
+  for (const card of document.querySelectorAll<HTMLElement>(".share-card")) {
+    card.addEventListener("pointermove", (event) => {
+      const bounds = card.getBoundingClientRect();
+      card.style.setProperty("--share-mx", `${event.clientX - bounds.left}px`);
+      card.style.setProperty("--share-my", `${event.clientY - bounds.top}px`);
+      card.style.setProperty("--share-radius", `${Math.hypot(bounds.width, bounds.height) * 1.3}px`);
+    });
+  }
+</script>
