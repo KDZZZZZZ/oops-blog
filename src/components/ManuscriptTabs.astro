@@ -83,34 +83,22 @@ const {
 
   <section class="manuscript-panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" data-manuscript-panel="overview">
     {overview && (
-      <>
-        <div class="overview-lede reveal">
-          <p class="eyebrow">Archive overview</p>
-          <h2>{overview.title}</h2>
-          {overview.description && <p>{overview.description}</p>}
-        </div>
-        {overview.stats && (
-          <div class="stat-strip reveal" aria-label="文稿状态统计">
-            {overview.stats.map((item) => <div><strong>{item.value}</strong><span>{item.label}</span></div>)}
-          </div>
+      <div class="chart-grid">
+        {overview.categoryStats && (
+          <figure class="chart-block reveal">
+            <figcaption><strong>门类分布</strong>{overview.categoryCaption && <span>{overview.categoryCaption}</span>}</figcaption>
+            <CategoryChart stats={overview.categoryStats} />
+            {overview.categoryNote && <p class="chart-note">{overview.categoryNote}</p>}
+          </figure>
         )}
-        <div class="chart-grid">
-          {overview.categoryStats && (
-            <figure class="chart-block reveal">
-              <figcaption><strong>门类分布</strong>{overview.categoryCaption && <span>{overview.categoryCaption}</span>}</figcaption>
-              <CategoryChart stats={overview.categoryStats} />
-              {overview.categoryNote && <p class="chart-note">{overview.categoryNote}</p>}
-            </figure>
-          )}
-          {overview.updateStats && (
-            <figure class="chart-block reveal">
-              <figcaption><strong>公开更新时间</strong>{overview.updateCaption && <span>{overview.updateCaption}</span>}</figcaption>
-              <UpdateChart stats={overview.updateStats} />
-              {overview.chartNote && <p class="chart-note">{overview.chartNote}</p>}
-            </figure>
-          )}
-        </div>
-      </>
+        {overview.updateStats && (
+          <figure class="chart-block reveal">
+            <figcaption><strong>公开更新时间</strong>{overview.updateCaption && <span>{overview.updateCaption}</span>}</figcaption>
+            <UpdateChart stats={overview.updateStats} />
+            {overview.chartNote && <p class="chart-note">{overview.chartNote}</p>}
+          </figure>
+        )}
+      </div>
     )}
   </section>
 </section>

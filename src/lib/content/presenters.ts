@@ -8,8 +8,8 @@ export const statusLabels: Record<ContentStatus, string> = {
 };
 
 export const contentKindLabels = {
-  post: "文章",
-  essay: "随笔",
+  post: "文稿",
+  essay: "碎念",
   project: "项目",
 } as const;
 

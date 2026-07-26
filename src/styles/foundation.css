@@ -43,26 +43,65 @@ html.theme-transitioning::view-transition-new(root) {
   }
 }
 
-[data-theme="light"] body {
-  background-color: #fefefb;
-  background-image: url("../assets/marble-light.svg");
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+/*
+ * 布景：两层 position:fixed 伪元素承载纹理与光晕，只动 transform（合成器动画，
+ * 不触发重排/重绘）。不用 background-attachment: fixed——那是滚动卡顿的常见来源。
+ * 层向外扩 6%，漂移时不露边。
+ */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: -6%;
+  z-index: -1;
+  pointer-events: none;
+  will-change: transform;
 }
 
-/* 深色模式没有纸纹理，用一层极淡的顶部辉光找回纵深，避免纯平黑 */
-[data-theme="dark"] body {
-  background-color: var(--bg);
-  background-image: radial-gradient(
-    1100px 560px at 50% -160px,
-    oklch(27% 0.014 83 / .6),
-    transparent 70%
-  );
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+[data-theme="light"] body { background-color: #fefefb; }
+
+[data-theme="light"] body::before {
+  background: url("../assets/marble-light.svg") center / cover no-repeat;
+  animation: backdrop-drift 96s ease-in-out infinite alternate;
 }
+
+[data-theme="light"] body::after {
+  background:
+    radial-gradient(52vw 40vh at 20% 18%, oklch(97% 0.013 75 / .5), transparent 68%),
+    radial-gradient(46vw 36vh at 82% 78%, oklch(96.5% 0.012 12 / .45), transparent 70%);
+  animation: backdrop-drift-counter 128s ease-in-out infinite alternate;
+}
+
+/* 深色：纯平黑改为缓慢流动的暖光与一缕玫瑰色微光 */
+[data-theme="dark"] body::before {
+  background:
+    radial-gradient(58vw 44vh at 50% 4%, oklch(27% 0.015 83 / .55), transparent 70%),
+    radial-gradient(44vw 36vh at 82% 34%, oklch(25% 0.022 12 / .34), transparent 72%);
+  animation: backdrop-drift 96s ease-in-out infinite alternate;
+}
+
+[data-theme="dark"] body::after {
+  background: radial-gradient(46vw 42vh at 16% 78%, oklch(24.5% 0.014 250 / .3), transparent 74%);
+  animation: backdrop-drift-counter 128s ease-in-out infinite alternate;
+}
+
+@keyframes backdrop-drift {
+  from { transform: translate3d(-1.1%, -0.7%, 0) scale(1.02); }
+  to { transform: translate3d(1.1%, 0.9%, 0) scale(1.05); }
+}
+
+@keyframes backdrop-drift-counter {
+  from { transform: translate3d(1.2%, 0.8%, 0); }
+  to { transform: translate3d(-1.2%, -1%, 0) scale(1.04); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after {
+    animation: none;
+  }
+}
+
 body.menu-open { overflow: hidden; }
 
 a {

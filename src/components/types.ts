@@ -89,9 +89,6 @@ export interface CategoryGroup {
 }
 
 export interface ManuscriptOverview {
-  title: string;
-  description?: string;
-  stats?: Array<{ label: string; value: string | number }>;
   categoryStats?: CategoryStat[];
   updateStats?: UpdateStat[];
   categoryCaption?: string;

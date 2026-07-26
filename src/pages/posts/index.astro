@@ -45,18 +45,7 @@ const updateStat: UpdateStat[] = updateSeries.map((point, index) => ({
   current: index === updateSeries.length - 1,
 }));
 
-const publishedCount = ctx.posts.filter((p) => p.status === "published").length;
-const draftCount = ctx.posts.filter((p) => p.status === "draft").length;
-const outlineCount = ctx.posts.filter((p) => p.status === "outline").length;
-
 const overview: ManuscriptOverview = {
-  title: "文稿存档",
-  description: "AI 编译器、Agent 工程与模型推理优化。统计包含全部状态的文稿。",
-  stats: [
-    { label: "已发布全文", value: publishedCount },
-    { label: "写作中", value: draftCount },
-    { label: "提纲", value: outlineCount },
-  ],
   categoryStats: categoryStat,
   updateStats: updateStat,
   categoryCaption: "按门类",

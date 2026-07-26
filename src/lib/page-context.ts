@@ -53,7 +53,7 @@ export async function getPageContext() {
   const navLinks: NavLink[] = [
     { label: "首页", href: "/", key: "home" },
     { label: "文稿", href: "/posts/", key: "posts" },
-    { label: "随笔", href: "/essays/", key: "essays" },
+    { label: "碎念", href: "/essays/", key: "essays" },
     { label: "更多", key: "more" },
     { label: "关于", href: "/about/", key: "about", description: "我在做什么" },
     { label: "项目", href: "/projects/", key: "projects", description: "开源与作品集" },
@@ -78,7 +78,7 @@ export async function getPageContext() {
       siteName: siteConfig.name,
       counts: [
         { label: "文稿", value: posts.length },
-        { label: "随笔", value: essays.length },
+        { label: "碎念", value: essays.length },
         { label: "项目", value: projects.length },
       ],
       note: "保持简单",

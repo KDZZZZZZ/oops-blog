@@ -17,7 +17,7 @@ const {
   id = "home-feed",
 } = Astro.props;
 
-// 随笔若带分享，在碎念里露出一行线索（音乐给音符，影视书籍用书名号）
+// 碎念若带分享，露出一行线索（音乐给音符，影视书籍用书名号）
 function shareHint(essay: EssayItem): string | undefined {
   const share = essay.shares?.find((item) => item.type !== "text");
   if (!share) return undefined;
@@ -48,7 +48,7 @@ function shareHint(essay: EssayItem): string | undefined {
   </div>
 
   {essays.length > 0 && (
-    <aside class="home-side reveal" aria-label="近期随笔与当前状态">
+    <aside class="home-side reveal" aria-label="近期碎念与当前状态">
       <section class="home-musing">
         <header class="home-section-title">
           <div><h2>{essayTitle}</h2></div>
