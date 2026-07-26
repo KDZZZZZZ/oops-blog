@@ -359,10 +359,27 @@
   border-bottom: 1px solid var(--border);
 }
 
+.musing-title {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--heading);
+  font: 400 16px/1.5 var(--font-display);
+}
+
 .musing-item p {
   margin: 0;
   color: var(--fg);
   font: 400 15px/1.8 var(--font-display);
+}
+
+.musing-share {
+  display: block;
+  margin-top: 10px;
+  color: var(--muted);
+  font: 12px/1.6 var(--font-mono);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .musing-item time {
@@ -372,7 +389,7 @@
   font: 10px/1.5 var(--font-mono);
 }
 
-.musing-item:hover p { color: var(--accent); }
+.musing-item:hover .musing-title { color: var(--accent); }
 
 .home-letter blockquote {
   position: relative;

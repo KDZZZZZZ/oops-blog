@@ -51,6 +51,15 @@ body:not(.home-page) .header-inner {
   -webkit-backdrop-filter: blur(20px) saturate(1.16);
 }
 
+/* 深色下描边和底色几乎融进背景，单独提一档轮廓 */
+[data-theme="dark"] .site-header.scrolled .header-inner,
+[data-theme="dark"] body:not(.home-page) .header-inner {
+  border-color: var(--border);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  box-shadow: 0 14px 42px oklch(0% 0 0 / .45),
+              inset 0 1px oklch(100% 0 0 / .06);
+}
+
 body:not(.home-page) .desktop-nav {
   gap: 4px;
   padding: 4px;
@@ -555,6 +564,7 @@ a.entry-row:hover { transform: translateX(4px); }
 }
 
 .entry-title {
+  display: block;
   margin: 0;
   color: var(--heading);
   font: 400 21px/1.4 var(--font-display);
@@ -562,6 +572,7 @@ a.entry-row:hover { transform: translateX(4px); }
 }
 
 .entry-summary {
+  display: block;
   max-width: 68ch;
   margin: 7px 0 0;
   color: var(--muted);

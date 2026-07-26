@@ -52,7 +52,17 @@ html.theme-transitioning::view-transition-new(root) {
   background-size: cover;
 }
 
-[data-theme="dark"] body { background-image: none; }
+/* 深色模式没有纸纹理，用一层极淡的顶部辉光找回纵深，避免纯平黑 */
+[data-theme="dark"] body {
+  background-color: var(--bg);
+  background-image: radial-gradient(
+    1100px 560px at 50% -160px,
+    oklch(27% 0.014 83 / .6),
+    transparent 70%
+  );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
 body.menu-open { overflow: hidden; }
 
 a {

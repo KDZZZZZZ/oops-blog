@@ -25,6 +25,7 @@ const recentEssayItems: EssayItem[] = ctx.essays.slice(0, 2).map((essay) => ({
   topic: essay.topic,
   sourceNote: essay.sourceNote,
   href: essay.url,
+  shares: essay.shares,
 }));
 
 const writingTrace = buildWritingTrace(ctx.allPosts);

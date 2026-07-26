@@ -16,6 +16,15 @@ const {
   essayTitle = "碎念",
   id = "home-feed",
 } = Astro.props;
+
+// 随笔若带分享，在碎念里露出一行线索（音乐给音符，影视书籍用书名号）
+function shareHint(essay: EssayItem): string | undefined {
+  const share = essay.shares?.find((item) => item.type !== "text");
+  if (!share) return undefined;
+  if (share.type === "music") return `♪ ${share.title} · ${share.artist}`;
+  if (share.type === "link") return share.title;
+  return `《${share.title}》`;
+}
 ---
 
 <section class="home-feed shell" id={id}>
@@ -46,7 +55,9 @@ const {
         </header>
         {essays.map((essay) => (
           <a class="musing-item" href={essay.href}>
+            <strong class="musing-title">{essay.title}</strong>
             <p>{essay.body}</p>
+            {shareHint(essay) && <span class="musing-share">{shareHint(essay)}</span>}
             {(essay.topic || essay.sourceNote) && <time>{essay.topic ?? essay.sourceNote}</time>}
           </a>
         ))}

@@ -1,5 +1,11 @@
+/* 标题与卡片列同轴：hero 内容压到与 essay-stream 相同的 680px 居中列 */
+.essay-hero .page-hero-grid {
+  max-width: 680px;
+  margin-inline: auto;
+}
+
 .essay-stream {
-  padding: 48px 0 110px;
+  padding: 24px 0 110px;
   max-width: 680px;
 }
 
