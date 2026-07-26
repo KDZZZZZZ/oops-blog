@@ -1,0 +1,63 @@
+---
+import { Menu } from "@lucide/astro";
+import DesktopNav from "./DesktopNav.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+import type { CategoryGroup, NavLink, NavKey, SocialLink } from "./types";
+
+interface HomePreview {
+  avatarSrc?: string;
+  siteName?: string;
+  presence?: string;
+  counts?: Array<{ label: string; value: string | number }>;
+  note?: string;
+  socialLinks?: SocialLink[];
+}
+
+interface PostsPreview {
+  categories?: CategoryGroup[];
+  footerHref?: string;
+  footerLabel?: string;
+}
+
+interface Props {
+  links: NavLink[];
+  current?: NavKey | string;
+  avatarSrc?: string;
+  homeHref?: string;
+  homeVariant?: boolean;
+  siteName?: string;
+  homePreview?: HomePreview;
+  postsPreview?: PostsPreview;
+}
+
+const {
+  links,
+  current,
+  avatarSrc,
+  homeHref = "/",
+  siteName = "Oops",
+  homePreview,
+  postsPreview,
+} = Astro.props;
+---
+
+<header class="site-header" id="site-header" data-pagefind-ignore>
+  <div class="header-inner">
+    <a class:list={["wordmark", avatarSrc && "home-wordmark"]} href={homeHref} aria-label="返回首页">
+      {
+        avatarSrc ? (
+          <><img src={avatarSrc} alt="" /><span class="sr-only">{siteName}</span></>
+        ) : (
+          <>{siteName}<i>·</i></>
+        )
+      }
+    </a>
+    <DesktopNav links={links} current={current} homePreview={homePreview} postsPreview={postsPreview} />
+    <div class="header-actions">
+      <ThemeToggle />
+      <button class="icon-button menu-button" id="menu-button" type="button" aria-label="打开导航" aria-expanded="false">
+        <Menu aria-hidden="true" />
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,40 @@
+---
+import { Search } from "@lucide/astro";
+import type { SearchIndexItem } from "./types";
+
+interface Props {
+  items?: SearchIndexItem[];
+  placeholder?: string;
+  hint?: string;
+  title?: string;
+}
+
+const {
+  items = [],
+  placeholder = "搜索文章、随笔和技术主题",
+  hint = "输入关键词，例如 LLVM、Agent 或 推理。",
+  title = "站内搜索",
+} = Astro.props;
+const serializedItems = JSON.stringify(items).replaceAll("<", "\\u003c");
+---
+
+<dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title" data-pagefind-ignore>
+  <div class="search-head">
+    <Search aria-hidden="true" />
+    <input
+      class="search-input"
+      id="search-input"
+      type="search"
+      autocomplete="off"
+      placeholder={placeholder}
+      aria-label={placeholder}
+    />
+    <button class="search-close" id="search-close" type="button">关闭</button>
+  </div>
+  <div class="search-body">
+    <h2 id="search-title" class="eyebrow" style="margin:14px 4px 0">{title}</h2>
+    <div id="search-results" class="search-hint">{hint}</div>
+  </div>
+  <script is:inline type="application/json" id="search-fallback-json" set:html={serializedItems} />
+  <slot />
+</dialog>

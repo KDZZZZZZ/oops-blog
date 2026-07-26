@@ -1,0 +1,30 @@
+---
+import type { ProjectItem } from "./types";
+
+interface Props {
+  projects: ProjectItem[];
+}
+
+const { projects } = Astro.props;
+---
+
+<div class="entry-list project-list">
+  {
+    projects.map((project) => (
+      <article class="entry-row reveal" id={project.id} data-category={project.category}>
+        <span class="entry-meta">{Array.isArray(project.meta) ? project.meta.map((item, index) => <>{index > 0 && <br />}{item}</>) : project.meta}</span>
+        <span>
+          <strong class="entry-title">{project.title}</strong>
+          {project.summary && <span class="entry-summary">{project.summary}</span>}
+          {project.stack && <span class="project-stack">{project.stack.map((item) => <span>{item}</span>)}</span>}
+        </span>
+        {(project.stateLabel || project.state) && (
+          <span class="project-state">
+            {project.stateLabel && <strong>{project.stateLabel}</strong>}
+            {project.state}
+          </span>
+        )}
+      </article>
+    ))
+  }
+</div>

@@ -1,0 +1,140 @@
+---
+import "../styles/global.css";
+import MobileNav from "../components/MobileNav.astro";
+import SearchDialog from "../components/SearchDialog.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import type { CategoryGroup, NavKey, NavLink, SearchIndexItem, SocialLink } from "../components/types";
+import { themeInitScript } from "../scripts/theme-init";
+import avatarAsset from "../assets/avatar.png";
+
+interface HomePreview {
+  avatarSrc?: string;
+  siteName?: string;
+  presence?: string;
+  counts?: Array<{ label: string; value: string | number }>;
+  note?: string;
+  socialLinks?: SocialLink[];
+}
+
+interface PostsPreview {
+  categories?: CategoryGroup[];
+  footerHref?: string;
+  footerLabel?: string;
+}
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalPath?: string;
+  image?: string;
+  bodyClass?: string;
+  currentNav?: NavKey | string;
+  navLinks?: NavLink[];
+  homeNavPreview?: HomePreview;
+  postsNavPreview?: PostsPreview;
+  socialLinks?: SocialLink[];
+  searchItems?: SearchIndexItem[];
+  searchPlaceholder?: string;
+  siteName?: string;
+  siteUrl?: string;
+  lang?: string;
+  themeColor?: string;
+  avatarSrc?: string;
+  footerGroups?: Array<{ label: string; links: NavLink[] }>;
+  homeVariant?: boolean;
+  withHeader?: boolean;
+  withFooter?: boolean;
+  ogType?: "website" | "article";
+}
+
+const {
+  title,
+  description = "Oops 的个人博客，记录 AI 编译器、Agent 工程与模型推理优化。",
+  canonicalPath = Astro.url.pathname,
+  image,
+  bodyClass,
+  currentNav,
+  siteName = "Oops",
+  siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? Astro.url.origin,
+  lang = "zh-CN",
+  themeColor = "#f9f8f5",
+  searchItems = [],
+  searchPlaceholder,
+  homeVariant = false,
+  withHeader = true,
+  withFooter = true,
+  ogType = "website",
+} = Astro.props;
+
+// Always resolve avatar so every page shows the avatar wordmark
+const resolvedAvatar = Astro.props.avatarSrc
+  ?? (typeof avatarAsset === "object" ? (avatarAsset as { src: string }).src : avatarAsset as string);
+
+const navLinks = Astro.props.navLinks ?? [
+  { label: "首页", href: "/", key: "home" },
+  { label: "文章", href: "/posts/", key: "posts" },
+  { label: "随笔", href: "/essays/", key: "essays" },
+  { label: "更多", key: "more", disabled: true, description: "更多内容尚未开放" },
+];
+
+// Default home preview so nav popup works on every page even if page doesn't supply counts
+const defaultHomePreview: HomePreview = {
+  siteName,
+};
+const homeNavPreview = Astro.props.homeNavPreview ?? defaultHomePreview;
+
+const footerGroups = Astro.props.footerGroups ?? [
+  { label: "阅读", links: navLinks.filter((item) => item.href && item.key !== "more") },
+];
+
+const canonical = new URL(canonicalPath, `${siteUrl}/`).toString();
+const ogImage = image ? new URL(image, `${siteUrl}/`).toString() : undefined;
+const fullTitle = title.includes(siteName) ? title : `${title} · ${siteName}`;
+---
+
+<!doctype html>
+<html lang={lang} data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content={themeColor} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
+    <title>{fullTitle}</title>
+    <script is:inline set:html={themeInitScript} />
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <a class="skip-link" href="#content">跳到正文</a>
+    {
+      withHeader && (
+        <SiteHeader
+          links={navLinks}
+          current={currentNav}
+          avatarSrc={resolvedAvatar}
+          homeVariant={homeVariant}
+          siteName={siteName}
+          homePreview={homeNavPreview}
+          postsPreview={Astro.props.postsNavPreview}
+        />
+      )
+    }
+    <main id="content" data-pagefind-body>
+      <slot />
+    </main>
+    {withFooter && <SiteFooter siteName={siteName} groups={footerGroups} />}
+    <MobileNav links={navLinks} current={currentNav} />
+    <SearchDialog items={searchItems} placeholder={searchPlaceholder} />
+    <script>
+      import "../scripts/index";
+    </script>
+    <slot name="scripts" />
+  </body>
+</html>

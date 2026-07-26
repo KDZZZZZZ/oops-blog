@@ -1,0 +1,79 @@
+---
+import { getCollection, render } from "astro:content";
+import ArticleLayout from "@/layouts/ArticleLayout.astro";
+import { getPageContext } from "@/lib/page-context";
+import {
+  estimateReadingStats,
+  formatCharacterCount,
+  getStatusLabel,
+  listPublicPosts,
+} from "@/lib/content";
+import { siteConfig } from "@/lib/site-config";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("posts");
+  const publicEntries = entries.filter(
+    (entry) => entry.data.status === "published" && !entry.data.draft,
+  );
+  return publicEntries.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+
+const ctx = await getPageContext();
+const sorted = listPublicPosts(ctx.allPosts);
+const currentIndex = sorted.findIndex((p) => p.slug === entry.data.slug);
+const prevPost = currentIndex > 0 ? sorted[currentIndex - 1] : undefined;
+const nextPost =
+  currentIndex < sorted.length - 1 ? sorted[currentIndex + 1] : undefined;
+
+// The layout already renders the title, so a depth-1 heading would only repeat it.
+const toc = headings
+  .filter((h) => h.depth >= 2 && h.depth <= 3)
+  .map((h) => ({ href: `#${h.slug}`, label: h.text, depth: h.depth }));
+
+const reading = estimateReadingStats(entry.body ?? "");
+
+const meta: string[] = [
+  new Date(entry.data.publishedAt).toLocaleDateString("zh-CN", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }),
+  formatCharacterCount(reading.characters),
+  `约 ${reading.minutes} 分钟`,
+  getStatusLabel(entry.data.status),
+];
+
+const canonicalPath = `/posts/${entry.data.slug}/`;
+---
+
+<ArticleLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  canonicalPath={canonicalPath}
+  currentNav="posts"
+  navLinks={ctx.navLinks}
+  searchItems={ctx.searchItems}
+  siteName={siteConfig.name}
+  siteUrl={siteConfig.url}
+  publishedAt={entry.data.publishedAt}
+  updatedAt={entry.data.updatedAt}
+  tags={entry.data.tags}
+  authorName={siteConfig.name}
+  eyebrow={entry.data.category}
+  toc={toc}
+  meta={meta}
+  previous={prevPost
+    ? { label: "上一篇", title: prevPost.title, href: prevPost.url }
+    : undefined}
+  next={nextPost
+    ? { label: "下一篇", title: nextPost.title, href: nextPost.url }
+    : undefined}
+>
+  <Content />
+</ArticleLayout>

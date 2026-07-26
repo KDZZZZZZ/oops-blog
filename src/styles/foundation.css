@@ -1,0 +1,131 @@
+* { box-sizing: border-box; }
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--fg);
+  font: 15px/1.65 var(--font-body);
+  font-synthesis-weight: none;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color .35s var(--ease), color .35s var(--ease);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html.theme-transitioning body {
+  transition: none;
+}
+
+html.theme-transitioning::view-transition-new(root) {
+  animation: theme-reveal .62s var(--ease);
+}
+
+@keyframes theme-reveal {
+  from {
+    clip-path: circle(0 at var(--theme-origin-x) var(--theme-origin-y));
+  }
+
+  to {
+    clip-path: circle(var(--theme-radius) at var(--theme-origin-x) var(--theme-origin-y));
+  }
+}
+
+[data-theme="light"] body {
+  background-color: #fefefb;
+  background-image: url("../assets/marble-light.svg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+[data-theme="dark"] body { background-image: none; }
+body.menu-open { overflow: hidden; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button { letter-spacing: 0; }
+
+img,
+svg {
+  display: block;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+::selection { background: color-mix(in srgb, var(--accent) 18%, transparent); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 16px;
+  z-index: 100;
+  transform: translateY(-160%);
+  padding: 8px 12px;
+  border-radius: 4px;
+  background: var(--heading);
+  color: var(--surface);
+  transition: transform .2s var(--ease);
+}
+
+.skip-link:focus { transform: none; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.shell {
+  width: min(var(--max), calc(100% - 48px));
+  margin-inline: auto;
+}
+
+@media (max-width: 900px) {
+  .shell { width: min(100% - 36px, 760px); }
+}
+
+@media (max-width: 600px) {
+  :root { --header-h: 62px; }
+  .shell { width: calc(100% - 32px); }
+}

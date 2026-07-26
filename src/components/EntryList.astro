@@ -1,0 +1,15 @@
+---
+import EntryRow from "./EntryRow.astro";
+import type { EntryItem } from "./types";
+
+interface Props {
+  entries: EntryItem[];
+  className?: string;
+}
+
+const { entries, className = "" } = Astro.props;
+---
+
+<div class:list={["entry-list", className]}>
+  {entries.map((entry) => <EntryRow {...entry} />)}
+</div>

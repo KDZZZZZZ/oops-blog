@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <filter id="liquid-marble" x="-12%" y="-12%" width="124%" height="124%" color-interpolation-filters="sRGB">
+      <feTurbulence
+        type="fractalNoise"
+        baseFrequency="0.006 0.013"
+        numOctaves="4"
+        seed="23"
+        result="broad-noise"
+      />
+      <feGaussianBlur in="broad-noise" stdDeviation="4.5" result="broad-blur" />
+      <feColorMatrix
+        in="broad-blur"
+        type="matrix"
+        values="
+          0 0 0 0 0.62
+          0 0 0 0 0.84
+          0 0 0 0 0.82
+          0 0 0 .13 -.065"
+        result="broad-tint"
+      />
+
+      <feTurbulence
+        type="turbulence"
+        baseFrequency="0.011 0.025"
+        numOctaves="2"
+        seed="41"
+        result="fine-noise"
+      />
+      <feDisplacementMap
+        in="fine-noise"
+        in2="broad-noise"
+        scale="58"
+        xChannelSelector="R"
+        yChannelSelector="B"
+        result="fine-flow"
+      />
+      <feGaussianBlur in="fine-flow" stdDeviation="2.4" result="fine-blur" />
+      <feColorMatrix
+        in="fine-blur"
+        type="matrix"
+        values="
+          0 0 0 0 0.68
+          0 0 0 0 0.80
+          0 0 0 0 0.90
+          0 0 0 .075 -.042"
+        result="fine-tint"
+      />
+
+      <feBlend in="SourceGraphic" in2="broad-tint" mode="multiply" result="broad-layer" />
+      <feBlend in="broad-layer" in2="fine-tint" mode="screen" />
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1100" fill="#fefefb" filter="url(#liquid-marble)" />
+</svg>

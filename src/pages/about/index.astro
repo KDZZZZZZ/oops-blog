@@ -1,0 +1,49 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPageContext } from "@/lib/page-context";
+import { siteConfig } from "@/lib/site-config";
+import avatarUrl from "@/assets/avatar.png";
+
+const ctx = await getPageContext();
+const avatar = typeof avatarUrl === "object" ? avatarUrl.src : avatarUrl;
+---
+
+<BaseLayout
+  title="关于"
+  description={`关于 ${siteConfig.name}：计算机科学、编译器、Agent 工程与开源博客。`}
+  canonicalPath="/about/"
+  currentNav="about"
+  navLinks={ctx.navLinks}
+  searchItems={ctx.searchItems}
+  footerGroups={ctx.footerGroups}
+>
+  <section class="page-hero compact-hero shell">
+    <div class="page-hero-grid">
+      <h1 class="display" data-enter>关于 Oops</h1>
+    </div>
+  </section>
+
+  <section class="section shell">
+    <div class="about-grid">
+      <figure class="portrait reveal">
+        <img src={avatar} width="600" height="600" alt="Oops 的头像插画" />
+        <figcaption>Oops<br />Computer science · Hangzhou</figcaption>
+      </figure>
+      <div class="prose reveal">
+        <h2>我在做什么</h2>
+        <p>我在读计算机科学本科，当前把主要精力放在三件事上：AI 编译器的中间表示与运行时、Agent 产品里的可靠状态链路，以及扩散语言模型的并行推理。</p>
+        <p>这些方向看起来分散，但我关心的是同一个问题：一个想法怎样穿过抽象层，变成能够被观察、验证和维护的系统。</p>
+
+        <h2>为什么写这个博客</h2>
+        <p>项目经历通常只剩下一行技术栈，实验记录通常只剩一个最终数字。我想保留中间那部分：为什么这样拆边界、哪里判断错了、什么证据改变了设计。</p>
+        <p>文章会优先写工程路径，不追求高频更新。还没有整理完成的内容会明确标注"整理中"，不会伪装成已经发布。</p>
+
+        <h2>联系</h2>
+        <p>
+          可以通过 <a href={`mailto:${siteConfig.email}`}>邮件</a> 联系我，或在{" "}
+          <a href={siteConfig.github} target="_blank" rel="noreferrer">GitHub</a> 找到我。
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

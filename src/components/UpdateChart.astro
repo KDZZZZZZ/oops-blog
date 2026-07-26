@@ -1,0 +1,83 @@
+---
+import { monotoneAreaPath, monotoneLinePath, type Point } from "@/lib/chart/spline";
+import type { UpdateStat } from "./types";
+
+interface Props {
+  stats: UpdateStat[];
+  label?: string;
+  id?: string;
+}
+
+const { stats, label, id = "update-ridge" } = Astro.props;
+const max = Math.max(1, ...stats.map((item) => item.max ?? item.value));
+const ariaLabel = label ?? stats.map((item) => `${item.label} ${item.value} 次`).join("，");
+
+// Points sit at the centre of their label column so the axis text lines up.
+const VIEW_W = 320;
+const TOP = 16;
+const BASELINE = 104;
+const column = VIEW_W / Math.max(1, stats.length);
+
+const points: Point[] = stats.map((item, index) => ({
+  x: (index + 0.5) * column,
+  y: BASELINE - ((item.value || 0) / max) * (BASELINE - TOP),
+}));
+
+const linePath = monotoneLinePath(points);
+const areaPath = monotoneAreaPath(points, BASELINE);
+const currentIndex = stats.findIndex((item) => item.current);
+const fillId = `${id}-fill`;
+---
+
+<div class="update-chart" role="img" aria-label={ariaLabel}>
+  <svg class="update-ridge" viewBox={`0 0 ${VIEW_W} ${BASELINE + 14}`} aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id={fillId} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.28" />
+        <stop offset="60%" stop-color="var(--accent)" stop-opacity="0.07" />
+        <stop offset="100%" stop-color="var(--accent)" stop-opacity="0" />
+      </linearGradient>
+    </defs>
+
+    {/* Quarter guides keep the ridge readable without a boxed axis. */}
+    {[0.5, 1].map((ratio) => (
+      <line
+        class="update-guide"
+        x1="0"
+        x2={VIEW_W}
+        y1={BASELINE - ratio * (BASELINE - TOP)}
+        y2={BASELINE - ratio * (BASELINE - TOP)}
+      />
+    ))}
+
+    {currentIndex >= 0 && (
+      <line
+        class="update-stem"
+        x1={points[currentIndex].x}
+        x2={points[currentIndex].x}
+        y1={points[currentIndex].y}
+        y2={BASELINE}
+      />
+    )}
+
+    <path class="update-area" d={areaPath} fill={`url(#${fillId})`} />
+    <path class="update-line" d={linePath} />
+    <line class="update-base" x1="0" x2={VIEW_W} y1={BASELINE} y2={BASELINE} />
+
+    {stats.map((item, index) => (
+      <g class:list={["update-node", item.current && "is-current", !item.value && "is-empty"]}>
+        {item.value > 0 && (
+          <text class="update-value" x={points[index].x} y={points[index].y - 11}>{item.value}</text>
+        )}
+        <circle class="update-halo" cx={points[index].x} cy={points[index].y} r="7" />
+        <circle class="update-dot" cx={points[index].x} cy={points[index].y} r="3" />
+      </g>
+    ))}
+  </svg>
+
+  <div class="update-axis" aria-hidden="true">
+    {stats.map((item) => (
+      <span class:list={[item.current && "is-current"]}>{item.label}</span>
+    ))}
+  </div>
+</div>

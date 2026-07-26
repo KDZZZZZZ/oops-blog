@@ -1,0 +1,42 @@
+---
+import type { CategoryStat } from "./types";
+
+interface Props {
+  stats: CategoryStat[];
+  label?: string;
+}
+
+const { stats, label } = Astro.props;
+const total = stats.reduce((sum, item) => sum + (item.value || 0), 0);
+const ariaLabel = label ?? stats.map((item) => `${item.label} ${item.value} 条`).join("，");
+
+/**
+ * A unit chart rather than bars: at archive scale every article can be its own
+ * mark, which reads honestly when two categories tie and stays legible when
+ * they do not. Dots wrap, so a long category simply takes another line.
+ */
+const rows = stats.map((item) => ({
+  ...item,
+  share: total > 0 ? Math.round(((item.value || 0) / total) * 100) : 0,
+  units: Array.from({ length: Math.max(0, item.value || 0) }, (_, index) => index),
+}));
+---
+
+<div class="category-chart" role="img" aria-label={ariaLabel}>
+  {
+    rows.map((row, rowIndex) => (
+      <div class="category-row" style={`--row:${rowIndex}`}>
+        <p class="category-row-head">
+          <span class="category-row-name">{row.label}</span>
+          <span class="category-row-share">{row.share}%</span>
+        </p>
+        <div class="category-units">
+          {row.units.map((unit) => (
+            <i style={`--unit:${unit}`} />
+          ))}
+          <strong>{row.value}</strong>
+        </div>
+      </div>
+    ))
+  }
+</div>

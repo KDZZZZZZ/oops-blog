@@ -1,0 +1,75 @@
+---
+import type { TraceNode } from "./types";
+
+interface Props {
+  nodes: TraceNode[];
+  label?: string;
+  embedded?: boolean;
+}
+
+const { nodes, label = "写作记录时间线", embedded = false } = Astro.props;
+
+const phaseLabels: Record<TraceNode["phase"], string> = {
+  new: "新月",
+  "first-quarter": "上弦月",
+  full: "满月",
+  "last-quarter": "下弦月",
+};
+---
+
+<div class:list={["home-trace", embedded ? "home-trace-hero" : "shell reveal"]}>
+  <div class="trace-axis" aria-label={label} data-writing-trace-axis>
+    <div class="trace-line">
+      {
+        nodes.map((node, index) => {
+          const size = 12 * Math.sqrt(node.count);
+          const style = `--trace-left:${node.displayPosition}%;--trace-size:${size.toFixed(2)}px;--trace-delay:${0.18 + index * 0.08}s`;
+          const className = [
+            "trace-node",
+            node.current && "trace-node-current",
+            node.muted && "trace-node-muted",
+            node.displayPosition < 8 && "trace-node-start",
+            node.displayPosition > 92 && "trace-node-end",
+          ].filter(Boolean).join(" ");
+          const tip = `${node.label} · ${phaseLabels[node.phase]} · ${node.count} 篇 · ${node.titles.join("、")}`;
+          return (
+            <span
+              class={className}
+              role="img"
+              tabindex="0"
+              aria-label={tip}
+              data-tip={tip}
+              data-count={node.count}
+              data-phase={node.phase}
+              style={style}
+            >
+              <span
+                class:list={["trace-node-mark", "trace-moon", `trace-moon-${node.phase}`]}
+                aria-hidden="true"
+              />
+            </span>
+          );
+        })
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  const alignWritingTraceToLatest = () => {
+    document.querySelectorAll<HTMLElement>("[data-writing-trace-axis]").forEach((axis) => {
+      if (axis.dataset.traceAligned === "true" || axis.scrollWidth <= axis.clientWidth) {
+        return;
+      }
+
+      axis.scrollLeft = axis.scrollWidth - axis.clientWidth;
+      axis.dataset.traceAligned = "true";
+    });
+  };
+
+  const scheduleTraceAlignment = () => requestAnimationFrame(alignWritingTraceToLatest);
+
+  scheduleTraceAlignment();
+  document.addEventListener("astro:page-load", scheduleTraceAlignment);
+  window.addEventListener("resize", scheduleTraceAlignment, { passive: true });
+</script>

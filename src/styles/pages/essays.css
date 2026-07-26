@@ -1,0 +1,109 @@
+.essay-stream {
+  padding: 48px 0 110px;
+  max-width: 680px;
+}
+
+/* ── Individual note card ───────────────────────────────────────────────── */
+.essay-note {
+  padding: 28px 32px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  transform-origin: top center;
+  transition:
+    opacity .39s var(--ease),
+    transform .39s var(--ease),
+    border-color .2s,
+    box-shadow .2s;
+  transition-delay: var(--paper-delay, 0ms), var(--paper-delay, 0ms), 0ms, 0ms;
+}
+
+.essay-note:hover {
+  border-color: color-mix(in srgb, var(--border) 80%, var(--accent));
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--heading) 5%, transparent);
+}
+
+.js .essay-note.paper-reveal {
+  opacity: 0;
+  transform: perspective(1200px) rotateX(-2.5deg) scaleY(.985) translateY(8px);
+}
+
+.js .essay-note.paper-reveal.visible {
+  opacity: 1;
+  transform: perspective(1200px) rotateX(0) scaleY(1) translateY(0);
+}
+
+/* ── Note header: index + topic ─────────────────────────────────────────── */
+.essay-note-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.essay-index {
+  color: var(--quiet);
+  font: 11px/1.5 var(--font-mono);
+  letter-spacing: .06em;
+}
+
+.essay-topic {
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--quiet);
+  font: 10px/1.5 var(--font-mono);
+  letter-spacing: .04em;
+}
+
+/* ── Note content ───────────────────────────────────────────────────────── */
+.essay-content h2 {
+  margin: 0 0 12px;
+  color: var(--heading);
+  font: 400 22px/1.35 var(--font-display);
+  letter-spacing: 0;
+}
+
+.essay-content p {
+  margin: 0;
+  color: var(--fg);
+  font: 400 16px/1.85 var(--font-display);
+}
+
+.essay-source {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  color: var(--quiet);
+  font: 11px/1.6 var(--font-mono);
+}
+
+/* ── Closing line ───────────────────────────────────────────────────────── */
+.essay-closing {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 36px 0 72px;
+  color: var(--quiet);
+  font: 11px/1.5 var(--font-mono);
+}
+
+.essay-closing span {
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+.essay-closing p {
+  margin: 0;
+  color: var(--muted);
+  font: italic 400 15px/1.5 var(--font-display);
+}
+
+@media (max-width: 600px) {
+  .essay-stream { padding: 32px 0 80px; }
+  .essay-note { padding: 22px 20px; }
+  .essay-content h2 { font-size: 20px; }
+  .essay-content p { font-size: 15px; }
+}

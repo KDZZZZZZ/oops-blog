@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f9f8f5" />
+  <meta name="description" content="关于 Oops：计算机科学、编译器、Agent 工程与开源博客。" />
+  <title>关于 · Oops</title>
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="stylesheet" href="modules/visual-effects/assets/site.css" />
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到正文</a>
+  <header class="site-header" id="site-header"><div class="header-inner"><a class="wordmark" href="index.html" aria-label="返回首页">Oops<i>·</i></a><nav class="desktop-nav" aria-label="主导航"><a href="index.html">首页</a><a href="posts.html">文稿</a><a href="essays.html">随笔</a><span class="nav-disabled" aria-disabled="true" title="更多内容尚未开放">更多</span></nav><div class="header-actions"><button class="icon-button" type="button" data-open-search aria-label="搜索内容"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg></button><button class="icon-button" id="theme-button" type="button" aria-label="切换主题"><svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"></svg></button><button class="icon-button menu-button" id="menu-button" type="button" aria-label="打开导航" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button></div></div></header>
+
+  <main id="content">
+    <section class="page-hero compact-hero shell"><div class="page-hero-grid"><h1 class="display" data-enter>关于 Oops</h1></div></section>
+
+    <section class="section shell">
+      <div class="about-grid">
+        <figure class="portrait reveal"><img src="modules/visual-effects/assets/avatar.png" width="600" height="600" alt="Oops 的头像插画" /><figcaption>Oops<br />Computer science · Hangzhou</figcaption></figure>
+        <div class="prose reveal">
+          <h2>我在做什么</h2>
+          <p>我在读计算机科学本科，当前把主要精力放在三件事上：AI 编译器的中间表示与运行时、Agent 产品里的可靠状态链路，以及扩散语言模型的并行推理。</p>
+          <p>这些方向看起来分散，但我关心的是同一个问题：一个想法怎样穿过抽象层，变成能够被观察、验证和维护的系统。</p>
+
+          <h2>为什么写这个博客</h2>
+          <p>项目经历通常只剩下一行技术栈，实验记录通常只剩一个最终数字。我想保留中间那部分：为什么这样拆边界、哪里判断错了、什么证据改变了设计。</p>
+          <p>文章会优先写工程路径，不追求高频更新。还没有整理完成的内容会明确标注“整理中”，不会伪装成已经发布。</p>
+
+          <h2 id="opensource">开源与参考边界</h2>
+          <p>这个站点从 innei.in 的公开表现中学习留白、阅读节奏和低幅动效，并采用 <a href="https://github.com/Innei/Yohaku" target="_blank" rel="noreferrer">Yohaku 公开设计系统</a>的 MIT 设计契约作为研究来源。</p>
+          <p>页面信息架构、HTML、CSS 和 JavaScript 均独立实现。完整 Yohaku 应用没有作为代码来源，Shiro 与 Mix Space 应用层的 AGPL 及附加条款也没有被带入本项目。更完整的来源说明见 <a href="THIRD_PARTY_NOTICES.md">THIRD_PARTY_NOTICES.md</a>。</p>
+
+          <h2>联系</h2>
+          <p>可以通过 <a href="mailto:2112335382@qq.com">邮件</a>联系我。GitHub 与 RSS 会在仓库真正公开后补上，不先放不可用入口。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>© 2026 Oops · 关于</span><div class="footer-links"><a href="posts.html">文章</a><a href="projects.html">项目</a><a href="mailto:2112335382@qq.com">邮箱</a></div></footer>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true"><div class="mobile-panel" role="dialog" aria-modal="true" aria-label="移动导航"><div class="mobile-panel-head"><span class="mobile-panel-title">导航</span><button class="icon-button" id="menu-close" type="button" aria-label="关闭导航"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"></path></svg></button></div><nav class="mobile-nav"><a href="index.html">首页</a><a href="posts.html">文稿</a><a href="essays.html">随笔</a><span class="nav-disabled" aria-disabled="true">更多</span></nav></div></div>
+  <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title"><div class="search-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg><input class="search-input" id="search-input" type="search" autocomplete="off" placeholder="搜索项目、技术和文章" aria-label="搜索项目、技术和文章" /><button class="search-close" id="search-close" type="button">关闭</button></div><div class="search-body"><h2 id="search-title" class="eyebrow" style="margin:14px 4px 0">站内搜索</h2><div id="search-results" class="search-hint">输入关键词，例如“LLVM”“Agent”或“推理”。</div></div></dialog>
+  <script src="modules/visual-effects/assets/site.js" defer></script>
+</body>
+</html>

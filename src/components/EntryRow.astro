@@ -1,0 +1,33 @@
+---
+import type { EntryItem } from "./types";
+
+interface Props extends EntryItem {
+  as?: "a" | "article" | "div";
+  reveal?: boolean;
+}
+
+const {
+  as,
+  href,
+  title,
+  summary,
+  meta,
+  side,
+  category,
+  id,
+  reveal = true,
+} = Astro.props as Props;
+
+const Tag = as ?? (href ? "a" : "article");
+const metaText = Array.isArray(meta) ? meta : meta ? [meta] : [];
+---
+
+<Tag class:list={["entry-row", reveal && "reveal"]} href={Tag === "a" ? href : undefined} id={id} data-category={category}>
+  <span class="entry-meta">{metaText.map((item, index) => <>{index > 0 && <br />}{item}</>)}</span>
+  <span>
+    <strong class="entry-title">{title}</strong>
+    {summary && <span class="entry-summary">{summary}</span>}
+    <slot />
+  </span>
+  {side && <span class="entry-side">{side}</span>}
+</Tag>

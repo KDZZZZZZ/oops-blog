@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f9f8f5" />
+  <meta name="description" content="Oops 的项目档案：编译器、Agent 后端与推理优化。" />
+  <title>项目 · Oops</title>
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="stylesheet" href="modules/visual-effects/assets/site.css" />
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到正文</a>
+  <header class="site-header" id="site-header"><div class="header-inner"><a class="wordmark" href="index.html" aria-label="返回首页">Oops<i>·</i></a><nav class="desktop-nav" aria-label="主导航"><a href="index.html">首页</a><a href="posts.html">文稿</a><a href="essays.html">随笔</a><span class="nav-disabled" aria-disabled="true" title="更多内容尚未开放">更多</span></nav><div class="header-actions"><button class="icon-button" type="button" data-open-search aria-label="搜索内容"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg></button><button class="icon-button" id="theme-button" type="button" aria-label="切换主题"><svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"></svg></button><button class="icon-button menu-button" id="menu-button" type="button" aria-label="打开导航" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button></div></div></header>
+
+  <main id="content">
+    <section class="page-hero compact-hero shell"><div class="page-hero-grid"><h1 class="display" data-enter>项目档案</h1></div></section>
+
+    <section class="section shell">
+      <div class="entry-list project-list">
+        <article class="entry-row reveal" id="kxc">
+          <span class="entry-meta">2025–2026<br />C++ / LLVM / CUDA</span>
+          <span><strong class="entry-title">KXC AI Compiler</strong><span class="entry-summary">构建类 TVM 的深度学习编译器原型，覆盖两级 IR、算子注册、Lowering、C/LLVM 代码生成、CPU/CUDA 设备抽象与运行时执行。</span><span class="project-stack"><span>Relay IR</span><span>TIR</span><span>LLVM</span><span>CUDA</span></span></span>
+          <span class="project-state"><strong>当前阶段</strong>RuntimeSession 与 profiling</span>
+        </article>
+        <article class="entry-row reveal" id="aigc">
+          <span class="entry-meta">2025–2026<br />Go / PostgreSQL</span>
+          <span><strong class="entry-title">商家 AIGC 内容创作平台</strong><span class="entry-summary">围绕 Agent 会话、资源检索、方案生成、内容任务和会员支付形成后端闭环，并以结构化 WebSocket 投影可恢复的工具与任务状态。</span><span class="project-stack"><span>Go</span><span>PostgreSQL</span><span>WebSocket</span><span>Agent Runtime</span></span></span>
+          <span class="project-state"><strong>工程重点</strong>状态恢复与任务边界</span>
+        </article>
+        <article class="entry-row reveal" id="dllm">
+          <span class="entry-meta">2026<br />DLLM / Inference</span>
+          <span><strong class="entry-title">扩散语言模型推理加速</strong><span class="entry-summary">定位大 block length 下的精度下降原因，设计 Dist Penalty 位置启发式路径，约束远端 token 的过早采纳。</span><span class="project-stack"><span>Parallel decoding</span><span>Dist Penalty</span><span>GSM8K</span></span></span>
+          <span class="project-state"><strong>当前阶段</strong>实验复核与文字整理</span>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>© 2026 Oops · 项目档案</span><div class="footer-links"><a href="posts.html">文章</a><a href="about.html">关于</a><a href="mailto:2112335382@qq.com">邮箱</a></div></footer>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true"><div class="mobile-panel" role="dialog" aria-modal="true" aria-label="移动导航"><div class="mobile-panel-head"><span class="mobile-panel-title">导航</span><button class="icon-button" id="menu-close" type="button" aria-label="关闭导航"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"></path></svg></button></div><nav class="mobile-nav"><a href="index.html">首页</a><a href="posts.html">文稿</a><a href="essays.html">随笔</a><span class="nav-disabled" aria-disabled="true">更多</span></nav></div></div>
+  <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title"><div class="search-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg><input class="search-input" id="search-input" type="search" autocomplete="off" placeholder="搜索项目、技术和文章" aria-label="搜索项目、技术和文章" /><button class="search-close" id="search-close" type="button">关闭</button></div><div class="search-body"><h2 id="search-title" class="eyebrow" style="margin:14px 4px 0">站内搜索</h2><div id="search-results" class="search-hint">输入关键词，例如“LLVM”“Agent”或“推理”。</div></div></dialog>
+  <script src="modules/visual-effects/assets/site.js" defer></script>
+</body>
+</html>

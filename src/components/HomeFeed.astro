@@ -1,0 +1,56 @@
+---
+import type { EntryItem, EssayItem } from "./types";
+
+interface Props {
+  posts: EntryItem[];
+  essays?: EssayItem[];
+  title?: string;
+  essayTitle?: string;
+  id?: string;
+}
+
+const {
+  posts,
+  essays = [],
+  title = "近期笔墨",
+  essayTitle = "碎念",
+  id = "home-feed",
+} = Astro.props;
+---
+
+<section class="home-feed shell" id={id}>
+  <div class="home-writing reveal">
+    <header class="home-section-title">
+      <div><h2>{title}</h2></div>
+    </header>
+    <ol class="home-writing-list">
+      {
+        posts.map((post, index) => (
+          <li>
+            <span class="writing-index">{String(index + 1).padStart(2, "0")}</span>
+            <a href={post.href}>
+              <h3>{post.title}</h3>
+              {(post.category || post.side) && <small>{post.category ?? post.side}</small>}
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+
+  {essays.length > 0 && (
+    <aside class="home-side reveal" aria-label="近期随笔与当前状态">
+      <section class="home-musing">
+        <header class="home-section-title">
+          <div><h2>{essayTitle}</h2></div>
+        </header>
+        {essays.map((essay) => (
+          <a class="musing-item" href={essay.href}>
+            <p>{essay.body}</p>
+            {(essay.topic || essay.sourceNote) && <time>{essay.topic ?? essay.sourceNote}</time>}
+          </a>
+        ))}
+      </section>
+    </aside>
+  )}
+</section>

@@ -1,0 +1,116 @@
+---
+import SearchTrigger from "./SearchTrigger.astro";
+import CategoryChart from "./CategoryChart.astro";
+import UpdateChart from "./UpdateChart.astro";
+import type { CategoryGroup, ManuscriptOverview, TimelineItem } from "./types";
+
+interface Props {
+  timeline: TimelineItem[];
+  categories: CategoryGroup[];
+  overview?: ManuscriptOverview;
+  year?: string | number;
+  timelineCountLabel?: string;
+  searchLabel?: string;
+}
+
+const {
+  timeline,
+  categories,
+  overview,
+  year = new Date().getFullYear(),
+  timelineCountLabel = `${timeline.length} 条记录`,
+  searchLabel = "搜索文章",
+} = Astro.props;
+---
+
+<section class="section shell manuscript-shell">
+  <div class="manuscript-toolbar reveal">
+    <div class="manuscript-toolbar-intro">
+      <span>Editorial index</span>
+      <p>循着时间读，按主题重逢。</p>
+    </div>
+    <div class="manuscript-toolbar-actions">
+      <div class="manuscript-tabs" role="tablist" aria-label="文章浏览方式">
+        <button type="button" role="tab" aria-selected="true" aria-controls="panel-time" id="tab-time" data-manuscript-tab="time"><span aria-hidden="true">01</span>年序</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="panel-category" id="tab-category" data-manuscript-tab="category" tabindex="-1"><span aria-hidden="true">02</span>门类</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="panel-overview" id="tab-overview" data-manuscript-tab="overview" tabindex="-1"><span aria-hidden="true">03</span>全览</button>
+        <span class="manuscript-tab-indicator" aria-hidden="true"></span>
+      </div>
+      <SearchTrigger className="manuscript-search" text="寻一篇" label={searchLabel} title={searchLabel} />
+    </div>
+  </div>
+
+  <section class="manuscript-panel" id="panel-time" role="tabpanel" aria-labelledby="tab-time" data-manuscript-panel="time">
+    <div class="timeline-year"><span>{year}</span><small>{timelineCountLabel}</small></div>
+    <div class="timeline-list">
+      {
+        timeline.map((item, index) => {
+          const day = item.datetime?.slice(8) ?? "";   // "08"
+          const month = item.dateLabel;                // "7月"
+          const prevMonth = index > 0 ? timeline[index - 1].dateLabel : null;
+          const showMonth = month !== prevMonth;
+
+          const content = (
+            <>
+              {showMonth && <span class="timeline-month-sep" aria-hidden="true">{month}</span>}
+              <time datetime={item.datetime} class:list={[item.muted && "muted"]}>{day}</time>
+              <span class="timeline-title"><strong>{item.title}</strong></span>
+              <span class="timeline-tag">
+                {[item.category, item.status].filter(Boolean).join(" · ")}
+              </span>
+            </>
+          );
+          return item.href
+            ? <a class="timeline-item reveal" href={item.href} id={item.id}>{content}</a>
+            : <div class="timeline-item reveal" id={item.id}>{content}</div>;
+        })
+      }
+    </div>
+  </section>
+
+  <section class="manuscript-panel" id="panel-category" role="tabpanel" aria-labelledby="tab-category" data-manuscript-panel="category">
+    <div class="category-index">
+      {
+        categories.map((group, index) => (
+          <section class="category-group reveal">
+            <header><span>{group.index ?? String(index + 1).padStart(2, "0")}</span><h2>{group.label}</h2><strong>{group.count}</strong></header>
+            {group.entries.map((entry) => entry.href ? <a href={entry.href}>{entry.title}</a> : <span>{entry.title}</span>)}
+          </section>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="manuscript-panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" data-manuscript-panel="overview">
+    {overview && (
+      <>
+        <div class="overview-lede reveal">
+          <p class="eyebrow">Archive overview</p>
+          <h2>{overview.title}</h2>
+          {overview.description && <p>{overview.description}</p>}
+        </div>
+        {overview.stats && (
+          <div class="stat-strip reveal" aria-label="文章状态统计">
+            {overview.stats.map((item) => <div><strong>{item.value}</strong><span>{item.label}</span></div>)}
+          </div>
+        )}
+        <div class="chart-grid">
+          {overview.categoryStats && (
+            <figure class="chart-block reveal">
+              <figcaption><strong>类别分布</strong>{overview.categoryCaption && <span>{overview.categoryCaption}</span>}</figcaption>
+              <CategoryChart stats={overview.categoryStats} />
+              {overview.categoryNote && <p class="chart-note">{overview.categoryNote}</p>}
+            </figure>
+          )}
+          {overview.updateStats && (
+            <figure class="chart-block reveal">
+              <figcaption><strong>公开更新时间</strong>{overview.updateCaption && <span>{overview.updateCaption}</span>}</figcaption>
+              <UpdateChart stats={overview.updateStats} />
+              {overview.chartNote && <p class="chart-note">{overview.chartNote}</p>}
+            </figure>
+          )}
+        </div>
+      </>
+    )}
+  </section>
+</section>

@@ -1,0 +1,17 @@
+---
+import { Search } from "@lucide/astro";
+
+interface Props {
+  label?: string;
+  title?: string;
+  className?: string;
+  text?: string;
+}
+
+const { label = "搜索内容", title = "搜索", className = "icon-button", text } = Astro.props;
+---
+
+<button class={className} type="button" data-open-search aria-label={label} title={title}>
+  <Search aria-hidden="true" />
+  {text && <span>{text}</span>}
+</button>

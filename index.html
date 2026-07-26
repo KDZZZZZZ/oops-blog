@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#fefefb" />
+  <meta name="description" content="Oops 的个人博客，记录 AI 编译器、Agent 工程与模型推理优化。" />
+  <title>Oops · 系统、编译器与智能体</title>
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="stylesheet" href="modules/visual-effects/assets/site.css" />
+</head>
+<body class="home-page">
+  <a class="skip-link" href="#content">跳到正文</a>
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a class="wordmark home-wordmark" href="index.html" aria-label="返回首页">
+        <img src="modules/visual-effects/assets/avatar.png" alt="" />
+        <span class="sr-only">Oops</span>
+      </a>
+      <nav class="desktop-nav" aria-label="主导航" data-od-id="path-1-0-1">
+        <span class="nav-pod nav-pod-home">
+          <a href="index.html" aria-current="page">首页</a>
+          <div class="nav-preview nav-preview-home" aria-label="首页快捷入口">
+            <section class="home-profile-card">
+              <img src="modules/visual-effects/assets/avatar.png" alt="Oops 的头像" />
+              <strong>Oops</strong>
+              <span class="presence"><i aria-hidden="true"></i>在线</span>
+              <dl class="profile-counts">
+                <div><dt>文稿</dt><dd>1</dd></div>
+                <div><dt>随笔</dt><dd>3</dd></div>
+                <div><dt>整理中</dt><dd>3</dd></div>
+              </dl>
+              <p>保持简单</p>
+              <div class="profile-links" aria-label="联系方式">
+                <a href="https://github.com/KDZZZZZZ" target="_blank" rel="noreferrer" aria-label="GitHub">GH</a>
+                <a href="mailto:2112335382@qq.com" aria-label="发送邮件">@</a>
+                <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=2112335382&amp;site=qq&amp;menu=yes" target="_blank" rel="noreferrer" aria-label="通过 QQ 联系">QQ</a>
+              </div>
+            </section>
+            <div class="home-link-grid" role="group" aria-label="页面入口">
+              <span>页面</span>
+              <a href="about.html"><b>关于</b><small>我在做什么</small></a>
+              <a href="projects.html"><b>项目</b><small>开源与作品集</small></a>
+              <a href="posts.html"><b>文稿</b><small>完整归档</small></a>
+              <a href="essays.html"><b>随笔</b><small>工程碎片</small></a>
+              <a href="about.html#opensource"><b>开源说明</b><small>参考与许可边界</small></a>
+              <a href="mailto:2112335382@qq.com"><b>写邮件</b><small>直接联系</small></a>
+            </div>
+          </div>
+        </span>
+        <span class="nav-pod nav-pod-posts">
+          <a href="posts.html">文稿</a>
+          <div class="nav-preview nav-preview-posts" aria-label="文稿预览">
+            <section class="post-categories" role="tablist" aria-label="文稿分类" aria-orientation="vertical">
+              <span class="preview-label">分类</span>
+              <button class="is-active" type="button" role="tab" aria-selected="true" aria-controls="post-panel-compiler" tabindex="0" data-post-category="compiler"><b>编译器</b><small>2</small></button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="post-panel-agent" tabindex="-1" data-post-category="agent"><b>Agent</b><small>1</small></button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="post-panel-inference" tabindex="-1" data-post-category="inference"><b>推理</b><small>1</small></button>
+            </section>
+            <div class="post-panels">
+              <section class="recent-posts is-active" id="post-panel-compiler" role="tabpanel" aria-label="编译器文章" data-post-panel="compiler">
+                <span class="preview-label">编译器</span>
+                <a href="article-lowering.html"><b>两级 IR 之间，Lowering 到底负责什么</b><small>已发布全文</small></a>
+                <a href="posts.html"><b>RuntimeSession 应该知道多少设备细节</b><small>边界梳理中</small></a>
+              </section>
+              <section class="recent-posts" id="post-panel-agent" role="tabpanel" aria-label="Agent 文章" data-post-panel="agent" hidden>
+                <span class="preview-label">Agent</span>
+                <a href="posts.html#websocket"><b>WebSocket 不是状态机</b><small>结构整理中</small></a>
+              </section>
+              <section class="recent-posts" id="post-panel-inference" role="tabpanel" aria-label="推理文章" data-post-panel="inference" hidden>
+                <span class="preview-label">推理</span>
+                <a href="posts.html#dist-penalty"><b>为什么远离 frontier 的 token 不该被过早相信</b><small>实验复核中</small></a>
+              </section>
+            </div>
+            <a class="posts-preview-foot" href="posts.html"><span>查看全部文稿</span><span data-post-preview-count>编译器 · 2 篇</span></a>
+          </div>
+        </span>
+        <span class="nav-pod"><a href="essays.html">随笔</a></span>
+        <span class="nav-pod nav-pod-more">
+          <button class="nav-trigger" type="button" aria-haspopup="menu">更多</button>
+          <div class="nav-preview nav-preview-more" role="menu" aria-label="更多页面">
+            <a href="about.html" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              <span><b>友链</b><small>互联网上的朋友们</small></span>
+            </a>
+            <a href="projects.html" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M9 3h6M10 9 5.5 18a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 9V3M8 15h8"></path></svg>
+              <span><b>项目</b><small>开源项目与作品集</small></span>
+            </a>
+            <a href="essays.html" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M3 21c3-1 5-3 5-6H4V8h7v6c0 4-3 7-8 7ZM13 21c3-1 5-3 5-6h-4V8h7v6c0 4-3 7-8 7Z"></path></svg>
+              <span><b>一言</b><small>工程判断的碎片</small></span>
+            </a>
+            <a href="about.html" role="menuitem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M20.8 4.6c-4.2-.3-7.6 1.1-9.8 4.1-1.5 2-2.2 4.5-2.2 7.5M8.8 16.2c2.6.3 5.2-.5 7.3-2.4 2.3-2.1 3.7-5.4 4.7-9.2M8.8 16.2 4 21"></path></svg>
+              <span><b>跃迁</b><small>空间跃迁门</small></span>
+            </a>
+          </div>
+        </span>
+        <style>
+          [data-od-id="path-1-0-1"] { overflow: visible; }
+          [data-od-id="path-1-0-1"] .nav-pod {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+          }
+          [data-od-id="path-1-0-1"] .nav-trigger {
+            min-height: 30px;
+            padding: 5px 10px;
+            border: 0;
+            border-radius: 4px;
+            background: transparent;
+            color: var(--muted);
+            font: 400 12px/1 var(--font-body);
+            letter-spacing: .02em;
+            cursor: pointer;
+          }
+          [data-od-id="path-1-0-1"] .nav-trigger:hover,
+          [data-od-id="path-1-0-1"] .nav-trigger:focus-visible { background: var(--surface); color: var(--heading); }
+          [data-od-id="path-1-0-1"] .nav-preview {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            z-index: 50;
+            border: 1px solid color-mix(in srgb, var(--border) 76%, transparent);
+            border-radius: 10px;
+            background: color-mix(in srgb, var(--surface) 94%, transparent);
+            box-shadow: 0 18px 48px color-mix(in srgb, var(--heading) 13%, transparent), inset 0 1px color-mix(in srgb, white 45%, transparent);
+            backdrop-filter: blur(22px) saturate(1.12);
+            -webkit-backdrop-filter: blur(22px) saturate(1.12);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translate(-50%, -5px) scale(.975);
+            transform-origin: 50% 0;
+            transition: opacity .16s ease, transform .22s var(--ease), visibility 0s linear .22s;
+          }
+          [data-od-id="path-1-0-1"] .nav-preview::before {
+            content: "";
+            position: absolute;
+            inset: -13px 0 auto;
+            height: 13px;
+          }
+          [data-od-id="path-1-0-1"] .nav-pod:hover .nav-preview,
+          [data-od-id="path-1-0-1"] .nav-pod:focus-within .nav-preview {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translate(-50%, 0) scale(1);
+            transition-delay: 0s;
+          }
+          [data-od-id="path-1-0-1"] .nav-preview a::after { display: none; }
+          [data-od-id="path-1-0-1"] .nav-preview-home {
+            width: 700px;
+            padding: 22px;
+            display: grid;
+            grid-template-columns: 210px 1fr;
+            gap: 28px;
+            text-align: left;
+          }
+          [data-od-id="path-1-0-1"] .home-profile-card { min-width: 0; }
+          [data-od-id="path-1-0-1"] .home-profile-card > img {
+            width: 58px; height: 58px; display: block; margin-bottom: 12px;
+            border: 2px solid color-mix(in srgb, var(--accent) 66%, var(--border)); border-radius: 50%; object-fit: cover;
+          }
+          [data-od-id="path-1-0-1"] .home-profile-card > strong { display: block; color: var(--heading); font: 500 18px/1.3 var(--font-display); }
+          [data-od-id="path-1-0-1"] .presence { display: flex; align-items: center; gap: 7px; margin-top: 3px; color: var(--muted); font-size: 12px; }
+          [data-od-id="path-1-0-1"] .presence i { width: 7px; height: 7px; border-radius: 50%; background: #21c76f; }
+          [data-od-id="path-1-0-1"] .profile-counts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 17px; }
+          [data-od-id="path-1-0-1"] .profile-counts div { display: flex; flex-direction: column-reverse; }
+          [data-od-id="path-1-0-1"] .profile-counts dt { color: var(--quiet); font-size: 10px; }
+          [data-od-id="path-1-0-1"] .profile-counts dd { color: var(--heading); font: 500 17px/1.25 var(--font-mono); }
+          [data-od-id="path-1-0-1"] .home-profile-card > p { margin-top: 16px; padding: 12px 8px; border-block: 1px solid var(--border); color: var(--muted); font-size: 12px; }
+          [data-od-id="path-1-0-1"] .profile-links { display: flex; gap: 6px; padding-top: 10px; }
+          [data-od-id="path-1-0-1"] .profile-links a { min-width: 28px; height: 28px; padding: 0 6px; display: grid; place-items: center; border-radius: 4px; color: var(--muted); font: 500 9px/1 var(--font-mono); }
+          [data-od-id="path-1-0-1"] .profile-links a:hover { background: color-mix(in srgb, var(--bg) 82%, var(--surface)); color: var(--heading); }
+          [data-od-id="path-1-0-1"] .home-link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 16px; align-content: start; }
+          [data-od-id="path-1-0-1"] .home-link-grid > span { grid-column: 1 / -1; margin-bottom: 3px; color: var(--quiet); font-size: 10px; letter-spacing: .06em; }
+          [data-od-id="path-1-0-1"] .home-link-grid a { min-width: 0; padding: 9px 10px; display: grid; gap: 2px; border-radius: 5px; color: var(--heading); }
+          [data-od-id="path-1-0-1"] .home-link-grid a:hover { background: color-mix(in srgb, var(--bg) 82%, var(--surface)); }
+          [data-od-id="path-1-0-1"] .home-link-grid b { font-size: 13px; font-weight: 500; }
+          [data-od-id="path-1-0-1"] .home-link-grid small { color: var(--muted); font-size: 10px; line-height: 1.4; }
+          [data-od-id="path-1-0-1"] .nav-preview-posts {
+            width: 590px;
+            padding: 14px 14px 0;
+            display: grid;
+            grid-template-columns: 170px 1fr;
+            gap: 0 16px;
+            text-align: left;
+          }
+          [data-od-id="path-1-0-1"] .post-categories,
+          [data-od-id="path-1-0-1"] .recent-posts { display: grid; align-content: start; gap: 3px; }
+          [data-od-id="path-1-0-1"] .post-panels { min-height: 152px; }
+          [data-od-id="path-1-0-1"] .recent-posts[hidden] { display: none; }
+          [data-od-id="path-1-0-1"] .preview-label { display: block; margin: 0 7px 5px; color: var(--quiet); font-size: 10px; letter-spacing: .06em; }
+          [data-od-id="path-1-0-1"] .post-categories button { width: 100%; padding: 9px 10px; display: flex; justify-content: space-between; gap: 12px; border: 0; border-radius: 5px; background: transparent; color: var(--heading); font: inherit; text-align: left; cursor: pointer; }
+          [data-od-id="path-1-0-1"] .post-categories button:hover,
+          [data-od-id="path-1-0-1"] .post-categories button:focus-visible,
+          [data-od-id="path-1-0-1"] .post-categories button.is-active { background: color-mix(in srgb, var(--bg) 82%, var(--surface)); outline: none; }
+          [data-od-id="path-1-0-1"] .post-categories b { font-size: 13px; font-weight: 500; }
+          [data-od-id="path-1-0-1"] .post-categories small { color: var(--quiet); font: 11px/1.5 var(--font-mono); }
+          [data-od-id="path-1-0-1"] .recent-posts a { padding: 8px 10px; display: grid; gap: 3px; border-radius: 5px; background: color-mix(in srgb, var(--bg) 76%, var(--surface)); }
+          [data-od-id="path-1-0-1"] .recent-posts a:hover { background: color-mix(in srgb, var(--bg) 92%, var(--surface)); }
+          [data-od-id="path-1-0-1"] .recent-posts b { color: var(--heading); font-size: 12px; font-weight: 450; line-height: 1.35; text-wrap: pretty; }
+          [data-od-id="path-1-0-1"] .recent-posts small { color: var(--quiet); font-size: 10px; }
+          [data-od-id="path-1-0-1"] .posts-preview-foot { grid-column: 1 / -1; margin-top: 12px; padding: 11px 2px; display: flex; justify-content: space-between; border-top: 1px solid var(--border); color: var(--muted); font-size: 11px; }
+          [data-od-id="path-1-0-1"] .posts-preview-foot:hover { color: var(--heading); }
+          [data-od-id="path-1-0-1"] .nav-preview-more { left: auto; right: -8px; width: 250px; padding: 8px; transform: translate(0, -5px) scale(.975); transform-origin: 100% 0; }
+          [data-od-id="path-1-0-1"] .nav-pod-more:hover .nav-preview-more,
+          [data-od-id="path-1-0-1"] .nav-pod-more:focus-within .nav-preview-more { transform: translate(0, 0) scale(1); }
+          [data-od-id="path-1-0-1"] .nav-preview-more a { padding: 9px; display: grid; grid-template-columns: 24px 1fr; gap: 10px; align-items: center; border-radius: 5px; }
+          [data-od-id="path-1-0-1"] .nav-preview-more a:hover { background: color-mix(in srgb, var(--bg) 82%, var(--surface)); }
+          [data-od-id="path-1-0-1"] .nav-preview-more svg { width: 18px; height: 18px; color: var(--muted); stroke-width: 1.6; }
+          [data-od-id="path-1-0-1"] .nav-preview-more span { display: grid; gap: 2px; }
+          [data-od-id="path-1-0-1"] .nav-preview-more b { color: var(--heading); font-size: 13px; font-weight: 500; }
+          [data-od-id="path-1-0-1"] .nav-preview-more small { color: var(--muted); font-size: 10px; }
+          @media (max-width: 900px) {
+            [data-od-id="path-1-0-1"] .nav-preview-home { width: 620px; grid-template-columns: 190px 1fr; }
+            [data-od-id="path-1-0-1"] .nav-preview-posts { width: 540px; grid-template-columns: 150px 1fr; }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            [data-od-id="path-1-0-1"] .nav-preview { transition: none; }
+          }
+        </style>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-button" type="button" data-open-search aria-label="搜索内容" title="搜索">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+        </button>
+        <button class="icon-button" id="theme-button" type="button" aria-label="切换主题" title="切换主题">
+          <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"></svg>
+        </button>
+        <button class="icon-button menu-button" id="menu-button" type="button" aria-label="打开导航" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="home-hero">
+      <div class="home-hero-center">
+        <img class="home-portrait" src="modules/visual-effects/assets/avatar.png" alt="Portrait of Oops" data-enter style="--delay:80ms" />
+        <p class="home-intro" data-enter style="--delay:150ms">Hi, I'm <strong>Oops 👋</strong>.</p>
+        <p class="home-subtitle" data-enter style="--delay:290ms">I write about AI compilers, Agent backends, and inference optimization, including the engineering decisions behind them.</p>
+      </div>
+
+      <div class="home-hero-foot">
+        <div class="home-counts">
+          <h1 data-enter style="--delay:220ms;margin:0;color:var(--quiet);font:italic 300 15px/1.6 var(--font-display);letter-spacing:0;text-wrap:balance">Make sense of the world, and make the world make sense.</h1>
+        </div>
+        <div class="home-socials" aria-label="联系方式">
+          <a href="https://github.com/KDZZZZZZ" target="_blank" rel="noreferrer" aria-label="访问 GitHub" title="GitHub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7A5.4 5.4 0 0 0 19.3 4 5 5 0 0 0 19.2.5S18 0 15 2a13.4 13.4 0 0 0-7 0C5-.1 3.8.5 3.8.5A5 5 0 0 0 3.7 4a5.4 5.4 0 0 0-1.5 3.7c0 5.4 3.5 6.6 6.8 7A4.8 4.8 0 0 0 8 18v4"></path><path d="M8 19c-3 .9-3-1.5-4-2"></path></svg>
+          </a>
+          <a href="mailto:2112335382@qq.com" aria-label="发送邮件" title="邮箱">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>
+          </a>
+          <a href="https://wpa.qq.com/msgrd?v=3&amp;uin=2112335382&amp;site=qq&amp;menu=yes" target="_blank" rel="noreferrer" aria-label="通过 QQ 联系" title="QQ">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M8.5 18.5 5 21v-5.2A7 7 0 0 1 3 11c0-4.4 4-8 9-8s9 3.6 9 8-4 8-9 8a10.7 10.7 0 0 1-3.5-.5Z"></path><path d="M8 10h.01M12 10h.01M16 10h.01"></path></svg>
+          </a>
+        </div>
+      </div>
+      <a class="home-scroll-cue" href="#home-feed" aria-label="继续阅读">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
+      </a>
+    </section>
+
+    <section class="home-feed shell" id="home-feed">
+      <div class="home-writing reveal">
+        <header class="home-section-title">
+          <div><h2>近期笔墨</h2></div>
+        </header>
+        <ol class="home-writing-list">
+          <li class="featured-writing">
+            <span class="writing-index">01</span>
+            <a href="article-lowering.html" style="display:flex;align-items:baseline;justify-content:space-between;gap:24px">
+              <h3 style="max-width:none;font-size:17px;line-height:1.45">两级 IR 之间，Lowering 到底负责什么</h3>
+              <small style="margin:0;white-space:nowrap">编译器</small>
+            </a>
+          </li>
+          <li>
+            <span class="writing-index">02</span>
+            <a href="posts.html#websocket"><h3>WebSocket 不是状态机</h3><small>Agent</small></a>
+          </li>
+          <li>
+            <span class="writing-index">03</span>
+            <a href="posts.html#dist-penalty"><h3>为什么远离 frontier 的 token 不该被过早相信</h3><small>推理</small></a>
+          </li>
+        </ol>
+      </div>
+
+      <aside class="home-side reveal" aria-label="近期随笔与当前状态">
+        <section class="home-musing">
+          <header class="home-section-title">
+            <div><h2>碎念</h2></div>
+          </header>
+          <a class="musing-item" href="essays.html#runtime-boundary">
+            <p>模块加载、张量生命周期和设备调度，不应该在同一个接口里互相猜测。</p>
+            <time>运行时边界</time>
+          </a>
+          <a class="musing-item" href="essays.html#profiling">
+            <p>先确认观测方式，再解释模型行为；profiling 输出也需要被当成证据链。</p>
+            <time>实验复盘</time>
+          </a>
+        </section>
+
+      </aside>
+    </section>
+
+    <section class="home-trace shell reveal">
+      <div class="trace-axis" aria-label="写作记录时间线" style="margin-top:34px;overflow:visible">
+        <div style="position:relative;height:28px;margin-inline:4px;border-top:1px solid var(--border)">
+          <a href="essays.html#connection-state" aria-label="Connection 短记" title="Connection · 短记" style="position:absolute;left:7%;top:-4px;width:7px;height:7px;border-radius:50%;background:var(--muted)"></a>
+          <a href="essays.html#profiling" aria-label="Profiling 短记" title="Profiling · 短记" style="position:absolute;left:24%;top:-3px;width:5px;height:5px;border-radius:50%;background:var(--quiet)"></a>
+          <a href="essays.html#runtime-boundary" aria-label="Runtime 短记" title="Runtime · 短记" style="position:absolute;left:43%;top:-4px;width:7px;height:7px;border-radius:50%;background:var(--muted)"></a>
+          <a href="posts.html#dist-penalty" aria-label="Dist Penalty 整理中" title="Dist Penalty · 整理中" style="position:absolute;left:68%;top:-3px;width:5px;height:5px;border-radius:50%;background:var(--quiet)"></a>
+          <a href="posts.html#websocket" aria-label="WebSocket 整理中" title="WebSocket · 整理中" style="position:absolute;left:76%;top:-4px;width:7px;height:7px;border-radius:50%;background:var(--muted)"></a>
+          <a href="article-lowering.html" aria-label="Lowering 已发布" title="Lowering · 已发布" style="position:absolute;left:94%;top:-5px;width:9px;height:9px;border-radius:50%;background:var(--accent)"></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer home-footer">
+    <div><strong>Oops</strong><p>保持简单</p><span>© 2026</span></div>
+    <nav aria-label="页脚导航"><span>阅读</span><a href="posts.html">文稿</a><a href="essays.html">随笔</a></nav>
+    <nav aria-label="页脚更多"><span>关于</span><a href="about.html#opensource">开源说明</a><a href="mailto:2112335382@qq.com">写邮件</a></nav>
+  </footer>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-panel" role="dialog" aria-modal="true" aria-label="移动导航">
+      <div class="mobile-panel-head"><span class="mobile-panel-title">导航</span><button class="icon-button" id="menu-close" type="button" aria-label="关闭导航"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></button></div>
+      <nav class="mobile-nav"><a href="index.html" aria-current="page">首页</a><a href="posts.html">文稿</a><a href="essays.html">随笔</a><span class="nav-disabled" aria-disabled="true">更多</span></nav>
+    </div>
+  </div>
+
+  <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title">
+    <div class="search-head">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+      <input class="search-input" id="search-input" type="search" autocomplete="off" placeholder="搜索文稿、随笔和技术主题" aria-label="搜索文稿、随笔和技术主题" />
+      <button class="search-close" id="search-close" type="button">关闭</button>
+    </div>
+    <div class="search-body"><h2 id="search-title" class="eyebrow" style="margin:14px 4px 0">站内搜索</h2><div id="search-results" class="search-hint">输入关键词，例如“LLVM”“Agent”或“推理”。</div></div>
+  </dialog>
+
+  <script src="modules/visual-effects/assets/site.js" defer></script>
+</body>
+</html>

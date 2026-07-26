@@ -1,0 +1,41 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ProjectShowcase from "@/components/ProjectShowcase.astro";
+import { getPageContext } from "@/lib/page-context";
+import type { ProjectItem } from "@/components/types";
+
+const ctx = await getPageContext();
+
+const projectItems: ProjectItem[] = ctx.projects.map((project) => ({
+  id: project.slug,
+  title: project.title,
+  summary: project.summary,
+  meta: [project.role, project.period],
+  category: project.status,
+  stack: project.stack,
+  state: project.status,
+  href: project.url,
+}));
+---
+
+<BaseLayout
+  title="项目"
+  description="开源项目与研究原型。"
+  canonicalPath="/projects/"
+  currentNav="projects"
+  navLinks={ctx.navLinks}
+  searchItems={ctx.searchItems}
+  searchPlaceholder="搜索项目"
+  footerGroups={ctx.footerGroups}
+>
+  <section class="page-hero compact-hero shell">
+    <div class="page-hero-grid">
+      <h1 class="display" data-enter>项目</h1>
+      <p class="page-hero-sub" data-enter style="--delay:120ms">开源项目与研究原型</p>
+    </div>
+  </section>
+
+  <section class="section shell">
+    <ProjectShowcase projects={projectItems} />
+  </section>
+</BaseLayout>

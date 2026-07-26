@@ -1,0 +1,34 @@
+---
+import { X } from "@lucide/astro";
+import type { NavLink, NavKey } from "./types";
+
+interface Props {
+  links: NavLink[];
+  current?: NavKey | string;
+  label?: string;
+}
+
+const { links, current, label = "移动导航" } = Astro.props;
+---
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true" data-pagefind-ignore>
+  <div class="mobile-panel" role="dialog" aria-modal="true" aria-label={label}>
+    <div class="mobile-panel-head">
+      <span class="mobile-panel-title">导航</span>
+      <button class="icon-button" id="menu-close" type="button" aria-label="关闭导航">
+        <X aria-hidden="true" />
+      </button>
+    </div>
+    <nav class="mobile-nav" aria-label={label}>
+      {
+        links.map((link) =>
+          link.disabled || !link.href ? (
+            <span class="nav-disabled" aria-disabled="true">{link.label}</span>
+          ) : (
+            <a href={link.href} aria-current={link.key === current ? "page" : undefined}>{link.label}</a>
+          )
+        )
+      }
+    </nav>
+  </div>
+</div>

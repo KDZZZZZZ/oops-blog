@@ -1,0 +1,94 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ManuscriptTabs from "@/components/ManuscriptTabs.astro";
+import { getPageContext } from "@/lib/page-context";
+import {
+  buildPostTimeline,
+  buildRecentSixMonthUpdateSeries,
+  getStatusLabel,
+} from "@/lib/content";
+import type {
+  CategoryStat,
+  ManuscriptOverview,
+  TimelineItem,
+  UpdateStat,
+} from "@/components/types";
+
+const ctx = await getPageContext();
+
+const timeline = buildPostTimeline(ctx.allPosts);
+const updateSeries = buildRecentSixMonthUpdateSeries(ctx.allPosts);
+
+const timelineItems: TimelineItem[] = timeline.flatMap((month) =>
+  month.posts.map((post) => ({
+    id: `post-${post.slug}`,
+    title: post.title,
+    href: post.url,
+    category: post.category,
+    status: getStatusLabel(post.status),
+    dateLabel: month.label,
+    datetime: post.publishedAt.toISOString().slice(0, 10),
+    muted: post.status !== "published",
+  })),
+);
+
+const categoryStat: CategoryStat[] = ctx.categoryCounts.map((stat) => ({
+  label: stat.category,
+  value: stat.count,
+}));
+
+const maxUpdate = Math.max(1, ...updateSeries.map((p) => p.count));
+const updateStat: UpdateStat[] = updateSeries.map((point, index) => ({
+  label: point.label,
+  value: point.count,
+  max: maxUpdate,
+  current: index === updateSeries.length - 1,
+}));
+
+const publishedCount = ctx.posts.filter((p) => p.status === "published").length;
+const draftCount = ctx.posts.filter((p) => p.status === "draft").length;
+const outlineCount = ctx.posts.filter((p) => p.status === "outline").length;
+
+const overview: ManuscriptOverview = {
+  title: "文稿存档",
+  description: "AI 编译器、Agent 工程与模型推理优化。统计包含全部状态的文章。",
+  stats: [
+    { label: "已发布全文", value: publishedCount },
+    { label: "写作中", value: draftCount },
+    { label: "提纲", value: outlineCount },
+  ],
+  categoryStats: categoryStat,
+  updateStats: updateStat,
+  categoryCaption: "按类别",
+  updateCaption: "近六个月",
+  categoryNote: `共 ${ctx.posts.length} 篇 · ${categoryStat.length} 个类别，每一点代表一篇。`,
+  chartNote: "图表只统计已公开正文，不包含草稿。",
+};
+---
+
+<BaseLayout
+  title="文稿"
+  description="按时间、类别与概览浏览全部文章。"
+  canonicalPath="/posts/"
+  currentNav="posts"
+  navLinks={ctx.navLinks}
+  postsNavPreview={ctx.postsPreview}
+  searchItems={ctx.searchItems}
+  searchPlaceholder="搜索文章"
+  footerGroups={ctx.footerGroups}
+>
+  <section class="page-hero compact-hero shell manuscript-hero">
+    <div class="page-hero-grid">
+      <h1 class="display page-title-sm" data-enter>文稿</h1>
+    </div>
+  </section>
+
+  <ManuscriptTabs
+    timeline={timelineItems}
+    categories={ctx.categoryGroups}
+    overview={overview}
+    year={new Date().getFullYear()}
+    timelineCountLabel={`${timelineItems.length} 条记录`}
+    searchLabel="搜索文章"
+  />
+</BaseLayout>

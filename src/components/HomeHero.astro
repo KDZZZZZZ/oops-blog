@@ -1,0 +1,76 @@
+---
+import { ArrowDown, ExternalLink, Mail, MessageCircle } from "@lucide/astro";
+import WritingTrace from "./WritingTrace.astro";
+import type { SocialLink, TraceNode } from "./types";
+
+interface Props {
+  avatarSrc: string;
+  greeting?: string;
+  name?: string;
+  subtitle?: string;
+  motto?: string;
+  socials?: SocialLink[];
+  scrollHref?: string;
+  avatarWidth?: number;
+  avatarHeight?: number;
+  traceNodes?: TraceNode[];
+}
+
+const {
+  avatarSrc,
+  greeting = "Hi, I'm Oops 👋.",
+  name = "Oops",
+  subtitle,
+  motto,
+  socials = [],
+  scrollHref = "#home-feed",
+  avatarWidth = 92,
+  avatarHeight = 92,
+  traceNodes = [],
+} = Astro.props;
+
+const iconFor = (label: string) => {
+  const normalized = label.toLowerCase();
+  if (normalized.includes("github")) return ExternalLink;
+  if (normalized.includes("qq") || normalized.includes("message")) return MessageCircle;
+  return Mail;
+};
+
+const [beforeName, afterName = ""] = greeting.includes(name)
+  ? greeting.split(name)
+  : [greeting, ""];
+---
+
+<section class="home-hero">
+  <div class="home-hero-center">
+    <img class="home-portrait" src={avatarSrc} width={avatarWidth} height={avatarHeight} alt={`Portrait of ${name}`} data-enter style="--delay:80ms" />
+    <p class="home-intro" data-enter style="--delay:150ms">
+      {beforeName}{greeting.includes(name) && <strong>{name}</strong>}{afterName}
+    </p>
+    {subtitle && <p class="home-subtitle" data-enter style="--delay:290ms">{subtitle}</p>}
+  </div>
+
+  <div class="home-hero-foot">
+    {motto && (
+      <div class="home-counts">
+        <h1 data-enter style="--delay:220ms;margin:0;color:var(--quiet);font:italic 300 15px/1.6 var(--font-display);letter-spacing:0;text-wrap:balance">{motto}</h1>
+      </div>
+    )}
+    {socials.length > 0 && (
+      <div class="home-socials" aria-label="联系方式">
+        {socials.map((item) => {
+          const Icon = iconFor(item.label);
+          return (
+            <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined} aria-label={item.label} title={item.label}>
+              <Icon aria-hidden="true" />
+            </a>
+          );
+        })}
+      </div>
+    )}
+  </div>
+  {traceNodes.length > 0 && <WritingTrace nodes={traceNodes} embedded />}
+  <a class="home-scroll-cue" href={scrollHref} aria-label="继续阅读">
+    <ArrowDown aria-hidden="true" />
+  </a>
+</section>

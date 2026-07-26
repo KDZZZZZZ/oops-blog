@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f9f8f5" />
+  <meta name="description" content="从高层算子语义到循环与内存访问：理解 AI 编译器中的 Lowering。" />
+  <title>两级 IR 之间，Lowering 到底负责什么 · Oops</title>
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="stylesheet" href="modules/visual-effects/assets/site.css" />
+</head>
+<body>
+  <a class="skip-link" href="#article">跳到正文</a>
+  <header class="site-header" id="site-header"><div class="header-inner"><a class="wordmark" href="index.html" aria-label="返回首页">Oops<i>·</i></a><nav class="desktop-nav" aria-label="主导航"><a href="index.html">首页</a><a href="posts.html" aria-current="page">文稿</a><a href="essays.html">随笔</a><span class="nav-disabled" aria-disabled="true" title="更多内容尚未开放">更多</span></nav><div class="header-actions"><button class="icon-button" type="button" data-open-search aria-label="搜索内容"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg></button><button class="icon-button" id="theme-button" type="button" aria-label="切换主题"><svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"></svg></button><button class="icon-button menu-button" id="menu-button" type="button" aria-label="打开导航" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button></div></div></header>
+
+  <main id="article">
+    <header class="article-header shell">
+      <div class="article-header-inner">
+        <p class="eyebrow" data-enter>Compiler · 编译器</p>
+        <h1 class="article-title" data-enter style="--delay:80ms">两级 IR 之间，Lowering 到底负责什么</h1>
+        <p class="article-deck" data-enter style="--delay:150ms">从高层算子语义走到循环、索引和内存访问，Lowering 不是一次格式转换，而是一段需要保留证据的决策链。</p>
+        <div class="article-meta" data-enter style="--delay:220ms"><span>Oops</span><span>约 5 分钟</span><span>持续修订</span></div>
+      </div>
+    </header>
+
+    <div class="article-layout shell">
+      <aside class="toc" aria-label="文章目录"><strong>本页目录</strong><a href="#two-levels">为什么需要两级 IR</a><a href="#contract">Lowering 的合同</a><a href="#trace">保持可追踪</a><a href="#runtime">不要越过运行时</a></aside>
+      <article class="article-body reveal">
+        <h2 id="two-levels">为什么需要两级 IR</h2>
+        <p>高层 IR 适合表达“做什么”。一个卷积、一个矩阵乘法或一次广播，在这里仍保留算子语义、形状关系和类型信息。低层 IR 则必须逐步回答“怎样做”：循环怎么组织、索引如何计算、缓冲区如何分配、目标设备能否执行。</p>
+        <p>如果只保留一种表示，高层优化会被循环细节拖累，后端生成又会缺少足够具体的信息。两级 IR 的价值不只是分层，而是让不同阶段拥有合适的词汇。</p>
+
+        <h2 id="contract">Lowering 的合同</h2>
+        <p>Lowering 的输入是一段仍带有高层语义的程序，输出是一段可以继续做调度、内存规划和代码生成的低层表示。它至少要完成三件事：确定算子展开方式、显式化数据布局与索引、把隐含的执行关系变成可检查的控制流。</p>
+        <div class="article-callout">Lowering 不应该顺手吞掉所有优化。它的首要职责是让语义下降得清楚、稳定、可验证。</div>
+        <pre><code>High-level op
+  -> shape and type checks
+  -> compute definition
+  -> loop and buffer form
+  -> target-aware optimization</code></pre>
+
+        <h2 id="trace">保持可追踪</h2>
+        <p>实现里最容易丢失的是“这段循环从哪个算子来的”。当 Lowering 同时做融合、常量折叠和布局重写，错误一旦出现，就很难判断问题属于前端语义、降级规则还是后端优化。</p>
+        <p>更稳妥的做法是让每个阶段产生可以单独打印和验证的结果，并保留源算子、形状与布局等元信息。这样测试可以针对边界写，而不是只能等待端到端结果出错。</p>
+
+        <h2 id="runtime">不要越过运行时</h2>
+        <p>Lowering 可以决定缓冲区和调用约定，但设备模块如何加载、张量生命周期如何管理、调用如何派发，应由运行时继续承担。编译阶段知道得太多，会把后端和设备策略写死在 IR 中。</p>
+        <p>我更倾向于把边界放在“生成明确的模块接口”这里：Lowering 提供足够具体的函数与元数据，RuntimeSession 负责把它们放到真实设备上运行。两边都保持可替换，调试路径也更短。</p>
+
+        <nav class="article-nav" aria-label="文章导航"><a href="posts.html"><small>返回</small><strong>文章归档</strong></a><a href="posts.html#websocket"><small>下一篇提纲</small><strong>WebSocket 不是状态机</strong></a></nav>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer"><span>© 2026 Oops · 文章持续修订</span><div class="footer-links"><a href="posts.html">全部文章</a><a href="projects.html#kxc">相关项目</a><a href="mailto:2112335382@qq.com">邮箱</a></div></footer>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true"><div class="mobile-panel" role="dialog" aria-modal="true" aria-label="移动导航"><div class="mobile-panel-head"><span class="mobile-panel-title">导航</span><button class="icon-button" id="menu-close" type="button" aria-label="关闭导航"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"></path></svg></button></div><nav class="mobile-nav"><a href="index.html">首页</a><a href="posts.html" aria-current="page">文稿</a><a href="essays.html">随笔</a><span class="nav-disabled" aria-disabled="true">更多</span></nav></div></div>
+  <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title"><div class="search-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg><input class="search-input" id="search-input" type="search" autocomplete="off" placeholder="搜索项目、技术和文章" aria-label="搜索项目、技术和文章" /><button class="search-close" id="search-close" type="button">关闭</button></div><div class="search-body"><h2 id="search-title" class="eyebrow" style="margin:14px 4px 0">站内搜索</h2><div id="search-results" class="search-hint">输入关键词，例如“LLVM”“Agent”或“推理”。</div></div></dialog>
+  <script src="modules/visual-effects/assets/site.js" defer></script>
+</body>
+</html>

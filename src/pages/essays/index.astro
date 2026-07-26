@@ -1,0 +1,36 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import EssayStream from "@/components/EssayStream.astro";
+import { getPageContext } from "@/lib/page-context";
+import type { EssayItem } from "@/components/types";
+
+const ctx = await getPageContext();
+
+const essayItems: EssayItem[] = ctx.essays.map((essay) => ({
+  id: essay.slug,
+  title: essay.title,
+  body: essay.body,
+  topic: essay.topic,
+  sourceNote: essay.sourceNote,
+  href: essay.url,
+}));
+---
+
+<BaseLayout
+  title="随笔"
+  description="工程现场、实验片段与未长成文章的短记。"
+  canonicalPath="/essays/"
+  currentNav="essays"
+  navLinks={ctx.navLinks}
+  searchItems={ctx.searchItems}
+  searchPlaceholder="搜索随笔"
+  footerGroups={ctx.footerGroups}
+>
+  <section class="page-hero compact-hero shell">
+    <div class="page-hero-grid">
+      <h1 class="display page-title-sm" data-enter>随笔</h1>
+    </div>
+  </section>
+
+  <EssayStream essays={essayItems} closing="保持简单" />
+</BaseLayout>

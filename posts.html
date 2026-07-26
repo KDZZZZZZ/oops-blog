@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f9f8f5" />
+  <meta name="description" content="Oops 的文稿归档：按时间、类别和统计概览浏览技术写作。" />
+  <title>文稿 · Oops</title>
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="stylesheet" href="modules/visual-effects/assets/site.css" />
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到正文</a>
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="index.html" aria-label="返回首页">Oops<i>·</i></a>
+      <nav class="desktop-nav" aria-label="主导航"><a href="index.html">首页</a><a href="posts.html" aria-current="page">文稿</a><a href="essays.html">随笔</a><span class="nav-disabled" aria-disabled="true" title="更多内容尚未开放">更多</span></nav>
+      <div class="header-actions">
+        <button class="icon-button" type="button" data-open-search aria-label="搜索内容" title="搜索"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg></button>
+        <button class="icon-button" id="theme-button" type="button" aria-label="切换主题"><svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"></svg></button>
+        <button class="icon-button menu-button" id="menu-button" type="button" aria-label="打开导航" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="page-hero compact-hero shell manuscript-hero">
+      <div class="page-hero-grid">
+        <h1 class="display" data-enter>文稿</h1>
+      </div>
+    </section>
+
+    <section class="section shell manuscript-shell">
+      <div class="manuscript-toolbar reveal">
+        <div class="manuscript-tabs" role="tablist" aria-label="文稿浏览方式">
+          <button type="button" role="tab" aria-selected="true" aria-controls="panel-time" id="tab-time" data-manuscript-tab="time">按时间</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="panel-category" id="tab-category" data-manuscript-tab="category">按类别</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="panel-overview" id="tab-overview" data-manuscript-tab="overview">概览</button>
+        </div>
+        <button class="search-trigger" type="button" data-open-search><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>搜索文稿</button>
+      </div>
+
+      <section class="manuscript-panel" id="panel-time" role="tabpanel" aria-labelledby="tab-time" data-manuscript-panel="time">
+        <div class="timeline-year"><span>2026</span><small>4 条记录</small></div>
+        <div class="timeline-list">
+          <a class="timeline-item reveal" href="article-lowering.html"><time datetime="2026-07">07</time><span class="timeline-marker" aria-hidden="true"></span><span><strong>两级 IR 之间，Lowering 到底负责什么</strong><small>编译器 · 已发布全文</small></span><span class="timeline-action">阅读</span></a>
+          <div class="timeline-item reveal" id="websocket"><time>写作中</time><span class="timeline-marker muted" aria-hidden="true"></span><span><strong>WebSocket 不是状态机</strong><small>Agent · 结构整理中</small></span><span class="timeline-action">提纲</span></div>
+          <div class="timeline-item reveal" id="dist-penalty"><time>写作中</time><span class="timeline-marker muted" aria-hidden="true"></span><span><strong>为什么远离 frontier 的 token 不该被过早相信</strong><small>推理 · 实验复核中</small></span><span class="timeline-action">提纲</span></div>
+          <div class="timeline-item reveal"><time>提纲</time><span class="timeline-marker muted" aria-hidden="true"></span><span><strong>RuntimeSession 应该知道多少设备细节</strong><small>编译器 · 边界梳理中</small></span><span class="timeline-action">草稿</span></div>
+        </div>
+      </section>
+
+      <section class="manuscript-panel" id="panel-category" role="tabpanel" aria-labelledby="tab-category" data-manuscript-panel="category" hidden>
+        <div class="category-index">
+          <section class="category-group reveal"><header><span>01</span><h2>编译器</h2><strong>2</strong></header><a href="article-lowering.html">两级 IR 之间，Lowering 到底负责什么</a><span>RuntimeSession 应该知道多少设备细节</span></section>
+          <section class="category-group reveal"><header><span>02</span><h2>Agent</h2><strong>1</strong></header><span>WebSocket 不是状态机</span></section>
+          <section class="category-group reveal"><header><span>03</span><h2>推理</h2><strong>1</strong></header><span>为什么远离 frontier 的 token 不该被过早相信</span></section>
+        </div>
+      </section>
+
+      <section class="manuscript-panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" data-manuscript-panel="overview" hidden>
+        <div class="overview-lede reveal"><p class="eyebrow">Archive overview</p><h2>文稿概览</h2><p>类别统计计入全文与提纲；更新时间只记录已经公开的正文。</p></div>
+        <div class="stat-strip reveal" aria-label="文稿状态统计"><div><strong>4</strong><span>记录总数</span></div><div><strong>1</strong><span>已发布全文</span></div><div><strong>3</strong><span>整理中</span></div></div>
+        <div class="chart-grid">
+          <figure class="chart-block reveal"><figcaption><strong>类别分布</strong><span>按当前 4 条记录</span></figcaption><div class="category-chart" role="img" aria-label="编译器 2 条，Agent 1 条，推理 1 条"><div><span>编译器</span><i style="--value:100%"></i><strong>2</strong></div><div><span>Agent</span><i style="--value:50%"></i><strong>1</strong></div><div><span>推理</span><i style="--value:50%"></i><strong>1</strong></div></div></figure>
+          <figure class="chart-block reveal"><figcaption><strong>公开更新时间</strong><span>最近 6 个月 · 正文更新次数</span></figcaption><div class="update-chart" role="img" aria-label="2026 年 2 月到 6 月无公开正文更新，7 月公开 1 篇"><div><i style="--value:4%"></i><span>02</span></div><div><i style="--value:4%"></i><span>03</span></div><div><i style="--value:4%"></i><span>04</span></div><div><i style="--value:4%"></i><span>05</span></div><div><i style="--value:4%"></i><span>06</span></div><div><i style="--value:100%"></i><span>07</span></div></div><p class="chart-note">仅统计已公开正文；提纲与整理中内容不计入更新次数。</p></figure>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>© 2026 Oops · 文稿归档</span><div class="footer-links"><a href="index.html">首页</a><a href="essays.html">随笔</a><a href="mailto:2112335382@qq.com">邮箱</a></div></footer>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true"><div class="mobile-panel" role="dialog" aria-modal="true" aria-label="移动导航"><div class="mobile-panel-head"><span class="mobile-panel-title">导航</span><button class="icon-button" id="menu-close" type="button" aria-label="关闭导航"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"></path></svg></button></div><nav class="mobile-nav"><a href="index.html">首页</a><a href="posts.html" aria-current="page">文稿</a><a href="essays.html">随笔</a><span class="nav-disabled" aria-disabled="true">更多</span></nav></div></div>
+  <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title"><div class="search-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg><input class="search-input" id="search-input" type="search" autocomplete="off" placeholder="搜索文稿、随笔和技术主题" aria-label="搜索文稿、随笔和技术主题" /><button class="search-close" id="search-close" type="button">关闭</button></div><div class="search-body"><h2 id="search-title" class="eyebrow" style="margin:14px 4px 0">站内搜索</h2><div id="search-results" class="search-hint">输入关键词，例如“LLVM”“Agent”或“推理”。</div></div></dialog>
+  <script src="modules/visual-effects/assets/site.js" defer></script>
+</body>
+</html>

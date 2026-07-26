@@ -1,0 +1,34 @@
+---
+import type { EssayItem } from "./types";
+
+interface Props {
+  essays: EssayItem[];
+  closing?: string;
+}
+
+const { essays, closing } = Astro.props;
+---
+
+<section class="essay-stream shell">
+  {
+    essays.map((essay, index) => (
+      <article class="essay-note paper-reveal" id={essay.id} style={`--paper-delay:${Math.min(index * 60, 180)}ms`}>
+        <header class="essay-note-head">
+          <span class="essay-index">{String(index + 1).padStart(2, "0")}</span>
+          {essay.topic && <span class="essay-topic">{essay.topic}</span>}
+        </header>
+        <div class="essay-content">
+          <h2>{essay.title}</h2>
+          <p>{essay.body}</p>
+          {essay.sourceNote && <footer class="essay-source">{essay.sourceNote}</footer>}
+        </div>
+      </article>
+    ))
+  }
+  {closing && (
+    <div class="essay-closing">
+      <span>—</span>
+      <p>{closing}</p>
+    </div>
+  )}
+</section>

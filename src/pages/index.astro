@@ -1,0 +1,71 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HomeHero from "@/components/HomeHero.astro";
+import HomeFeed from "@/components/HomeFeed.astro";
+import { getPageContext } from "@/lib/page-context";
+import { buildWritingTrace } from "@/lib/content";
+import { siteConfig } from "@/lib/site-config";
+import avatarUrl from "@/assets/avatar.png";
+import type { EntryItem, EssayItem, TraceNode } from "@/components/types";
+
+const ctx = await getPageContext();
+const avatar = typeof avatarUrl === "object" ? (avatarUrl as { src: string }).src : (avatarUrl as string);
+
+const recentPostItems: EntryItem[] = ctx.posts.slice(0, 3).map((post) => ({
+  id: post.slug,
+  title: post.title,
+  href: post.url,
+  category: post.category,
+}));
+
+const recentEssayItems: EssayItem[] = ctx.essays.slice(0, 2).map((essay) => ({
+  id: essay.slug,
+  title: essay.title,
+  body: essay.body,
+  topic: essay.topic,
+  sourceNote: essay.sourceNote,
+  href: essay.url,
+}));
+
+const writingTrace = buildWritingTrace(ctx.allPosts);
+const traceNodes: TraceNode[] = writingTrace.map((node, index) => ({
+  label: node.label,
+  count: node.count,
+  titles: node.titles,
+  position: node.position,
+  displayPosition: node.displayPosition,
+  phase: node.phase,
+  current: index === writingTrace.length - 1,
+}));
+---
+
+<BaseLayout
+  title={siteConfig.name}
+  description={siteConfig.description}
+  canonicalPath="/"
+  currentNav="home"
+  navLinks={ctx.navLinks}
+  homeNavPreview={ctx.homePreview}
+  postsNavPreview={ctx.postsPreview}
+  searchItems={ctx.searchItems}
+  footerGroups={ctx.footerGroups}
+  homeVariant={true}
+  bodyClass="home-page"
+  avatarSrc={avatar}
+>
+  <HomeHero
+    avatarSrc={avatar}
+    greeting={siteConfig.greeting}
+    name={siteConfig.name}
+    motto={siteConfig.headline}
+    socials={ctx.socialLinks}
+    traceNodes={traceNodes}
+  />
+
+  <HomeFeed
+    posts={recentPostItems}
+    essays={recentEssayItems}
+    title="近期笔墨"
+    essayTitle="碎念"
+  />
+</BaseLayout>

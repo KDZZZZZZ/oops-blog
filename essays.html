@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f9f8f5" />
+  <meta name="description" content="Oops 的随笔：工程现场、实验片段与尚未完成的判断。" />
+  <title>随笔 · Oops</title>
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="stylesheet" href="modules/visual-effects/assets/site.css" />
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到正文</a>
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="index.html" aria-label="返回首页">Oops<i>·</i></a>
+      <nav class="desktop-nav" aria-label="主导航"><a href="index.html">首页</a><a href="posts.html">文稿</a><a href="essays.html" aria-current="page">随笔</a><span class="nav-disabled" aria-disabled="true" title="更多内容尚未开放">更多</span></nav>
+      <div class="header-actions"><button class="icon-button" type="button" data-open-search aria-label="搜索内容" title="搜索"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg></button><button class="icon-button" id="theme-button" type="button" aria-label="切换主题"><svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"></svg></button><button class="icon-button menu-button" id="menu-button" type="button" aria-label="打开导航" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button></div>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="page-hero compact-hero shell essay-hero">
+      <div class="page-hero-grid"><h1 class="display" data-enter>随笔</h1></div>
+    </section>
+
+    <section class="essay-stream shell">
+      <article class="essay-note reveal" id="runtime-boundary"><div class="essay-note-meta"><span>01</span><span>运行时</span></div><div><h2>先把运行时边界做清楚</h2><p>模块加载、张量生命周期和设备调度看起来都属于 runtime，但它们不该共享同一种“方便”。边界越晚确定，后面的抽象就越像补丁。</p><footer>来自 RuntimeSession 的接口整理</footer></div></article>
+      <article class="essay-note reveal" id="profiling"><div class="essay-note-meta"><span>02</span><span>实验</span></div><div><h2>一次精度回落的复盘</h2><p>当 block length 变大，第一反应不该是给模型行为编故事。先确认日志、采样和对照是否在描述同一个过程，再谈启发式。</p><footer>来自 Dist Penalty 的实验复核</footer></div></article>
+      <article class="essay-note reveal" id="connection-state"><div class="essay-note-meta"><span>03</span><span>Agent</span></div><div><h2>连接不是状态</h2><p>WebSocket 断开时，真正需要恢复的是事件序列和业务投影。把连接对象当作会话本身，只会让重连逻辑承担它不该知道的事情。</p><footer>来自 Agent 会话状态设计</footer></div></article>
+    </section>
+
+  </main>
+
+  <footer class="site-footer"><span>© 2026 Oops · 随笔</span><div class="footer-links"><a href="index.html">首页</a><a href="posts.html">文稿</a><a href="mailto:2112335382@qq.com">邮箱</a></div></footer>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true"><div class="mobile-panel" role="dialog" aria-modal="true" aria-label="移动导航"><div class="mobile-panel-head"><span class="mobile-panel-title">导航</span><button class="icon-button" id="menu-close" type="button" aria-label="关闭导航"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 6 6 18M6 6l12 12"></path></svg></button></div><nav class="mobile-nav"><a href="index.html">首页</a><a href="posts.html">文稿</a><a href="essays.html" aria-current="page">随笔</a><span class="nav-disabled" aria-disabled="true">更多</span></nav></div></div>
+  <dialog class="search-dialog" id="search-dialog" aria-labelledby="search-title"><div class="search-head"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg><input class="search-input" id="search-input" type="search" autocomplete="off" placeholder="搜索文稿、随笔和技术主题" aria-label="搜索文稿、随笔和技术主题" /><button class="search-close" id="search-close" type="button">关闭</button></div><div class="search-body"><h2 id="search-title" class="eyebrow" style="margin:14px 4px 0">站内搜索</h2><div id="search-results" class="search-hint">输入关键词，例如“LLVM”“Agent”或“推理”。</div></div></dialog>
+  <script src="modules/visual-effects/assets/site.js" defer></script>
+</body>
+</html>

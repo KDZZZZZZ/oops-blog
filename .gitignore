@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Test artifacts
+playwright-report/
+test-results/
+coverage/
+
+# Release tarballs (build artifacts, not source)
+*.tar.gz
+
+# Local scratch / tooling caches
+tmp/
+.codegraph/
+.agents/
+.claude/
+scripts/_*
+
+# Secrets — never commit deploy credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.aliyun/
+
+# Logs
+*.log

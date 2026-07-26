@@ -1,0 +1,41 @@
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/inter-latin-wght-normal.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  --bg: oklch(100% 0 0);
+  --surface: oklch(99.7% 0.003 240);
+  --fg: oklch(25.58% 0.0075 95.4);
+  --heading: oklch(18.02% 0.0068 92.1);
+  --muted: oklch(46.78% 0.0083 88.7);
+  --quiet: oklch(62.4% 0.008 91);
+  --border: oklch(85.07% 0.0111 95.2);
+  --subtle: oklch(93.2% 0.007 93);
+  --accent: oklch(62.13% 0.1241 11.6);
+  --success: oklch(62% 0.09 159);
+  --font-display: "Noto Serif CJK SC", "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, Georgia, serif;
+  --font-body: "Inter", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Hiragino Sans GB", sans-serif;
+  --font-mono: "Operator Mono", "Cascadia Code PL", "JetBrains Mono", "Fira Code", Consolas, Monaco, monospace;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --max: 1180px;
+  --header-h: 72px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: oklch(18.5% 0.007 83);
+  --surface: oklch(21.5% 0.007 83);
+  --fg: oklch(89.5% 0.008 91);
+  --heading: oklch(95.5% 0.005 91);
+  --muted: oklch(72% 0.007 91);
+  --quiet: oklch(56% 0.006 91);
+  --border: oklch(36% 0.007 91 / .72);
+  --subtle: oklch(25.5% 0.008 86);
+  --accent: oklch(70% 0.105 12);
+  --success: oklch(72% 0.08 159);
+}
