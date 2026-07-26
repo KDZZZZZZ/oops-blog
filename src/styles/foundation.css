@@ -62,27 +62,37 @@ body::after {
 
 [data-theme="light"] body::before {
   background: url("../assets/marble-light.svg") center / cover no-repeat;
+  filter: contrast(1.06) saturate(1.1);
   animation: backdrop-drift 96s ease-in-out infinite alternate;
 }
 
+/* 云影加深一档：暖、玫瑰、微蓝三团，纸面有明暗起伏才有"感觉" */
 [data-theme="light"] body::after {
   background:
-    radial-gradient(52vw 40vh at 20% 18%, oklch(97% 0.013 75 / .5), transparent 68%),
-    radial-gradient(46vw 36vh at 82% 78%, oklch(96.5% 0.012 12 / .45), transparent 70%);
+    radial-gradient(54vw 42vh at 18% 16%, oklch(94% 0.021 75 / .8), transparent 66%),
+    radial-gradient(48vw 38vh at 84% 74%, oklch(93.5% 0.02 12 / .7), transparent 68%),
+    radial-gradient(42vw 34vh at 70% 10%, oklch(94.5% 0.017 245 / .6), transparent 70%);
   animation: backdrop-drift-counter 128s ease-in-out infinite alternate;
 }
 
-/* 深色：纯平黑改为缓慢流动的暖光与一缕玫瑰色微光 */
+/* 深色：星空。密集的暗星缓慢漂移，稀疏的亮星反向漂移并轻微闪烁 */
 [data-theme="dark"] body::before {
   background:
-    radial-gradient(58vw 44vh at 50% 4%, oklch(27% 0.015 83 / .55), transparent 70%),
-    radial-gradient(44vw 36vh at 82% 34%, oklch(25% 0.022 12 / .34), transparent 72%);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cg fill='%23fff'%3E%3Ccircle cx='18' cy='26' r='.7' opacity='.35'/%3E%3Ccircle cx='61' cy='11' r='.5' opacity='.28'/%3E%3Ccircle cx='99' cy='41' r='.8' opacity='.42'/%3E%3Ccircle cx='143' cy='17' r='.6' opacity='.3'/%3E%3Ccircle cx='196' cy='33' r='.9' opacity='.38'/%3E%3Ccircle cx='237' cy='9' r='.5' opacity='.25'/%3E%3Ccircle cx='31' cy='84' r='.55' opacity='.26'/%3E%3Ccircle cx='87' cy='96' r='.95' opacity='.45'/%3E%3Ccircle cx='150' cy='71' r='.6' opacity='.3'/%3E%3Ccircle cx='203' cy='88' r='.7' opacity='.36'/%3E%3Ccircle cx='243' cy='116' r='.5' opacity='.24'/%3E%3Ccircle cx='12' cy='137' r='.8' opacity='.4'/%3E%3Ccircle cx='66' cy='151' r='.55' opacity='.28'/%3E%3Ccircle cx='121' cy='128' r='.7' opacity='.34'/%3E%3Ccircle cx='177' cy='143' r='1' opacity='.48'/%3E%3Ccircle cx='228' cy='166' r='.6' opacity='.3'/%3E%3Ccircle cx='39' cy='197' r='.9' opacity='.42'/%3E%3Ccircle cx='98' cy='214' r='.6' opacity='.28'/%3E%3Ccircle cx='158' cy='192' r='.5' opacity='.24'/%3E%3Ccircle cx='211' cy='224' r='.8' opacity='.4'/%3E%3Ccircle cx='137' cy='247' r='.65' opacity='.3'/%3E%3Ccircle cx='23' cy='241' r='.5' opacity='.26'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 260px 260px repeat,
+    radial-gradient(70vw 52vh at 50% -6%, oklch(26% 0.02 262 / .4), transparent 72%);
   animation: backdrop-drift 96s ease-in-out infinite alternate;
 }
 
 [data-theme="dark"] body::after {
-  background: radial-gradient(46vw 42vh at 16% 78%, oklch(24.5% 0.014 250 / .3), transparent 74%);
-  animation: backdrop-drift-counter 128s ease-in-out infinite alternate;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cg fill='%23fff'%3E%3Ccircle cx='46' cy='58' r='1.2' opacity='.85'/%3E%3Ccircle cx='168' cy='24' r='1' opacity='.6'/%3E%3Ccircle cx='317' cy='86' r='1.4' opacity='.9'/%3E%3Ccircle cx='392' cy='178' r='1' opacity='.65'/%3E%3Ccircle cx='238' cy='151' r='1.1' opacity='.75'/%3E%3Ccircle cx='88' cy='219' r='1.5' opacity='.95'/%3E%3Ccircle cx='300' cy='286' r='1' opacity='.6'/%3E%3Ccircle cx='150' cy='342' r='1.3' opacity='.85'/%3E%3Ccircle cx='383' cy='367' r='1.1' opacity='.7'/%3E%3Ccircle cx='34' cy='388' r='1' opacity='.6'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 420px 420px repeat;
+  animation:
+    backdrop-drift-counter 128s ease-in-out infinite alternate,
+    star-twinkle 6.5s ease-in-out infinite alternate;
+}
+
+@keyframes star-twinkle {
+  from { opacity: .55; }
+  to { opacity: 1; }
 }
 
 @keyframes backdrop-drift {
@@ -100,6 +110,21 @@ body::after {
   body::after {
     animation: none;
   }
+}
+
+/* 自定义指针：墨色笔锋箭头，白描边保证深浅两底都可见；可点元素换玫瑰色 */
+html {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Cpath d='M5 2.5 5 17.5 9.2 14 11.5 19.3 14.3 18 12 12.9 17 12.6Z' fill='%23262220' stroke='%23fff' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 5 2, default;
+}
+
+:is(a, button, summary, [role="button"], [role="tab"], [role="menuitem"]) {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Cpath d='M5 2.5 5 17.5 9.2 14 11.5 19.3 14.3 18 12 12.9 17 12.6Z' fill='%23c25668' stroke='%23fff' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 5 2, pointer;
+}
+
+/* 文本域保留原生光标 */
+input,
+textarea {
+  cursor: auto;
 }
 
 body.menu-open { overflow: hidden; }
