@@ -135,11 +135,15 @@ test("browser feedback keeps the archive chrome aligned and consistent", async (
   expect(ink?.fromBaseline).toBe(0);
   expect(ink?.leftDelta).toBeLessThanOrEqual(1);
 
-  await expect(page.locator(".manuscript-toolbar-intro")).toContainText("循着时间读，按主题重逢。");
-  await expect(page.locator(".manuscript-tabs")).toContainText("年序");
+  await expect(page.locator(".manuscript-toolbar-intro")).toContainText("顺时间读，按门类找，或看全貌。");
+  await expect(page.locator(".manuscript-tabs")).toContainText("编年");
   await expect(page.locator(".manuscript-tabs")).toContainText("门类");
   await expect(page.locator(".manuscript-tabs")).toContainText("全览");
   await expect(page.locator(".manuscript-search")).toContainText("寻一篇");
+
+  // The section is called 文稿 throughout, so the copy must not slip to 文章.
+  const archiveCopy = await page.locator(".manuscript-shell").innerText();
+  expect(archiveCopy).not.toMatch(/文章/);
 });
 
 test("home publication trace groups posts into weekly area-scaled circles", async ({ page }) => {

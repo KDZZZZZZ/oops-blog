@@ -67,9 +67,9 @@ const primaryLinks = links.filter((item) => ["home", "posts", "essays", "more"].
         return (
           <span class="nav-pod nav-pod-posts">
             <a href={link.href} aria-current={link.key === current ? "page" : undefined}>{link.label}</a>
-            <div class="nav-preview nav-preview-posts" aria-label="文章预览">
-              <section class="post-categories" role="tablist" aria-label="文章分类" aria-orientation="vertical">
-                <span class="preview-label">分类</span>
+            <div class="nav-preview nav-preview-posts" aria-label="文稿预览">
+              <section class="post-categories" role="tablist" aria-label="文稿门类" aria-orientation="vertical">
+                <span class="preview-label">门类</span>
                 {postsPreview.categories.map((category, index) => (
                   <button
                     class:list={[index === 0 && "is-active"]}
@@ -90,7 +90,7 @@ const primaryLinks = links.filter((item) => ["home", "posts", "essays", "more"].
                     class:list={["recent-posts", index === 0 && "is-active"]}
                     id={`post-panel-${category.label}`}
                     role="tabpanel"
-                    aria-label={`${category.label}文章`}
+                    aria-label={`${category.label}门类的文稿`}
                     data-post-panel={category.label}
                     hidden={index !== 0}
                   >
@@ -103,7 +103,7 @@ const primaryLinks = links.filter((item) => ["home", "posts", "essays", "more"].
               </div>
               {postsPreview.footerHref && (
                 <a class="posts-preview-foot" href={postsPreview.footerHref}>
-                  <span>{postsPreview.footerLabel ?? "查看全部文章"}</span>
+                  <span>{postsPreview.footerLabel ?? "查看全部文稿"}</span>
                   <span data-post-preview-count>{activePostCategory?.label} · {activePostCategory?.count ?? 0} 篇</span>
                 </a>
               )}

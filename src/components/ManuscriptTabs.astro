@@ -18,20 +18,20 @@ const {
   categories,
   overview,
   year = new Date().getFullYear(),
-  timelineCountLabel = `${timeline.length} 条记录`,
-  searchLabel = "搜索文章",
+  timelineCountLabel = `共 ${timeline.length} 篇`,
+  searchLabel = "搜索文稿",
 } = Astro.props;
 ---
 
 <section class="section shell manuscript-shell">
   <div class="manuscript-toolbar reveal">
     <div class="manuscript-toolbar-intro">
-      <span>Editorial index</span>
-      <p>循着时间读，按主题重逢。</p>
+      <span>Ways to read</span>
+      <p>顺时间读，按门类找，或看全貌。</p>
     </div>
     <div class="manuscript-toolbar-actions">
-      <div class="manuscript-tabs" role="tablist" aria-label="文章浏览方式">
-        <button type="button" role="tab" aria-selected="true" aria-controls="panel-time" id="tab-time" data-manuscript-tab="time"><span aria-hidden="true">01</span>年序</button>
+      <div class="manuscript-tabs" role="tablist" aria-label="文稿浏览方式">
+        <button type="button" role="tab" aria-selected="true" aria-controls="panel-time" id="tab-time" data-manuscript-tab="time"><span aria-hidden="true">01</span>编年</button>
         <button type="button" role="tab" aria-selected="false" aria-controls="panel-category" id="tab-category" data-manuscript-tab="category" tabindex="-1"><span aria-hidden="true">02</span>门类</button>
         <button type="button" role="tab" aria-selected="false" aria-controls="panel-overview" id="tab-overview" data-manuscript-tab="overview" tabindex="-1"><span aria-hidden="true">03</span>全览</button>
         <span class="manuscript-tab-indicator" aria-hidden="true"></span>
@@ -90,14 +90,14 @@ const {
           {overview.description && <p>{overview.description}</p>}
         </div>
         {overview.stats && (
-          <div class="stat-strip reveal" aria-label="文章状态统计">
+          <div class="stat-strip reveal" aria-label="文稿状态统计">
             {overview.stats.map((item) => <div><strong>{item.value}</strong><span>{item.label}</span></div>)}
           </div>
         )}
         <div class="chart-grid">
           {overview.categoryStats && (
             <figure class="chart-block reveal">
-              <figcaption><strong>类别分布</strong>{overview.categoryCaption && <span>{overview.categoryCaption}</span>}</figcaption>
+              <figcaption><strong>门类分布</strong>{overview.categoryCaption && <span>{overview.categoryCaption}</span>}</figcaption>
               <CategoryChart stats={overview.categoryStats} />
               {overview.categoryNote && <p class="chart-note">{overview.categoryNote}</p>}
             </figure>

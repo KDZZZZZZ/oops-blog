@@ -51,7 +51,7 @@ const outlineCount = ctx.posts.filter((p) => p.status === "outline").length;
 
 const overview: ManuscriptOverview = {
   title: "文稿存档",
-  description: "AI 编译器、Agent 工程与模型推理优化。统计包含全部状态的文章。",
+  description: "AI 编译器、Agent 工程与模型推理优化。统计包含全部状态的文稿。",
   stats: [
     { label: "已发布全文", value: publishedCount },
     { label: "写作中", value: draftCount },
@@ -59,22 +59,22 @@ const overview: ManuscriptOverview = {
   ],
   categoryStats: categoryStat,
   updateStats: updateStat,
-  categoryCaption: "按类别",
+  categoryCaption: "按门类",
   updateCaption: "近六个月",
-  categoryNote: `共 ${ctx.posts.length} 篇 · ${categoryStat.length} 个类别，每一点代表一篇。`,
-  chartNote: "图表只统计已公开正文，不包含草稿。",
+  categoryNote: `共 ${ctx.posts.length} 篇 · ${categoryStat.length} 个门类，一点即一篇。`,
+  chartNote: "只统计已公开的正文，不含草稿。",
 };
 ---
 
 <BaseLayout
   title="文稿"
-  description="按时间、类别与概览浏览全部文章。"
+  description="编年、门类、全览，三种方式浏览全部文稿。"
   canonicalPath="/posts/"
   currentNav="posts"
   navLinks={ctx.navLinks}
   postsNavPreview={ctx.postsPreview}
   searchItems={ctx.searchItems}
-  searchPlaceholder="搜索文章"
+  searchPlaceholder="搜索文稿"
   footerGroups={ctx.footerGroups}
 >
   <section class="page-hero compact-hero shell manuscript-hero">
@@ -88,7 +88,7 @@ const overview: ManuscriptOverview = {
     categories={ctx.categoryGroups}
     overview={overview}
     year={new Date().getFullYear()}
-    timelineCountLabel={`${timelineItems.length} 条记录`}
-    searchLabel="搜索文章"
+    timelineCountLabel={`共 ${timelineItems.length} 篇`}
+    searchLabel="搜索文稿"
   />
 </BaseLayout>
