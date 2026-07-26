@@ -9,7 +9,6 @@ interface Props {
   name?: string;
   subtitle?: string;
   motto?: string;
-  mottoCite?: string;
   socials?: SocialLink[];
   scrollHref?: string;
   avatarWidth?: number;
@@ -23,7 +22,6 @@ const {
   name = "Oops",
   subtitle,
   motto,
-  mottoCite,
   socials = [],
   scrollHref = "#home-feed",
   avatarWidth = 92,
@@ -58,7 +56,6 @@ const [beforeName, afterName = ""] = greeting.includes(name)
         <h1 data-enter style="--delay:220ms;margin:0;color:var(--quiet);font:italic 300 15px/1.6 var(--font-display);letter-spacing:0;text-wrap:balance">{motto}</h1>
       </div>
     )}
-    {motto && mottoCite && <p class="home-motto-cite" data-enter style="--delay:300ms">{mottoCite}</p>}
     {socials.length > 0 && (
       <div class="home-socials" aria-label="联系方式">
         {socials.map((item) => {

@@ -322,14 +322,6 @@
   font: italic 400 15px/1.5 var(--font-display);
 }
 
-.essay-closing cite {
-  display: block;
-  margin-top: 4px;
-  color: var(--quiet);
-  font: normal 10px/1.6 var(--font-mono);
-  font-style: normal;
-}
-
 @media (max-width: 600px) {
   .essay-stream { padding: 32px 0 80px; }
   .essay-note { padding: 22px 20px; }

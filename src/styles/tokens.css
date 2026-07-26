@@ -20,7 +20,8 @@
   --success: oklch(62% 0.09 159);
   --font-display: "Noto Serif CJK SC", "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, Georgia, serif;
   --font-body: "Inter", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Hiragino Sans GB", sans-serif;
-  --font-mono: "Operator Mono", "Cascadia Code PL", "JetBrains Mono", "Fira Code", Consolas, Monaco, monospace;
+  /* 中文兜底放在 monospace 之前，否则中文在 Windows 上会回落到 NSimSun */
+  --font-mono: "Operator Mono", "Cascadia Code PL", "JetBrains Mono", "Fira Code", Consolas, Monaco, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", monospace;
   --ease: cubic-bezier(.22, 1, .36, 1);
   --max: 1180px;
   --header-h: 72px;

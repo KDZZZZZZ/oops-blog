@@ -6,19 +6,11 @@
   text-transform: uppercase;
 }
 
-/* 页面题记：引文 + 小字出处 */
+/* 页面题记 */
 .epigraph {
   margin: 0 0 30px;
   color: var(--muted);
   font: 400 17px/1.9 var(--font-display);
-}
-
-.epigraph cite {
-  display: block;
-  margin-top: 4px;
-  color: var(--quiet);
-  font: 11px/1.6 var(--font-mono);
-  font-style: normal;
 }
 
 .display {

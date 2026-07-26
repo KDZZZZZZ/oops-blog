@@ -172,13 +172,6 @@
   letter-spacing: .03em;
 }
 
-.home-motto-cite {
-  margin: 7px 0 0;
-  color: color-mix(in srgb, var(--quiet) 72%, transparent);
-  font: 10px/1.5 var(--font-mono);
-  letter-spacing: .05em;
-}
-
 .home-counts strong {
   color: var(--muted);
   font-weight: 500;
