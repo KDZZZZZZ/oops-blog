@@ -1,5 +1,5 @@
 ---
-title: 深夜歌单加一
+title: 我寄愁心与明月
 slug: talking-to-the-moon
 topic: 音乐
 sourceNote: 分享自网易云音乐
@@ -14,4 +14,4 @@ shares:
     url: https://music.163.com/#/song?id=25657283
 ---
 
-歌单随机到这首，前奏一响就没舍得切。
+随君直到夜郎西
