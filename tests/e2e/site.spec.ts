@@ -58,6 +58,24 @@ test("option A hand-drawn controls render and preserve the theme state", async (
   });
 
   const moreTrigger = page.locator(".desktop-nav .nav-trigger");
+  const moreLayout = await moreTrigger.evaluate((button) => {
+    const icon = button.querySelector(".nav-primary-icon");
+    const label = button.querySelector(".nav-label");
+    const iconRect = icon?.getBoundingClientRect();
+    const labelRect = label?.getBoundingClientRect();
+
+    return {
+      display: getComputedStyle(button).display,
+      alignItems: getComputedStyle(button).alignItems,
+      centerDelta: iconRect && labelRect
+        ? Math.abs((iconRect.top + iconRect.height / 2) - (labelRect.top + labelRect.height / 2))
+        : Number.POSITIVE_INFINITY,
+    };
+  });
+  expect(moreLayout.display).toContain("flex");
+  expect(moreLayout.alignItems).toBe("center");
+  expect(moreLayout.centerDelta).toBeLessThanOrEqual(1);
+
   await moreTrigger.hover();
   await expect.poll(() => moreTrigger.evaluate((button) => getComputedStyle(button).cursor)).toContain("%23c25668");
   await expect.poll(() => moreTrigger.evaluate((button) => getComputedStyle(button).color)).toBe(headingColor);

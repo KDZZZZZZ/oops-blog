@@ -34,7 +34,8 @@
 }
 
 .home-page .desktop-nav a,
-.home-page .desktop-nav .nav-disabled {
+.home-page .desktop-nav .nav-disabled,
+.home-page .desktop-nav .nav-trigger {
   min-height: 30px;
   padding: 5px 10px;
   display: inline-flex;
