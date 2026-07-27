@@ -75,6 +75,7 @@ body:not(.home-page) .desktop-nav .nav-trigger {
   padding: 5px 10px;
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   border-radius: 4px;
   font-size: 12px;
 }
@@ -89,10 +90,10 @@ body:not(.home-page) .desktop-nav a[aria-current="page"] {
 
 body:not(.home-page) .header-actions {
   gap: 4px;
-  padding: 3px;
-  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  padding: 0;
+  border: 0;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  background: transparent;
 }
 
 body:not(.home-page) .header-actions .icon-button {
@@ -103,6 +104,11 @@ body:not(.home-page) .header-actions .icon-button {
 body:not(.home-page) .header-actions .icon-button svg {
   width: 15px;
   height: 15px;
+}
+
+body:not(.home-page) .header-actions .icon-button .sketch-icon--ring {
+  width: 28px;
+  height: 28px;
 }
 
 /* Offset content below fixed header on inner pages */
@@ -150,6 +156,7 @@ body:not(.home-page) #content {
 .desktop-nav .nav-disabled,
 .desktop-nav .nav-trigger {
   position: relative;
+  gap: 6px;
   color: var(--muted);
   font-size: 13px;
   font-weight: 400;
@@ -173,6 +180,89 @@ body:not(.home-page) #content {
 }
 
 .desktop-nav a[aria-current="page"] { color: var(--heading); }
+
+.nav-primary-icon {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+  color: var(--quiet);
+  transition: color .2s, transform .2s var(--ease);
+}
+
+.desktop-nav a:hover .nav-primary-icon {
+  color: var(--heading);
+  transform: translateY(-1px);
+}
+
+.desktop-nav .nav-trigger:hover .nav-primary-icon,
+.desktop-nav .nav-trigger:focus-visible .nav-primary-icon {
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.desktop-nav a[aria-current="page"] .nav-primary-icon {
+  color: var(--accent);
+  animation: nav-icon-selected .46s cubic-bezier(.22, .86, .28, 1.18) .04s backwards;
+}
+
+.nav-label {
+  position: relative;
+}
+
+.nav-label::after {
+  content: "";
+  position: absolute;
+  right: 7%;
+  bottom: -4px;
+  left: 5%;
+  height: 3px;
+  background: var(--accent);
+  clip-path: polygon(0 44%, 24% 24%, 53% 51%, 78% 31%, 100% 45%, 100% 72%, 69% 64%, 32% 77%, 0 64%);
+  opacity: 0;
+  transform: scaleX(.72) rotate(-1.5deg);
+  transform-origin: left center;
+  transition: opacity .2s, transform .24s var(--ease);
+}
+
+.desktop-nav a[aria-current="page"] .nav-label::after {
+  opacity: .9;
+  transform: scaleX(1) rotate(-1.5deg);
+  animation: nav-ink-selected .44s var(--ease) .1s backwards;
+}
+
+@keyframes nav-icon-selected {
+  0% {
+    opacity: .28;
+    transform: translateY(3px) rotate(-7deg) scale(.76);
+  }
+
+  62% {
+    opacity: 1;
+    transform: translateY(-1px) rotate(2deg) scale(1.08);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes nav-ink-selected {
+  0% {
+    opacity: 0;
+    transform: scaleX(.04) rotate(-3deg);
+  }
+
+  72% {
+    opacity: 1;
+    transform: scaleX(1.06) rotate(-1deg);
+  }
+
+  100% {
+    opacity: .9;
+    transform: scaleX(1) rotate(-1.5deg);
+  }
+}
 
 .desktop-nav .nav-disabled {
   color: var(--quiet);
@@ -198,7 +288,7 @@ body:not(.home-page) #content {
 .nav-trigger:hover,
 .nav-trigger:focus-visible {
   background: var(--surface);
-  color: var(--heading);
+  color: var(--accent);
 }
 
 .nav-preview {
@@ -499,10 +589,93 @@ body:not(.home-page) #content {
   background: var(--subtle);
 }
 
+#theme-button:hover,
+#theme-button:focus-visible {
+  color: var(--accent);
+}
+
 .icon-button svg {
   width: 18px;
   height: 18px;
   stroke-width: 1.7;
+}
+
+#theme-button .sketch-icon--ring {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#theme-button.theme-icon-switching .sketch-icon--ring {
+  animation: theme-icon-switch .52s cubic-bezier(.22, .82, .25, 1.12);
+}
+
+#theme-button.theme-icon-switching .sketch-icon-ring {
+  animation: theme-ring-redraw .48s var(--ease);
+}
+
+@keyframes theme-icon-switch {
+  0% {
+    opacity: .26;
+    transform: rotate(-22deg) scale(.72);
+  }
+
+  58% {
+    opacity: 1;
+    transform: rotate(7deg) scale(1.1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes theme-ring-redraw {
+  0% {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  74% {
+    stroke-dasharray: 1;
+    stroke-dashoffset: -.06;
+  }
+
+  100% {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+.sketch-icon {
+  overflow: visible;
+  stroke-width: 1.7;
+}
+
+.sketch-icon-ring {
+  stroke: color-mix(in srgb, currentColor 64%, var(--border));
+  stroke-width: 1.15;
+}
+
+.sketch-icon-dot {
+  fill: currentColor;
+  stroke: none;
+}
+
+.sketch-icon-accent {
+  fill: var(--accent);
+  stroke: none;
+}
+
+.sketch-icon-accent-stroke {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.45;
+}
+
+.sketch-icon-soft-stroke {
+  opacity: .48;
+  stroke-width: 1.35;
 }
 
 .menu-button { display: none; }

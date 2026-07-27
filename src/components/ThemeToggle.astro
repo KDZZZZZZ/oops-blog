@@ -1,5 +1,5 @@
 ---
-import { Moon } from "@lucide/astro";
+import SketchIcon from "./SketchIcon.astro";
 
 interface Props {
   label?: string;
@@ -9,5 +9,5 @@ const { label = "切换主题" } = Astro.props;
 ---
 
 <button class="icon-button" id="theme-button" type="button" aria-label={label} title={label}>
-  <Moon id="theme-icon" aria-hidden="true" />
+  <SketchIcon id="theme-icon" name="moon" ring />
 </button>

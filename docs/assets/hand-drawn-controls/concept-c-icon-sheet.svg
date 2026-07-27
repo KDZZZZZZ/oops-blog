@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">方案 C：连续墨线，九个手绘控件图标</title>
+  <desc id="desc">首页、文稿、碎念、更多、GitHub、邮件、QQ、月亮和太阳图标的连续墨线稿。</desc>
+  <rect width="1200" height="650" fill="#f3f1ec"/>
+  <style>
+    .title { fill:#262320; font: 34px Georgia, "Noto Serif SC", serif; }
+    .sub { fill:#777168; font: 15px Inter, "PingFang SC", sans-serif; }
+    .label { fill:#302d29; font: 20px "Noto Serif SC", Georgia, serif; }
+    .label-active { fill:#c25668; font: 20px "Noto Serif SC", Georgia, serif; }
+    .note { fill:#827b72; font: 12px Inter, "PingFang SC", sans-serif; letter-spacing:.08em; }
+    .cell { fill:#fbfaf7; }
+    .ink { fill:none; stroke:#302d29; stroke-width:2.8; stroke-linecap:round; stroke-linejoin:round; }
+    .fine { fill:none; stroke:#746e66; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; opacity:.62; }
+    .accent { fill:none; stroke:#c25668; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+    .accent-fill { fill:#c25668; }
+  </style>
+
+  <text x="72" y="62" class="title">C · 连续墨线</text>
+  <text x="72" y="92" class="sub">图标的尾笔继续走成下划线或不完整光环；界面仍是文字主导，线稿只留下手写痕迹。</text>
+
+  <!-- Row 1 -->
+  <g transform="translate(72 122)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(28 28)">
+      <path class="accent" d="M9 39L31 18L55 39L54 60L39 60L39 47L27 47L27 60L17 60L17 38C22 42 31 45 36 40C42 35 49 36 54 40C60 46 64 66 69 76C75 81 88 79 101 78"/>
+    </g>
+    <text x="139" y="62" class="label-active">首页</text>
+    <path class="accent" d="M137 77C163 74 196 79 225 76"/>
+    <text x="139" y="100" class="note">HOME · 尾笔变下划线</text>
+  </g>
+
+  <g transform="translate(435 122)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(28 27)">
+      <path class="ink" d="M18 14L55 17L57 63L20 61L18 14C29 11 45 12 55 17L47 26L56 27M28 35C36 34 44 36 50 35M28 45C38 43 46 46 52 44M28 55C36 54 43 56 49 55C56 55 61 61 64 69C68 79 83 79 101 77"/>
+    </g>
+    <text x="139" y="62" class="label">文稿</text>
+    <path class="fine" d="M137 77C163 74 196 79 225 76"/>
+    <text x="139" y="100" class="note">POSTS · 卷页尾线</text>
+  </g>
+
+  <g transform="translate(798 122)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(28 27)">
+      <path class="ink" d="M17 43C15 25 29 14 45 15C61 16 71 28 67 41C64 52 54 58 44 56C36 55 33 49 37 44C41 39 49 41 50 46C51 53 43 61 36 66C29 72 37 78 49 77L101 77"/>
+      <circle cx="65" cy="27" r="2.5" class="accent-fill"/>
+    </g>
+    <text x="139" y="62" class="label">碎念</text>
+    <path class="fine" d="M137 77C163 74 196 79 225 76"/>
+    <text x="139" y="100" class="note">ESSAYS · 思绪不断线</text>
+  </g>
+
+  <!-- Row 2 -->
+  <g transform="translate(72 286)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(28 28)">
+      <path class="ink" d="M13 43C25 25 53 23 68 42C78 54 75 67 87 74C92 77 97 78 103 77"/>
+      <circle cx="25" cy="43" r="4.2" fill="#302d29"/>
+      <circle cx="45" cy="39" r="5.5" fill="#302d29"/>
+      <circle cx="66" cy="44" r="3.4" fill="#302d29"/>
+    </g>
+    <text x="139" y="62" class="label">更多</text>
+    <path class="fine" d="M137 77C163 74 196 79 225 76"/>
+    <text x="139" y="100" class="note">MORE · 墨点弧线</text>
+  </g>
+
+  <g transform="translate(435 286)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(27 25)">
+      <path class="fine" d="M5 50C1 25 18 8 42 7C62 7 75 20 78 38"/>
+      <path class="ink" d="M24 62L24 31M24 41L47 41M47 41L47 25M47 41L66 57"/>
+      <circle class="ink" cx="24" cy="25" r="5.6"/>
+      <circle class="ink" cx="47" cy="20" r="5.6"/>
+      <circle class="ink" cx="68" cy="61" r="5.6"/>
+      <path class="fine" d="M77 45C80 63 69 76 51 81C34 86 15 78 9 64"/>
+    </g>
+    <text x="139" y="62" class="label">GitHub</text>
+    <text x="139" y="92" class="note">OPEN SOURCE · 不完整光环</text>
+  </g>
+
+  <g transform="translate(798 286)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(27 25)">
+      <path class="fine" d="M6 51C1 27 18 8 41 7C60 7 73 18 78 34"/>
+      <path class="ink" d="M19 29L67 30L65 62L21 61L19 29L43 48L66 31M21 60L35 47M65 61L51 47"/>
+      <circle cx="43" cy="48" r="3.4" class="accent-fill"/>
+      <path class="fine" d="M79 45C82 63 69 77 51 81C34 85 16 78 9 65"/>
+      <path class="accent" d="M18 78C33 75 52 79 68 76"/>
+    </g>
+    <text x="139" y="62" class="label">邮件</text>
+    <text x="139" y="92" class="note">MAIL · 蜡封与悬停线</text>
+  </g>
+
+  <!-- Row 3 -->
+  <g transform="translate(72 450)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(27 25)">
+      <path class="fine" d="M7 54C1 30 16 9 40 7C59 6 74 18 78 36"/>
+      <path class="ink" d="M26 53C20 43 21 28 30 20C37 14 50 14 58 21C67 29 68 44 62 54M28 48C31 63 55 64 60 48M25 52L18 60M63 52L70 60"/>
+      <circle cx="36" cy="35" r="2.1" fill="#302d29"/>
+      <circle cx="52" cy="35" r="2.1" fill="#302d29"/>
+      <path class="accent" d="M40 43Q44 47 48 43"/>
+      <path class="fine" d="M79 47C80 66 66 78 49 81C31 84 16 77 10 66"/>
+    </g>
+    <text x="139" y="62" class="label">QQ</text>
+    <text x="139" y="92" class="note">CHAT · 单线企鹅</text>
+  </g>
+
+  <g transform="translate(435 450)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(27 25)">
+      <path class="ink" d="M57 59C42 66 24 55 24 39C24 26 33 17 44 15C39 24 40 35 47 42C53 48 62 50 69 46C67 52 63 56 57 59Z"/>
+      <path class="ink" d="M68 20C79 26 83 40 78 51C74 60 79 68 91 69"/>
+      <circle cx="70" cy="17" r="2.8" fill="#302d29"/>
+      <path class="fine" d="M13 66C26 80 52 84 72 72"/>
+    </g>
+    <text x="139" y="62" class="label">切到深色</text>
+    <text x="139" y="92" class="note">THEME · 逸出轨道</text>
+  </g>
+
+  <g transform="translate(798 450)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(27 25)">
+      <path class="ink" d="M43 28C53 27 60 34 59 43C59 52 52 59 43 59C34 59 27 52 28 42C28 34 35 28 43 28ZM43 17L43 10M43 76L43 69M18 43L11 43M75 43L68 43M25 25L20 20M66 65L62 61M24 63L19 68M64 25L69 20"/>
+      <path class="ink" d="M69 20C80 28 82 45 75 56C70 65 76 72 91 71"/>
+      <path class="accent" d="M34 44C39 38 48 37 53 42"/>
+    </g>
+    <text x="139" y="62" class="label">切到浅色</text>
+    <text x="139" y="92" class="note">THEME · 连续日光线</text>
+  </g>
+
+  <path d="M72 616C350 614 853 620 1128 615" fill="none" stroke="#c25668" stroke-width="1.2" opacity=".48"/>
+  <text x="72" y="636" class="note">文字主导 · 图标尾笔延伸 · 推荐用于顶部导航和明暗按钮</text>
+</svg>

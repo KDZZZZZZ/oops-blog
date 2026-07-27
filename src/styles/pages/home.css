@@ -39,6 +39,7 @@
   padding: 5px 10px;
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   border-radius: 4px;
   font-size: 12px;
 }
@@ -52,10 +53,10 @@
 
 .home-page .header-actions {
   gap: 4px;
-  padding: 3px;
-  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  padding: 0;
+  border: 0;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  background: transparent;
 }
 
 .home-page .header-actions .icon-button {
@@ -66,6 +67,11 @@
 .home-page .header-actions .icon-button svg {
   width: 15px;
   height: 15px;
+}
+
+.home-page .header-actions .icon-button .sketch-icon--ring {
+  width: 28px;
+  height: 28px;
 }
 
 .home-page .site-header.scrolled .desktop-nav,
@@ -195,28 +201,32 @@
   height: 36px;
   display: grid;
   place-items: center;
-  border: 1px solid var(--border);
+  border: 0;
   border-radius: 50%;
   color: var(--quiet);
-  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  background: transparent;
 }
 
 .home-socials a {
-  transition: transform .24s var(--ease), color .24s, border-color .24s;
+  transition: transform .24s var(--ease), color .24s, background-color .24s;
 }
 
 .home-socials a:hover {
   transform: translateY(-3px);
   color: var(--heading);
-  border-color: var(--muted);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
 }
 
 .home-socials span { opacity: .48; }
 
-.home-socials svg {
-  width: 15px;
-  height: 15px;
-  stroke-width: 1.6;
+.home-socials .sketch-icon--ring {
+  width: 36px;
+  height: 36px;
+  stroke-width: 1.7;
+}
+
+.home-socials a:hover .sketch-icon-ring {
+  stroke: color-mix(in srgb, currentColor 78%, var(--border));
 }
 
 .home-scroll-cue {
@@ -686,7 +696,12 @@
 @media (max-width: 900px) {
   .home-page .header-inner { width: min(100% - 36px, 760px); }
   .site-header.scrolled .header-inner { width: min(520px, calc(100% - 28px)); }
-  .home-page .header-actions { border-radius: 8px; }
+  .home-page .header-actions {
+    padding: 3px;
+    border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--surface) 78%, transparent);
+  }
   .home-page .header-actions .icon-button {
     width: 36px;
     height: 36px;

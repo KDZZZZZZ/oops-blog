@@ -28,6 +28,58 @@ for (const width of widths) {
   });
 }
 
+test("option A hand-drawn controls render and preserve the theme state", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+
+  await expect(page.locator(".desktop-nav .nav-primary-icon")).toHaveCount(4);
+  await expect(page.locator(".home-socials .sketch-icon--ring")).toHaveCount(3);
+  await expect(page.locator("#theme-icon .sketch-icon-ring")).toHaveCount(1);
+  await expect(page.locator("#theme-icon .sketch-icon-accent")).toHaveCount(1);
+
+  const selectedMotion = await page.locator('.desktop-nav a[aria-current="page"]').evaluate((link) => {
+    const icon = link.querySelector(".nav-primary-icon");
+    const label = link.querySelector(".nav-label");
+    return {
+      iconAnimation: icon ? getComputedStyle(icon).animationName : "",
+      inkAnimation: label ? getComputedStyle(label, "::after").animationName : "",
+    };
+  });
+  expect(selectedMotion.iconAnimation).toContain("nav-icon-selected");
+  expect(selectedMotion.inkAnimation).toContain("nav-ink-selected");
+
+  const accentColor = await page.evaluate(() => {
+    const probe = document.createElement("span");
+    probe.style.color = "var(--accent)";
+    document.body.append(probe);
+    const color = getComputedStyle(probe).color;
+    probe.remove();
+    return color;
+  });
+
+  const moreTrigger = page.locator(".desktop-nav .nav-trigger");
+  await moreTrigger.hover();
+  await expect.poll(() => moreTrigger.evaluate((button) => getComputedStyle(button).color)).toBe(accentColor);
+  await expect.poll(() => moreTrigger.locator(".nav-primary-icon").evaluate((icon) => getComputedStyle(icon).color)).toBe(accentColor);
+
+  const themeButton = page.locator("#theme-button");
+  await themeButton.hover();
+  await expect.poll(() => themeButton.evaluate((button) => getComputedStyle(button).color)).toBe(accentColor);
+
+  await themeButton.click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await expect(themeButton).toHaveAttribute("aria-label", "切换到浅色主题");
+  await expect(themeButton).toHaveClass(/theme-icon-switching/);
+  await expect(page.locator("#theme-icon .sketch-icon-ring")).toHaveCount(1);
+  await expect(page.locator("#theme-icon .sketch-icon-accent-stroke")).toHaveCount(1);
+  await expect(themeButton).not.toHaveClass(/theme-icon-switching/, { timeout: 1_500 });
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.reload();
+  await page.locator("#theme-button").click();
+  await expect(page.locator("#theme-button")).not.toHaveClass(/theme-icon-switching/);
+});
+
 test("theme, search, mobile navigation and archive tabs work", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");

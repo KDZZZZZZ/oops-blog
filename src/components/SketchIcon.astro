@@ -1,0 +1,112 @@
+---
+export type SketchIconName =
+  | "home"
+  | "posts"
+  | "essays"
+  | "more"
+  | "github"
+  | "mail"
+  | "qq"
+  | "sun"
+  | "moon";
+
+interface Props {
+  name: SketchIconName;
+  ring?: boolean;
+  id?: string;
+  class?: string;
+}
+
+const {
+  name,
+  ring = false,
+  id,
+  class: className,
+} = Astro.props;
+---
+
+<svg
+  id={id}
+  class:list={["sketch-icon", ring && "sketch-icon--ring", className]}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+  {ring && (
+    <path
+      class="sketch-icon-ring"
+      pathLength="1"
+      d="M12 1.7C18.6 1.5 22.6 6.2 22.3 12.2C22 18.6 18 22.5 11.8 22.4C5.5 22.4 1.5 18.2 1.7 11.9C1.9 5.8 6 1.9 12 1.7Z"
+    />
+  )}
+
+  <g class="sketch-icon-glyph" transform={ring ? "translate(4 4) scale(.667)" : undefined}>
+    {name === "home" && (
+      <path d="M3.5 11.2L11.8 3.8L20.7 11.3M6 9.7L6.3 20L18.2 19.8L18 9.7M10 20V14.5L14.5 14.6V19.8" />
+    )}
+
+    {name === "posts" && (
+      <path d="M5 2.8L17.8 3.8L19 21L5.7 20.5ZM14.6 3.7L14.9 8L18.3 8.2M8.5 11.2C11 10.9 13.2 11.6 15.8 11.2M8.5 14.8C11.6 14.4 13.6 15.2 16 14.7M8.5 18C10.8 17.7 12.7 18.2 14.7 17.9" />
+    )}
+
+    {name === "essays" && (
+      <>
+        <path d="M4.2 12C3.6 6.6 7.8 3.3 12.5 3.7C17.2 4 20 7.6 18.8 11.5C18 14.8 14.8 16.8 11.8 16.2C9.5 15.8 8.7 14.1 9.8 12.8C11 11.3 13.2 12 13.3 13.4C13.4 16 10.5 18.2 7.5 20.2" />
+        <circle class="sketch-icon-dot" cx="18.5" cy="6.8" r="1.1" />
+      </>
+    )}
+
+    {name === "more" && (
+      <>
+        <path class="sketch-icon-soft-stroke" d="M3.2 13C7.2 7.6 15.8 7.2 20.9 13.2" />
+        <circle class="sketch-icon-dot" cx="7" cy="13" r="1.6" />
+        <circle class="sketch-icon-dot" cx="12.2" cy="12" r="2" />
+        <circle class="sketch-icon-dot" cx="18" cy="13.4" r="1.3" />
+        <path d="M5.5 18.1C9.3 19.2 15.5 19.2 19 17.9" />
+      </>
+    )}
+
+    {name === "github" && (
+      <>
+        <path d="M6.2 18V7.5M6.2 11L13 11M13 11V5.5M13 11L18.7 16.2" />
+        <circle cx="6.2" cy="5.4" r="2.2" />
+        <circle cx="13" cy="3.5" r="2.2" />
+        <circle cx="19.7" cy="17.2" r="2.2" />
+      </>
+    )}
+
+    {name === "mail" && (
+      <>
+        <path d="M3.5 6.1L20.7 6.4L20.2 18.3L4 18ZM4 6.8L12 13.1L20.4 6.8M4 18L9 12.7M20.2 18L15.1 12.8" />
+        <circle class="sketch-icon-accent" cx="12" cy="13" r="1.45" />
+      </>
+    )}
+
+    {name === "qq" && (
+      <>
+        <path d="M7.5 15.8C5.7 12.7 6.1 7.4 8.7 5C10.9 3 14.8 3.1 17 5.2C19.6 7.8 19.8 12.6 17.8 15.9M8.2 14.2C9 19.3 16.3 19.5 17.2 14.1M7.7 15.5L4.8 18.3M17.8 15.5L20.4 18.2M10.2 20L9.2 22M15.2 20L16.2 22" />
+        <circle class="sketch-icon-dot" cx="10.5" cy="9.5" r="1" />
+        <circle class="sketch-icon-dot" cx="15.3" cy="9.5" r="1" />
+        <path class="sketch-icon-accent-stroke" d="M11.5 12.2Q12.9 13.6 14.3 12.2" />
+      </>
+    )}
+
+    {name === "moon" && (
+      <>
+        <path d="M16.9 17.5C11.9 20.1 6.2 16.7 6.2 11.5C6.2 7.5 9 4.6 12.6 4C10.8 7 11.3 10.3 13.5 12.5C15.5 14.5 18.2 15.1 20.5 14.1C19.8 15.7 18.6 16.8 16.9 17.5Z" />
+        <circle class="sketch-icon-accent" cx="19.7" cy="5" r="1.15" />
+      </>
+    )}
+
+    {name === "sun" && (
+      <>
+        <path d="M12 7.7C15.2 7.5 17.2 9.8 17 12.5C16.8 15.5 14.6 17.4 11.9 17.3C8.9 17.3 6.8 15.1 7.1 12.2C7.2 9.6 9.4 7.8 12 7.7ZM12 4V1.7M12 22.4V20M3.7 12.3H1.4M22.5 12.3H20M6.1 6.2L4.3 4.4M19.6 19.6L17.8 17.8M6 18L4.2 19.8M17.9 6L19.7 4.2" />
+        <path class="sketch-icon-accent-stroke" d="M9.5 12.6C10.5 11.2 13 10.7 14.6 11.8" />
+      </>
+    )}
+  </g>
+</svg>

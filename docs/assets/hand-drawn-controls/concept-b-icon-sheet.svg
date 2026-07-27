@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">方案 B：手账印章，九个手绘控件图标</title>
+  <desc id="desc">首页、文稿、碎念、更多、GitHub、邮件、QQ、月亮和太阳图标的手账印章稿。</desc>
+  <defs>
+    <pattern id="roseHatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(12)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="#c25668" stroke-width="1" opacity=".22"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="650" fill="#f3f1ec"/>
+  <style>
+    .title { fill:#262320; font: 34px Georgia, "Noto Serif SC", serif; }
+    .sub { fill:#777168; font: 15px Inter, "PingFang SC", sans-serif; }
+    .label { fill:#302d29; font: 19px "Noto Serif SC", Georgia, serif; }
+    .note { fill:#827b72; font: 12px Inter, "PingFang SC", sans-serif; letter-spacing:.08em; }
+    .cell { fill:#fbfaf7; }
+    .stamp { fill:#f7f4ee; stroke:#302d29; stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; }
+    .stamp-soft { fill:none; stroke:#817a71; stroke-width:1.2; stroke-linecap:round; stroke-linejoin:round; opacity:.45; }
+    .ink { fill:none; stroke:#302d29; stroke-width:2.8; stroke-linecap:round; stroke-linejoin:round; }
+    .fine { fill:none; stroke:#302d29; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+    .accent { fill:none; stroke:#c25668; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+    .accent-fill { fill:#c25668; }
+  </style>
+
+  <text x="72" y="62" class="title">B · 手账印章</text>
+  <text x="72" y="92" class="sub">每个入口是一枚不完全规整的小章；图形更醒目，适合想让顶部栏更有性格的版本。</text>
+
+  <!-- Row 1 -->
+  <g transform="translate(72 122)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(24 20)">
+      <path d="M6 8Q34 3 76 7L80 76Q43 82 8 77Z" fill="url(#roseHatch)" stroke="#302d29" stroke-width="2.8" stroke-linejoin="round"/>
+      <path class="stamp-soft" d="M10 4Q44 7 82 5L78 80Q41 76 4 81Z"/>
+      <path class="ink" d="M21 44L43 24L67 44M27 40L28 66L61 65L61 40M38 65L38 52L50 52L50 65"/>
+      <path class="accent" d="M18 73C33 70 58 75 69 72"/>
+    </g>
+    <text x="136" y="61" class="label">首页</text>
+    <text x="136" y="87" class="note">HOME · 当前印章</text>
+  </g>
+
+  <g transform="translate(435 122)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(24 20)">
+      <path class="stamp" d="M7 7Q40 3 77 8L80 76Q44 81 8 77Z"/>
+      <path class="stamp-soft" d="M11 4Q46 7 82 5L77 81Q39 77 4 80Z"/>
+      <path class="ink" d="M27 23L57 25L59 62L29 61Z"/>
+      <path class="ink" d="M20 31L26 31M20 39L26 39M20 47L26 47M20 55L26 55"/>
+      <path class="fine" d="M36 35C42 34 48 36 53 35M36 44C43 43 49 45 54 44M36 53C42 52 47 54 51 53"/>
+    </g>
+    <text x="136" y="61" class="label">文稿</text>
+    <text x="136" y="87" class="note">POSTS · 双页印章</text>
+  </g>
+
+  <g transform="translate(798 122)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(24 20)">
+      <path class="stamp" d="M8 6Q43 4 77 9L79 76Q43 80 7 77Z"/>
+      <path class="stamp-soft" d="M5 10Q43 5 82 6L76 81Q41 77 5 80Z"/>
+      <path class="ink" d="M47 19C37 28 31 40 32 61M47 19C56 26 58 38 53 47C49 54 42 58 32 61M35 34C41 34 47 37 52 41M32 48C38 47 44 49 49 52"/>
+      <path class="accent" d="M29 64C35 61 40 61 45 64"/>
+    </g>
+    <text x="136" y="61" class="label">碎念</text>
+    <text x="136" y="87" class="note">ESSAYS · 羽毛笔记</text>
+  </g>
+
+  <!-- Row 2 -->
+  <g transform="translate(72 286)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(24 20)">
+      <path class="stamp" d="M7 8Q42 3 77 7L80 77Q44 81 8 76Z"/>
+      <path class="stamp-soft" d="M10 4Q42 8 82 5L77 81Q42 76 4 80Z"/>
+      <path class="ink" d="M22 27L64 28L63 61L23 62Z"/>
+      <path class="fine" d="M29 36L57 36M29 43L57 43"/>
+      <circle cx="32" cy="54" r="3.2" fill="#302d29"/>
+      <circle cx="43" cy="54" r="4.2" fill="#302d29"/>
+      <circle cx="56" cy="54" r="2.8" fill="#302d29"/>
+    </g>
+    <text x="136" y="61" class="label">更多</text>
+    <text x="136" y="87" class="note">MORE · 抽屉印章</text>
+  </g>
+
+  <g transform="translate(435 286)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(24 20)">
+      <path class="stamp" d="M8 7Q43 4 77 8L80 76Q42 81 7 77Z"/>
+      <path class="stamp-soft" d="M5 11Q44 4 81 6L76 81Q41 77 5 80Z"/>
+      <path class="ink" d="M27 59L27 31M27 41L46 41M46 41L46 26M46 41L63 55"/>
+      <circle class="ink" cx="27" cy="26" r="5.5"/>
+      <circle class="ink" cx="46" cy="21" r="5.5"/>
+      <circle class="ink" cx="65" cy="59" r="5.5"/>
+      <path class="accent" d="M19 69C34 66 53 69 70 66"/>
+    </g>
+    <text x="136" y="61" class="label">GitHub</text>
+    <text x="136" y="87" class="note">OPEN SOURCE · 节点章</text>
+  </g>
+
+  <g transform="translate(798 286)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(24 20)">
+      <path class="stamp" d="M7 7Q41 3 77 8L80 76Q44 81 8 77Z"/>
+      <path class="stamp-soft" d="M11 4Q46 7 82 5L77 81Q38 77 4 80Z"/>
+      <path class="ink" d="M20 29L67 30L65 62L21 61Z"/>
+      <path class="ink" d="M21 31L43 48L66 31"/>
+      <path class="fine" d="M21 60L35 47M65 61L51 47"/>
+      <circle cx="43" cy="48" r="3.5" class="accent-fill"/>
+    </g>
+    <text x="136" y="61" class="label">邮件</text>
+    <text x="136" y="87" class="note">MAIL · 信封章</text>
+  </g>
+
+  <!-- Row 3 -->
+  <g transform="translate(72 450)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(24 20)">
+      <path class="stamp" d="M8 7Q43 4 77 8L79 77Q42 80 7 76Z"/>
+      <path class="stamp-soft" d="M5 10Q42 4 82 6L76 81Q40 77 5 80Z"/>
+      <path class="ink" d="M27 51C21 43 22 28 30 21C37 15 49 15 57 21C65 29 67 43 61 52M29 48C31 62 55 64 59 48"/>
+      <circle cx="36" cy="35" r="2.2" fill="#302d29"/>
+      <circle cx="51" cy="35" r="2.2" fill="#302d29"/>
+      <path class="fine" d="M39 43Q43 46 47 43"/>
+      <circle cx="27" cy="48" r="3.4" fill="#c25668" opacity=".72"/>
+      <circle cx="60" cy="48" r="3.4" fill="#c25668" opacity=".72"/>
+    </g>
+    <text x="136" y="61" class="label">QQ</text>
+    <text x="136" y="87" class="note">CHAT · 企鹅小章</text>
+  </g>
+
+  <g transform="translate(435 450)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(24 20)">
+      <path class="stamp" d="M8 8Q43 3 77 7L80 76Q44 81 8 77Z"/>
+      <path class="stamp-soft" d="M5 11Q42 4 82 6L76 81Q40 77 5 80Z"/>
+      <path class="ink" d="M58 58C43 65 25 55 25 39C25 27 33 19 44 16C39 25 40 35 47 41C53 47 61 49 68 46C66 52 63 55 58 58Z"/>
+      <path class="accent" d="M60 23L65 18M62 18L66 22"/>
+    </g>
+    <text x="136" y="61" class="label">切到深色</text>
+    <text x="136" y="87" class="note">THEME · 月亮章</text>
+  </g>
+
+  <g transform="translate(798 450)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(24 20)">
+      <path class="stamp" d="M7 7Q42 4 77 8L80 76Q43 81 8 77Z"/>
+      <path class="stamp-soft" d="M11 4Q44 7 82 6L77 81Q40 76 4 80Z"/>
+      <path class="ink" d="M43 28C53 27 60 34 59 43C59 52 52 59 43 59C34 59 27 52 28 42C28 34 35 28 43 28Z"/>
+      <path class="fine" d="M43 17L43 11M43 76L43 69M18 43L12 43M75 43L68 43M25 25L20 20M66 65L62 61M24 63L19 68M64 25L69 20"/>
+      <path class="accent" d="M34 43C39 37 48 37 53 42"/>
+    </g>
+    <text x="136" y="61" class="label">切到浅色</text>
+    <text x="136" y="87" class="note">THEME · 太阳章</text>
+  </g>
+
+  <path d="M72 616C344 620 858 612 1128 617" fill="none" stroke="#302d29" stroke-width="1.2" opacity=".32"/>
+  <text x="72" y="636" class="note">独立小章 · 淡玫瑰排线只标记当前项 · 第一版不推荐整套使用</text>
+</svg>

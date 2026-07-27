@@ -1,5 +1,6 @@
 ---
 import { FlaskConical, Quote, Sprout, Users } from "@lucide/astro";
+import SketchIcon, { type SketchIconName } from "./SketchIcon.astro";
 import type { CategoryGroup, NavLink, NavKey, SocialLink } from "./types";
 
 interface HomePreview {
@@ -33,10 +34,15 @@ const primaryLinks = links.filter((item) => ["home", "posts", "essays", "more"].
 <nav class="desktop-nav" aria-label="主导航" data-od-id="path-1-0-1">
   {
     primaryLinks.map((link) => {
+      const iconName = String(link.key) as SketchIconName;
+
       if (link.key === "home" && homePreview) {
         return (
           <span class="nav-pod nav-pod-home">
-            <a href={link.href} aria-current={link.key === current ? "page" : undefined}>{link.label}</a>
+            <a href={link.href} aria-current={link.key === current ? "page" : undefined}>
+              <SketchIcon name={iconName} class="nav-primary-icon" />
+              <span class="nav-label">{link.label}</span>
+            </a>
             <div class="nav-preview nav-preview-home" aria-label="首页快捷入口">
               <section class="home-profile-card">
                 {homePreview.avatarSrc && <img src={homePreview.avatarSrc} alt={`${homePreview.siteName ?? "Oops"} 的头像`} />}
@@ -66,7 +72,10 @@ const primaryLinks = links.filter((item) => ["home", "posts", "essays", "more"].
       if (link.key === "posts" && postsPreview?.categories?.length) {
         return (
           <span class="nav-pod nav-pod-posts">
-            <a href={link.href} aria-current={link.key === current ? "page" : undefined}>{link.label}</a>
+            <a href={link.href} aria-current={link.key === current ? "page" : undefined}>
+              <SketchIcon name={iconName} class="nav-primary-icon" />
+              <span class="nav-label">{link.label}</span>
+            </a>
             <div class="nav-preview nav-preview-posts" aria-label="文稿预览">
               <section class="post-categories" role="tablist" aria-label="文稿门类" aria-orientation="vertical">
                 <span class="preview-label">门类</span>
@@ -115,10 +124,18 @@ const primaryLinks = links.filter((item) => ["home", "posts", "essays", "more"].
       if (link.key === "more") {
         const moreLinks = links.filter((item) => item.key && !["home", "posts", "essays", "more"].includes(String(item.key)) && item.href);
         return link.disabled || !moreLinks.length ? (
-          <span class="nav-pod"><span class="nav-disabled" aria-disabled="true" title={link.description}>{link.label}</span></span>
+          <span class="nav-pod">
+            <span class="nav-disabled" aria-disabled="true" title={link.description}>
+              <SketchIcon name={iconName} class="nav-primary-icon" />
+              <span class="nav-label">{link.label}</span>
+            </span>
+          </span>
         ) : (
           <span class="nav-pod nav-pod-more">
-            <button class="nav-trigger" type="button" aria-haspopup="menu">{link.label}</button>
+            <button class="nav-trigger" type="button" aria-haspopup="menu">
+              <SketchIcon name={iconName} class="nav-primary-icon" />
+              <span class="nav-label">{link.label}</span>
+            </button>
             <div class="nav-preview nav-preview-more" role="menu" aria-label="更多页面">
               {moreLinks.map((item, index) => {
                 const Icon = moreIcons[index % moreIcons.length];
@@ -137,9 +154,15 @@ const primaryLinks = links.filter((item) => ["home", "posts", "essays", "more"].
       return (
         <span class="nav-pod">
           {link.disabled || !link.href ? (
-            <span class="nav-disabled" aria-disabled="true" title={link.description}>{link.label}</span>
+            <span class="nav-disabled" aria-disabled="true" title={link.description}>
+              <SketchIcon name={iconName} class="nav-primary-icon" />
+              <span class="nav-label">{link.label}</span>
+            </span>
           ) : (
-            <a href={link.href} aria-current={link.key === current ? "page" : undefined}>{link.label}</a>
+            <a href={link.href} aria-current={link.key === current ? "page" : undefined}>
+              <SketchIcon name={iconName} class="nav-primary-icon" />
+              <span class="nav-label">{link.label}</span>
+            </a>
           )}
         </span>
       );

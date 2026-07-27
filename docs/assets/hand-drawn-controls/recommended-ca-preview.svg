@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">推荐组合 C＋A 的浅色与深色界面预览</title>
+  <desc id="desc">顶部导航和主题按钮使用连续墨线，GitHub、邮件和 QQ 联系按钮使用完整手绘圆环。</desc>
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24">
+      <path d="M3.5 11.2L11.8 3.8L20.7 11.3M6 9.7L6.3 20L18.2 19.8L18 9.7M10 20V14.5L14.5 14.6V19.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-posts" viewBox="0 0 24 24">
+      <path d="M5 2.8L17.8 3.8L19 21L5.7 20.5ZM14.6 3.7L14.9 8L18.3 8.2M8.5 11.2C11 10.9 13.2 11.6 15.8 11.2M8.5 14.8C11.6 14.4 13.6 15.2 16 14.7M8.5 18C10.8 17.7 12.7 18.2 14.7 17.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-essays" viewBox="0 0 24 24">
+      <path d="M4.2 12C3.6 6.6 7.8 3.3 12.5 3.7C17.2 4 20 7.6 18.8 11.5C18 14.8 14.8 16.8 11.8 16.2C9.5 15.8 8.7 14.1 9.8 12.8C11 11.3 13.2 12 13.3 13.4C13.4 16 10.5 18.2 7.5 20.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="18.5" cy="6.8" r="1.1" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-more" viewBox="0 0 24 24">
+      <path d="M3.2 13C7.2 7.6 15.8 7.2 20.9 13.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      <circle cx="7" cy="13" r="1.6" fill="currentColor"/>
+      <circle cx="12.2" cy="12" r="2" fill="currentColor"/>
+      <circle cx="18" cy="13.4" r="1.3" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-github" viewBox="0 0 24 24">
+      <path d="M6.2 18V7.5M6.2 11L13 11M13 11V5.5M13 11L18.7 16.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="6.2" cy="5.4" r="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <circle cx="13" cy="3.5" r="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <circle cx="19.7" cy="17.2" r="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/>
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <path d="M3.5 6.1L20.7 6.4L20.2 18.3L4 18ZM4 6.8L12 13.1L20.4 6.8M4 18L9 12.7M20.2 18L15.1 12.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="12" cy="13" r="1.45" fill="#c25668"/>
+    </symbol>
+    <symbol id="i-qq" viewBox="0 0 24 24">
+      <path d="M7.5 15.8C5.7 12.7 6.1 7.4 8.7 5C10.9 3 14.8 3.1 17 5.2C19.6 7.8 19.8 12.6 17.8 15.9M8.2 14.2C9 19.3 16.3 19.5 17.2 14.1M7.7 15.5L4.8 18.3M17.8 15.5L20.4 18.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="10.5" cy="9.5" r="1" fill="currentColor"/>
+      <circle cx="15.3" cy="9.5" r="1" fill="currentColor"/>
+      <path d="M11.5 12.2Q12.9 13.6 14.3 12.2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24">
+      <path d="M16.9 17.5C11.9 20.1 6.2 16.7 6.2 11.5C6.2 7.5 9 4.6 12.6 4C10.8 7 11.3 10.3 13.5 12.5C15.5 14.5 18.2 15.1 20.5 14.1C19.8 15.7 18.6 16.8 16.9 17.5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M19.8 5.7C22.8 8 23 12 21 14.7C19.5 16.8 20.5 19.2 23 19.6" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="20.2" cy="4.7" r="1" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24">
+      <path d="M12 7.7C15.2 7.5 17.2 9.8 17 12.5C16.8 15.5 14.6 17.4 11.9 17.3C8.9 17.3 6.8 15.1 7.1 12.2C7.2 9.6 9.4 7.8 12 7.7ZM12 4V1.7M12 22.4V20M3.7 12.3H1.4M22.5 12.3H20M6.1 6.2L4.3 4.4M19.6 19.6L17.8 17.8M6 18L4.2 19.8M17.9 6L19.7 4.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+  <style>
+    .title { fill:#262320; font: 34px Georgia, "Noto Serif SC", serif; }
+    .sub { fill:#777168; font: 15px Inter, "PingFang SC", sans-serif; }
+    .panel-label { font: 12px Inter, "PingFang SC", sans-serif; letter-spacing:.12em; }
+    .nav { font: 16px "PingFang SC", "Microsoft YaHei", sans-serif; }
+    .caption { font: 13px Inter, "PingFang SC", sans-serif; letter-spacing:.06em; }
+    .light-ink { color:#302d29; }
+    .dark-ink { color:#ece7df; }
+  </style>
+
+  <rect width="1200" height="620" fill="#f3f1ec"/>
+  <text x="72" y="58" class="title">推荐稿 · C＋A</text>
+  <text x="72" y="88" class="sub">顶部使用连续墨线，联系入口使用完整手绘圆环。下面同时展示浅色和深色状态。</text>
+
+  <!-- Light panel -->
+  <g transform="translate(72 116)">
+    <path d="M12 2Q524 -3 1044 3L1053 196Q537 203 4 196Z" fill="#fbfaf7" stroke="#d8d2c8" stroke-width="1.2"/>
+    <text x="28" y="32" class="panel-label" fill="#817a71">LIGHT THEME</text>
+    <g class="light-ink">
+      <path d="M33 72C33 56 45 46 60 46C77 46 88 58 87 73C86 89 76 99 60 99C44 99 33 88 33 72Z" fill="#f3f1ec" stroke="currentColor" stroke-width="1.3"/>
+      <text x="106" y="79" class="caption" fill="#6f6961">Oops</text>
+
+      <g transform="translate(318 43)">
+        <path d="M3 5Q205 -2 415 4L418 56Q209 61 1 56Z" fill="#f7f5f0" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        <g transform="translate(18 13)" style="color:#c25668">
+          <use href="#i-home" width="24" height="24"/>
+          <text x="31" y="18" class="nav" fill="#c25668">首页</text>
+          <path d="M29 27C48 24 68 29 84 26" fill="none" stroke="#c25668" stroke-width="1.8" stroke-linecap="round"/>
+        </g>
+        <g transform="translate(116 13)">
+          <use href="#i-posts" width="24" height="24"/>
+          <text x="31" y="18" class="nav" fill="#302d29">文稿</text>
+        </g>
+        <g transform="translate(215 13)">
+          <use href="#i-essays" width="24" height="24"/>
+          <text x="31" y="18" class="nav" fill="#302d29">碎念</text>
+        </g>
+        <g transform="translate(314 13)">
+          <use href="#i-more" width="24" height="24"/>
+          <text x="31" y="18" class="nav" fill="#302d29">更多</text>
+        </g>
+      </g>
+
+      <g transform="translate(936 42)">
+        <path d="M5 28C5 12 16 2 31 3C47 3 57 14 56 29C55 45 45 55 30 55C14 55 4 44 5 28Z" fill="#f7f5f0" stroke="currentColor" stroke-width="1.5"/>
+        <use href="#i-moon" x="17" y="15" width="28" height="28"/>
+      </g>
+
+      <text x="320" y="150" class="caption" fill="#817a71">联系按钮</text>
+      <g transform="translate(440 118)">
+        <path d="M3 31C3 14 15 3 31 3C47 3 58 15 57 31C56 47 46 58 30 58C14 58 3 47 3 31Z" fill="#f7f5f0" stroke="currentColor" stroke-width="1.4"/>
+        <use href="#i-github" x="18" y="18" width="25" height="25"/>
+      </g>
+      <g transform="translate(515 118)">
+        <path d="M4 30C4 14 15 3 31 3C47 3 58 15 57 30C56 47 45 58 30 58C14 58 3 47 4 30Z" fill="#f7f5f0" stroke="currentColor" stroke-width="1.4"/>
+        <use href="#i-mail" x="18" y="18" width="25" height="25"/>
+      </g>
+      <g transform="translate(590 118)">
+        <path d="M3 31C3 14 15 3 31 3C47 3 58 15 57 31C56 47 46 58 30 58C14 58 3 47 3 31Z" fill="#f7f5f0" stroke="currentColor" stroke-width="1.4"/>
+        <use href="#i-qq" x="18" y="18" width="25" height="25"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Dark panel -->
+  <g transform="translate(72 350)">
+    <path d="M9 3Q532 -3 1046 4L1052 196Q529 202 4 196Z" fill="#1d1b18" stroke="#393530" stroke-width="1.2"/>
+    <text x="28" y="32" class="panel-label" fill="#8d867d">DARK THEME</text>
+    <g class="dark-ink">
+      <path d="M33 72C33 56 45 46 60 46C77 46 88 58 87 73C86 89 76 99 60 99C44 99 33 88 33 72Z" fill="#26231f" stroke="currentColor" stroke-width="1.3"/>
+      <text x="106" y="79" class="caption" fill="#aaa39a">Oops</text>
+
+      <g transform="translate(318 43)">
+        <path d="M3 5Q205 -2 415 4L418 56Q209 61 1 56Z" fill="#26231f" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        <g transform="translate(18 13)" style="color:#d67888">
+          <use href="#i-home" width="24" height="24"/>
+          <text x="31" y="18" class="nav" fill="#d67888">首页</text>
+          <path d="M29 27C48 24 68 29 84 26" fill="none" stroke="#d67888" stroke-width="1.8" stroke-linecap="round"/>
+        </g>
+        <g transform="translate(116 13)">
+          <use href="#i-posts" width="24" height="24"/>
+          <text x="31" y="18" class="nav" fill="#ece7df">文稿</text>
+        </g>
+        <g transform="translate(215 13)">
+          <use href="#i-essays" width="24" height="24"/>
+          <text x="31" y="18" class="nav" fill="#ece7df">碎念</text>
+        </g>
+        <g transform="translate(314 13)">
+          <use href="#i-more" width="24" height="24"/>
+          <text x="31" y="18" class="nav" fill="#ece7df">更多</text>
+        </g>
+      </g>
+
+      <g transform="translate(936 42)">
+        <path d="M5 28C5 12 16 2 31 3C47 3 57 14 56 29C55 45 45 55 30 55C14 55 4 44 5 28Z" fill="#26231f" stroke="currentColor" stroke-width="1.5"/>
+        <use href="#i-sun" x="17" y="15" width="28" height="28"/>
+      </g>
+
+      <text x="320" y="150" class="caption" fill="#aaa39a">联系按钮</text>
+      <g transform="translate(440 118)">
+        <path d="M3 31C3 14 15 3 31 3C47 3 58 15 57 31C56 47 46 58 30 58C14 58 3 47 3 31Z" fill="#26231f" stroke="currentColor" stroke-width="1.4"/>
+        <use href="#i-github" x="18" y="18" width="25" height="25"/>
+      </g>
+      <g transform="translate(515 118)">
+        <path d="M4 30C4 14 15 3 31 3C47 3 58 15 57 30C56 47 45 58 30 58C14 58 3 47 4 30Z" fill="#26231f" stroke="currentColor" stroke-width="1.4"/>
+        <use href="#i-mail" x="18" y="18" width="25" height="25"/>
+      </g>
+      <g transform="translate(590 118)">
+        <path d="M3 31C3 14 15 3 31 3C47 3 58 15 57 31C56 47 46 58 30 58C14 58 3 47 3 31Z" fill="#26231f" stroke="currentColor" stroke-width="1.4"/>
+        <use href="#i-qq" x="18" y="18" width="25" height="25"/>
+      </g>
+    </g>
+  </g>
+
+  <text x="72" y="590" class="sub">浅色显示月牙，深色显示太阳；图标表达点击后的目标主题。</text>
+</svg>

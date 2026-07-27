@@ -1,5 +1,6 @@
 ---
-import { ArrowDown, ExternalLink, Mail, MessageCircle } from "@lucide/astro";
+import { ArrowDown } from "@lucide/astro";
+import SketchIcon from "./SketchIcon.astro";
 import WritingTrace from "./WritingTrace.astro";
 import type { SocialLink, TraceNode } from "./types";
 
@@ -31,9 +32,9 @@ const {
 
 const iconFor = (label: string) => {
   const normalized = label.toLowerCase();
-  if (normalized.includes("github")) return ExternalLink;
-  if (normalized.includes("qq") || normalized.includes("message")) return MessageCircle;
-  return Mail;
+  if (normalized.includes("github")) return "github";
+  if (normalized.includes("qq") || normalized.includes("message")) return "qq";
+  return "mail";
 };
 
 const [beforeName, afterName = ""] = greeting.includes(name)
@@ -59,10 +60,10 @@ const [beforeName, afterName = ""] = greeting.includes(name)
     {socials.length > 0 && (
       <div class="home-socials" aria-label="联系方式">
         {socials.map((item) => {
-          const Icon = iconFor(item.label);
+          const icon = iconFor(item.label);
           return (
             <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined} aria-label={item.label} title={item.label}>
-              <Icon aria-hidden="true" />
+              <SketchIcon name={icon} ring />
             </a>
           );
         })}

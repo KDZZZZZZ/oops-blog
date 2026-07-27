@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">方案 A：安静边注，九个手绘控件图标</title>
+  <desc id="desc">首页、文稿、碎念、更多、GitHub、邮件、QQ、月亮和太阳图标的手绘线稿。</desc>
+  <rect width="1200" height="650" fill="#f3f1ec"/>
+  <style>
+    .title { fill:#262320; font: 34px Georgia, "Noto Serif SC", serif; }
+    .sub { fill:#777168; font: 15px Inter, "PingFang SC", sans-serif; }
+    .label { fill:#302d29; font: 19px "Noto Serif SC", Georgia, serif; }
+    .note { fill:#827b72; font: 12px Inter, "PingFang SC", sans-serif; letter-spacing:.08em; }
+    .cell { fill:#fbfaf7; stroke:#d8d2c8; stroke-width:1.2; }
+    .ink { fill:none; stroke:#302d29; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+    .soft { fill:none; stroke:#817a71; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; opacity:.42; }
+    .accent { fill:none; stroke:#c25668; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
+    .accent-fill { fill:#c25668; }
+  </style>
+
+  <text x="72" y="62" class="title">A · 安静边注</text>
+  <text x="72" y="92" class="sub">小图标置于文字前，完整轮廓保证识别；玫瑰色只留一个笔记式记号。</text>
+
+  <!-- Row 1 -->
+  <g transform="translate(72 122)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(34 28)">
+      <path class="soft" d="M3 43C6 19 22 4 43 3C67 2 83 19 82 43C81 65 66 82 42 82C20 82 4 67 3 43Z"/>
+      <path class="ink" d="M18 42L42 20L67 42"/>
+      <path class="ink" d="M24 38L25 65L59 64L59 37"/>
+      <path class="ink" d="M36 64L36 50Q42 46 48 50L48 64"/>
+      <path class="accent" d="M12 78C29 76 57 80 73 77"/>
+    </g>
+    <text x="138" y="62" class="label">首页</text>
+    <text x="138" y="88" class="note">HOME · 当前项</text>
+  </g>
+
+  <g transform="translate(435 122)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(37 29)">
+      <path class="soft" d="M8 17L57 12Q65 14 65 23L68 70L18 74Q10 72 10 64Z"/>
+      <path class="ink" d="M19 9L58 12L61 66L18 64Z"/>
+      <path class="ink" d="M48 12L49 25L60 25"/>
+      <path class="ink" d="M28 35C35 34 42 36 50 35M28 45C38 44 46 47 52 45M28 55C35 54 42 56 47 55"/>
+    </g>
+    <text x="138" y="62" class="label">文稿</text>
+    <text x="138" y="88" class="note">POSTS · 折角纸张</text>
+  </g>
+
+  <g transform="translate(798 122)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(35 29)">
+      <path class="soft" d="M10 47C5 27 20 9 43 8C67 7 82 22 80 43C79 62 62 74 42 73C33 73 26 70 20 66L10 72L14 60C12 56 11 52 10 47Z"/>
+      <path class="ink" d="M17 44C15 27 28 17 44 17C61 17 72 28 71 42C69 57 57 64 43 63C35 63 29 61 24 57L16 62L19 52C18 49 17 47 17 44Z"/>
+      <path class="ink" d="M31 42C35 35 42 33 48 37C55 42 50 51 43 50C38 49 38 44 42 42"/>
+      <circle cx="58" cy="50" r="2.7" class="accent-fill"/>
+    </g>
+    <text x="138" y="62" class="label">碎念</text>
+    <text x="138" y="88" class="note">ESSAYS · 思绪气泡</text>
+  </g>
+
+  <!-- Row 2 -->
+  <g transform="translate(72 286)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(35 29)">
+      <path class="soft" d="M7 42C25 22 58 20 79 43"/>
+      <circle cx="24" cy="43" r="5.2" fill="#302d29"/>
+      <circle cx="45" cy="40" r="6.5" fill="#302d29"/>
+      <circle cx="69" cy="45" r="4.3" fill="#302d29"/>
+      <path class="ink" d="M15 58C29 62 57 62 76 57"/>
+    </g>
+    <text x="138" y="62" class="label">更多</text>
+    <text x="138" y="88" class="note">MORE · 不等大墨点</text>
+  </g>
+
+  <g transform="translate(435 286)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(36 28)">
+      <path class="soft" d="M3 42C4 19 21 4 43 4C66 4 82 21 81 43C80 65 65 81 42 81C20 81 4 65 3 42Z"/>
+      <path class="ink" d="M24 57L24 31M24 39L48 39M48 39L48 24M48 39L66 51"/>
+      <circle class="ink" cx="24" cy="26" r="6"/>
+      <circle class="ink" cx="48" cy="19" r="6"/>
+      <circle class="ink" cx="68" cy="56" r="6"/>
+    </g>
+    <text x="138" y="62" class="label">GitHub</text>
+    <text x="138" y="88" class="note">OPEN SOURCE · 分叉节点</text>
+  </g>
+
+  <g transform="translate(798 286)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(35 28)">
+      <path class="soft" d="M4 43C5 19 21 4 43 4C67 4 82 21 81 43C80 66 65 81 42 81C20 81 4 65 4 43Z"/>
+      <path class="ink" d="M18 27L66 28L65 62L19 62Z"/>
+      <path class="ink" d="M19 30L42 49L65 30"/>
+      <path class="ink" d="M19 61L34 47M65 61L50 47"/>
+      <circle cx="43" cy="49" r="3.3" class="accent-fill"/>
+    </g>
+    <text x="138" y="62" class="label">邮件</text>
+    <text x="138" y="88" class="note">MAIL · 小蜡封点</text>
+  </g>
+
+  <!-- Row 3 -->
+  <g transform="translate(72 450)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(34 27)">
+      <path class="soft" d="M4 42C4 19 20 4 43 3C66 3 82 20 81 43C81 66 64 82 42 81C19 81 4 65 4 42Z"/>
+      <path class="ink" d="M24 52C18 43 20 25 29 18C36 12 48 12 56 18C66 26 68 43 62 53"/>
+      <path class="ink" d="M27 47C32 59 53 60 59 47C56 61 53 68 43 69C32 69 28 61 27 47Z"/>
+      <circle cx="36" cy="35" r="2.2" fill="#302d29"/>
+      <circle cx="51" cy="35" r="2.2" fill="#302d29"/>
+      <path class="accent" d="M39 43Q43 47 47 43"/>
+      <path class="ink" d="M25 50L17 58M61 50L69 58M34 68L30 75M52 68L56 75"/>
+    </g>
+    <text x="138" y="62" class="label">QQ</text>
+    <text x="138" y="88" class="note">CHAT · 极简企鹅</text>
+  </g>
+
+  <g transform="translate(435 450)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(36 27)">
+      <path class="soft" d="M4 42C4 19 21 4 43 4C67 4 82 21 81 43C80 66 65 81 42 81C20 81 4 65 4 42Z"/>
+      <path class="ink" d="M57 58C41 65 24 54 24 38C24 25 33 17 44 15C38 24 39 34 46 41C52 47 61 49 69 46C67 51 63 55 57 58Z"/>
+      <circle cx="64" cy="22" r="3.2" class="accent-fill"/>
+    </g>
+    <text x="138" y="62" class="label">切到深色</text>
+    <text x="138" y="88" class="note">THEME · 月牙</text>
+  </g>
+
+  <g transform="translate(798 450)">
+    <rect class="cell" width="330" height="142" rx="16"/>
+    <g transform="translate(35 27)">
+      <path class="soft" d="M4 42C4 19 21 4 43 4C67 4 82 21 81 43C80 66 65 81 42 81C20 81 4 65 4 42Z"/>
+      <path class="ink" d="M43 27C53 26 61 34 60 43C59 53 52 59 43 59C33 59 26 52 27 42C27 33 34 27 43 27Z"/>
+      <path class="ink" d="M43 15L43 8M43 78L43 70M16 43L9 43M77 43L69 43M24 24L18 18M68 68L62 62M23 63L17 69M67 23L73 17"/>
+      <path class="accent" d="M35 44C38 39 45 37 50 41"/>
+    </g>
+    <text x="138" y="62" class="label">切到浅色</text>
+    <text x="138" y="88" class="note">THEME · 太阳</text>
+  </g>
+
+  <path d="M72 616C351 613 855 619 1128 615" fill="none" stroke="#c25668" stroke-width="1.2" opacity=".48"/>
+  <text x="72" y="636" class="note">90% 炭笔线 · 5% 玫瑰色 · 固定路径，不使用动态抖动</text>
+</svg>
