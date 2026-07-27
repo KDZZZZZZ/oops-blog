@@ -189,14 +189,10 @@ body:not(.home-page) #content {
   transition: color .2s, transform .2s var(--ease);
 }
 
-.desktop-nav a:hover .nav-primary-icon {
-  color: var(--heading);
-  transform: translateY(-1px);
-}
-
+.desktop-nav a:hover .nav-primary-icon,
 .desktop-nav .nav-trigger:hover .nav-primary-icon,
 .desktop-nav .nav-trigger:focus-visible .nav-primary-icon {
-  color: var(--accent);
+  color: var(--heading);
   transform: translateY(-1px);
 }
 
@@ -282,13 +278,12 @@ body:not(.home-page) #content {
   border: 0;
   border-radius: 4px;
   background: transparent;
-  cursor: pointer;
 }
 
 .nav-trigger:hover,
 .nav-trigger:focus-visible {
   background: var(--surface);
-  color: var(--accent);
+  color: var(--heading);
 }
 
 .nav-preview {
@@ -578,7 +573,6 @@ body:not(.home-page) #content {
   border-radius: 50%;
   background: transparent;
   color: var(--muted);
-  cursor: pointer;
   display: grid;
   place-items: center;
   transition: color .2s, background-color .2s;
@@ -587,11 +581,6 @@ body:not(.home-page) #content {
 .icon-button:hover {
   color: var(--heading);
   background: var(--subtle);
-}
-
-#theme-button:hover,
-#theme-button:focus-visible {
-  color: var(--accent);
 }
 
 .icon-button svg {

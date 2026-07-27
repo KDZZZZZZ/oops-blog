@@ -48,9 +48,9 @@ test("option A hand-drawn controls render and preserve the theme state", async (
   expect(selectedMotion.iconAnimation).toContain("nav-icon-selected");
   expect(selectedMotion.inkAnimation).toContain("nav-ink-selected");
 
-  const accentColor = await page.evaluate(() => {
+  const headingColor = await page.evaluate(() => {
     const probe = document.createElement("span");
-    probe.style.color = "var(--accent)";
+    probe.style.color = "var(--heading)";
     document.body.append(probe);
     const color = getComputedStyle(probe).color;
     probe.remove();
@@ -59,12 +59,14 @@ test("option A hand-drawn controls render and preserve the theme state", async (
 
   const moreTrigger = page.locator(".desktop-nav .nav-trigger");
   await moreTrigger.hover();
-  await expect.poll(() => moreTrigger.evaluate((button) => getComputedStyle(button).color)).toBe(accentColor);
-  await expect.poll(() => moreTrigger.locator(".nav-primary-icon").evaluate((icon) => getComputedStyle(icon).color)).toBe(accentColor);
+  await expect.poll(() => moreTrigger.evaluate((button) => getComputedStyle(button).cursor)).toContain("%23c25668");
+  await expect.poll(() => moreTrigger.evaluate((button) => getComputedStyle(button).color)).toBe(headingColor);
+  await expect.poll(() => moreTrigger.locator(".nav-primary-icon").evaluate((icon) => getComputedStyle(icon).color)).toBe(headingColor);
 
   const themeButton = page.locator("#theme-button");
   await themeButton.hover();
-  await expect.poll(() => themeButton.evaluate((button) => getComputedStyle(button).color)).toBe(accentColor);
+  await expect.poll(() => themeButton.evaluate((button) => getComputedStyle(button).cursor)).toContain("%23c25668");
+  await expect.poll(() => themeButton.evaluate((button) => getComputedStyle(button).color)).toBe(headingColor);
 
   await themeButton.click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
