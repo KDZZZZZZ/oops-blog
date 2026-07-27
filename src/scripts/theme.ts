@@ -36,7 +36,7 @@ function setTheme(theme: Theme): void {
     themeButton.setAttribute("aria-label", label);
   }
 
-  const color = theme === "dark" ? "#1d1b18" : "#fbfaf7";
+  const color = theme === "dark" ? "#1d1b18" : "#f3f1ec";
   document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute("content", color);
 }
 

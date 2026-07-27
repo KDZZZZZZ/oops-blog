@@ -58,22 +58,13 @@ body::after {
   will-change: transform;
 }
 
+/* Light theme: one stable editorial-paper canvas, without ambient effects. */
 [data-theme="light"] body { background-color: var(--bg); }
 
-[data-theme="light"] body::before {
-  background: url("../assets/marble-light.svg") center / cover no-repeat;
-  filter: contrast(1.025) saturate(.58);
-  opacity: .52;
-  animation: backdrop-drift 112s ease-in-out infinite alternate;
-}
-
-/* Low-chroma paper light: ivory, mist blue and a neutral mineral shadow. */
+[data-theme="light"] body::before,
 [data-theme="light"] body::after {
-  background:
-    radial-gradient(64vw 48vh at 8% 4%, oklch(97.2% 0.012 82 / .72), transparent 72%),
-    radial-gradient(56vw 44vh at 92% 8%, oklch(96.8% 0.011 248 / .52), transparent 74%),
-    radial-gradient(58vw 48vh at 78% 92%, oklch(97% 0.006 228 / .38), transparent 76%);
-  animation: backdrop-drift-counter 144s ease-in-out infinite alternate;
+  content: none;
+  animation: none;
 }
 
 /* 深色：星空。密集的暗星缓慢漂移，稀疏的亮星反向漂移并轻微闪烁 */

@@ -8,7 +8,7 @@
 
 :root {
   color-scheme: light;
-  --bg: oklch(98.5% 0.006 88);
+  --bg: #f3f1ec;
   --surface: oklch(99.7% 0.003 240);
   --fg: oklch(25.58% 0.0075 95.4);
   --heading: oklch(18.02% 0.0068 92.1);
