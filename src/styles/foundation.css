@@ -58,21 +58,22 @@ body::after {
   will-change: transform;
 }
 
-[data-theme="light"] body { background-color: #fefefb; }
+[data-theme="light"] body { background-color: var(--bg); }
 
 [data-theme="light"] body::before {
   background: url("../assets/marble-light.svg") center / cover no-repeat;
-  filter: contrast(1.06) saturate(1.1);
-  animation: backdrop-drift 96s ease-in-out infinite alternate;
+  filter: contrast(1.025) saturate(.58);
+  opacity: .52;
+  animation: backdrop-drift 112s ease-in-out infinite alternate;
 }
 
-/* 云影加深一档：暖、玫瑰、微蓝三团，纸面有明暗起伏才有"感觉" */
+/* Low-chroma paper light: ivory, mist blue and a neutral mineral shadow. */
 [data-theme="light"] body::after {
   background:
-    radial-gradient(54vw 42vh at 18% 16%, oklch(94% 0.021 75 / .8), transparent 66%),
-    radial-gradient(48vw 38vh at 84% 74%, oklch(93.5% 0.02 12 / .7), transparent 68%),
-    radial-gradient(42vw 34vh at 70% 10%, oklch(94.5% 0.017 245 / .6), transparent 70%);
-  animation: backdrop-drift-counter 128s ease-in-out infinite alternate;
+    radial-gradient(64vw 48vh at 8% 4%, oklch(97.2% 0.012 82 / .72), transparent 72%),
+    radial-gradient(56vw 44vh at 92% 8%, oklch(96.8% 0.011 248 / .52), transparent 74%),
+    radial-gradient(58vw 48vh at 78% 92%, oklch(97% 0.006 228 / .38), transparent 76%);
+  animation: backdrop-drift-counter 144s ease-in-out infinite alternate;
 }
 
 /* 深色：星空。密集的暗星缓慢漂移，稀疏的亮星反向漂移并轻微闪烁 */

@@ -13,10 +13,10 @@
         in="broad-blur"
         type="matrix"
         values="
-          0 0 0 0 0.62
-          0 0 0 0 0.84
-          0 0 0 0 0.82
-          0 0 0 .13 -.065"
+          0 0 0 0 0.74
+          0 0 0 0 0.73
+          0 0 0 0 0.70
+          0 0 0 .085 -.052"
         result="broad-tint"
       />
 
@@ -40,10 +40,10 @@
         in="fine-blur"
         type="matrix"
         values="
-          0 0 0 0 0.68
-          0 0 0 0 0.80
-          0 0 0 0 0.90
-          0 0 0 .075 -.042"
+          0 0 0 0 0.70
+          0 0 0 0 0.75
+          0 0 0 0 0.81
+          0 0 0 .055 -.034"
         result="fine-tint"
       />
 
@@ -52,5 +52,5 @@
     </filter>
   </defs>
 
-  <rect width="1600" height="1100" fill="#fefefb" filter="url(#liquid-marble)" />
+  <rect width="1600" height="1100" fill="#fbfaf7" filter="url(#liquid-marble)" />
 </svg>

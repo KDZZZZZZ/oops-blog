@@ -7,7 +7,7 @@ export const themeInitScript = `(() => {
       ? stored
       : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
     root.dataset.theme = theme;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#1d1b18" : "#fefefb");
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#1d1b18" : "#fbfaf7");
   } catch {
     root.dataset.theme = root.dataset.theme || "light";
   }
